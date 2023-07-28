@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+
+
+        <div class="tournamentDetailsPage">
+            <div class="match-header">
+                <div class="container">
+                    <div class="row">
+                        <div th:if="${tournament.tournamentInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_1}" class="col-md-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/tournaments/tournament-details/tournybo1.png" />
+                        </div>
+                        <div th:if="${tournament.tournamentInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_3}" class="col-md-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/tournaments/tournament-details/tournybo3.png" />
+                        </div>
+                        <div class="col-md-7">
+                            <div class="match-info">
+                                <h3 style="font-size:36px">
+                                    <span th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</span>
+
+                                    <div th:unless="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">
+                                        <span th:if="${tournament.tournamentInfo.gameModeEnum == T(com.ltlogic.constants.GameModeEnum).SearchAndDestroy}" th:text="${tournament.tournamentInfo.gameEnum.getGameEnumDesc() + ' - S&AMP;D ' + tournament.tournamentInfo.title}"></span>
+                                        <span th:if="${tournament.tournamentInfo.gameModeEnum == T(com.ltlogic.constants.GameModeEnum).Variant}" th:text="${tournament.tournamentInfo.gameEnum.getGameEnumDesc() + ' - Variant ' + tournament.tournamentInfo.title}"></span>
+                                    </div>                                </h3>
+                                <h2 style="font-size:26px;color:#d8c668" th:text="${'Tournament ID #' + tournament.tournamentId}"></h2>
+                                <h2 style="font-size:26px;" th:if="${user}" th:text="${'Start Time: ' + tournament.tournamentInfo.getScheduledTournamentTimeForFE(user.getUserInfo().getTimeZone())}"></h2>
+                                <h2 style="font-size:26px;" th:unless="${user}" th:text="${'Start Time: ' + tournament.tournamentInfo.getScheduledTournamentTimeForFE(null)}"></h2>
+                            </div>
+                        </div>
+                        <div th:if="${canJoinTournament}" class="col-md-3">
+                            <div class="match-info-sub apply2">
+                                <p>Want to play in this tournament?</p>
+                            </div>
+                            <div class="match-info-sub apply">
+                                <a th:href="@{'/tournaments/' + ${tournament.pk} + '/join'}">Join Now</a>
+                            </div>
+                        </div>
+                        <div th:if="${canLeaveTournament}" class="col-md-3" style="padding-top:5px;">
+                            <a th:href="@{'/tournaments/' + ${tournament.pk} + '/leave'}" class="btn radius-50 btn-default btn-lg disabledOnClick">
+                                Leave Tournament
+                            </a>
+                        </div>
+                        <div th:if="${tournamentWinner}" class="col-md-3" style="padding-top:10px;">
+                            <div style="font-size:20px; font-weight: bold;">
+                                <div class="match-info-sub" style="float:left"><span>Tournament Winner: </span><span th:text="${tournamentWinner.teamPojo.teamName}"> </span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="match-menu-container">
+                <div class="match-menu container">
+                    <ul class="menu-items">
+                        <li><a th:href="@{'/tournaments/' + ${tournament.pk}}">DETAILS</a></li>
+                        <li class="active"><a th:href="@{'/tournaments/' + ${tournament.pk} + '/bracket'}">BRACKET</a></li>
+                        <li th:if="${isTeamLeader}"><a th:href="@{'/tournament/' + ${tournament.pk} + '/invite-users'}">INVITE USERS</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="contents container">
+                <br /><br />
+                <div>
+                    <iframe th:if="${bracketUrl}" th:src="${'https://challonge.com/' + bracketUrl + '/module?show_final_results=1'}" width="100%" height="600" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+                </div>
+                <br /><br />
+            </div>
+
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

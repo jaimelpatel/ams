@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" style="background:url('https://storage.googleapis.com/cod-pics/leaderboard6.jpg'); background-position: 50% 50%;-webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: cover;
+             background-size: cover;
+             width: 100%;background-color: rgba(0, 0, 0, 0.9) !important;">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Leaderboards</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View the top 100 players in both XP and Earnings on NLG below.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="main-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <!-- main start -->
+                    <!-- ================ -->
+                    <div class="main col-md-12">
+                        <!-- tabs start -->
+                        <!-- ================ -->
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs style-3" role="tablist">
+                            <li class="active"><a href="#h3tab1" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i>XP</a></li>
+                            <li><a href="#h3tab2" role="tab" data-toggle="tab"><i class="fa fa-dollar pr-10"></i>Earnings</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+                            <div class="tab-pane in active" id="h3tab1">
+
+
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${xpFirst}" th:text="${xpFirst}"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${xpSecond}" th:text="${xpSecond}"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${xpThird}" th:text="${xpThird}"></h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Rank
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Username
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Social Media
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Total XP
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${userRanksByXP.isEmpty()}">
+                                        <tr>
+                                            <td style="color:#333535;" class="text-center" colspan="5">
+                                                No rank history by XP.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody th:if="${!userRanksByXP.isEmpty()}">
+                                        <tr th:each="user : ${userRanksByXP}">
+                                            <td style="color:#333535;text-align:center;" th:text="${user.rankXP.rank}"></td>
+                                            <td style="color:#333535;text-align:center;"><a th:href="@{'/' + ${user.username} + '/profile'}" th:text="${user.username}"></a></td>
+                                            <td style="color:#333535;text-align:center;"> 
+
+
+                                                <a th:if="${user.userInfo.twitterUrl != null AND user.userInfo.twitterUrl != '' AND user.userInfo.twitterUrl != ' '}" class="twitter" target="_blank" th:href="${user.userInfo.twitterUrl}"><i class="fa fa-twitter"></i></a>
+                                                <a th:if="${user.userInfo.twitchUrl != null AND user.userInfo.twitchUrl != '' AND user.userInfo.twitchUrl != ' '}" class="twitch" target="_blank" th:href="${user.userInfo.twitchUrl}"><i class="fa fa-twitch"></i></a>
+                                                <a th:if="${user.userInfo.facebookUrl != null AND user.userInfo.facebookUrl != '' AND user.userInfo.facebookUrl != ' '}" class="facebook" target="_blank" th:href="${user.userInfo.facebookUrl}"><i class="fa fa-facebook"></i></a>
+                                                <a th:if="${user.userInfo.youtubeUrl != null AND user.userInfo.youtubeUrl != '' AND user.userInfo.youtubeUrl != ' '}" class="youtube" target="_blank" th:href="${user.userInfo.youtubeUrl}"><i class="fa fa-youtube"></i></a>
+
+
+                                            </td>
+                                            <td style="color:#333535;text-align:center;" th:text="${user.rankXP.totalXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <br/> 
+                            </div>
+
+
+
+                            <div class="tab-pane in" id="h3tab2">
+
+
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${cashFirst}" th:text="${cashFirst}"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${cashSecond}" th:text="${cashSecond}"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${cashThird}" th:text="${cashThird}"></h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Rank
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Username
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Social Media
+                                            </th>
+                                            <th style="background-color:#1d2223;color:#f3f3f3;text-align:center;">
+                                                Earnings
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${userRanksByEarnings.isEmpty()}">
+                                        <tr>
+                                            <td style="color:#333535;" class="text-center" colspan="5">
+                                                No rank history by Earnings.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody th:if="${!userRanksByEarnings.isEmpty()}">
+                                        <tr th:each="user : ${userRanksByEarnings}">
+                                            <td style="color:#333535;text-align:center;" th:text="${user.rankEarnings.rank}"></td>
+                                            <td style="color:#333535;text-align:center;"><a th:href="@{'/' + ${user.username} + '/profile'}" th:text="${user.username}"></a></td>
+                                            <td style="color:#333535;text-align:center;"> 
+                                                <a th:if="${user.userInfo.twitterUrl != null AND user.userInfo.twitterUrl != '' AND user.userInfo.twitterUrl != ' '}" class="twitter" target="_blank" th:href="${user.userInfo.twitterUrl}"><i class="fa fa-twitter"></i></a>
+                                                <a th:if="${user.userInfo.twitchUrl != null AND user.userInfo.twitchUrl != '' AND user.userInfo.twitchUrl != ' '}" class="twitch" target="_blank" th:href="${user.userInfo.twitchUrl}"><i class="fa fa-twitch"></i></a>
+                                                <a th:if="${user.userInfo.facebookUrl != null AND user.userInfo.facebookUrl != '' AND user.userInfo.facebookUrl != ' '}" class="facebook" target="_blank" th:href="${user.userInfo.facebookUrl}"><i class="fa fa-facebook"></i></a>
+                                                <a th:if="${user.userInfo.youtubeUrl != null AND user.userInfo.youtubeUrl != '' AND user.userInfo.youtubeUrl != ' '}" class="youtube" target="_blank" th:href="${user.userInfo.youtubeUrl}"><i class="fa fa-youtube"></i></a>
+
+
+                                            </td>
+                                            <td style="color:#333535;text-align:center;" th:text="'$' + ${user.rankEarnings.totalEarnings}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <br/> 
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

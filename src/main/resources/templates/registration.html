@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents">
+            <!-- main-container start -->
+            <!-- ================ -->
+            <div class="main-container dark-translucent-bg" th:style="'background:url(https://storage.googleapis.com/nlg-template-img/registration/ww2.jpg);'">
+                <div class="container">
+                    <div class="row">
+                        <!-- main start -->
+                        <!-- ================ -->
+                        <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+                            <div class="form-block center-block p-30 light-gray-bg border-clear">
+                                <h2 class="title">Sign Up</h2>
+                                <!--                                <div th:if="${registrationError}" class="alert alert-danger"><p th:text="${error}"></p></div>                                                      -->
+                                <form class="form-horizontal" role="form" th:action="@{/register}" th:object="${registrationPojo}" method="post">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">E-mail Address <span class="text-danger small">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="email" id="email" name="email" autofocus="autofocus" th:value="${em}" class="form-control" placeholder=""/>
+                                            <i class="fa fa-pencil form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">Username <span class="text-danger small">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="username" name="username" autofocus="autofocus" th:value="${un}" class="form-control" placeholder=""/>
+                                            <i class="fa fa-user form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">Password <span class="text-danger small">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="password" id="password" name="password" class="form-control" placeholder=""/>
+                                            <i class="fa fa-lock form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">Password Confirmation<span class="text-danger small">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control" placeholder=""/>
+                                            <i class="fa fa-lock form-control-feedback"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- section start -->
+                                    <!-- ================ -->
+                                    <!--<div class="form-group has-feedback">-->
+                                    <!--<div class="container">-->
+                                    <!-- filters start -->
+                                    <!--<div class="sorting-filters text-center mb-20">-->
+                                    <!--<form class="form-inline">-->
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">Region <span class="text-danger small">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ul class="teamTypeList">
+                                                <li><input type="radio" name="regionId" value="0" checked="true"/> North America</li>
+                                                <li><input type="radio" name="regionId" value="1"/> Europe</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-feedback">
+                                        <label for="inputName" class="col-sm-4 control-label">Timezone</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" name="timeZoneEnumId" id="timeZoneEnumId">
+                                                <option selected="selected" disabled="disabled" th:value="0">Please select your Timezone</option>
+                                                <option th:each="TimeZoneEnum : ${timeZoneEnumList}" th:value="${TimeZoneEnum.getTimeZonesEnumId()}" th:text="${TimeZoneEnum.getTimeZonesEnumDesc()}"></option>
+                                            </select>
+                                            <i class="glyphicon glyphicon-time padding-icon-right form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <!--							<div class="form-group">
+                                                                                                    <label>Order</label>
+                                                                                                    <select class="form-control">
+                                                                                                            <option selected="selected">Acs</option>
+                                                                                                            <option>Desc</option>
+                                                                                                    </select> 
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                    <label>Price $ (min/max)</label>
+                                                                                                    <div class="row grid-space-10">
+                                                                                                            <div class="col-sm-6">
+                                                                                                                    <input type="text" class="form-control">
+                                                                                                            </div>
+                                                                                                            <div class="col-sm-6">
+                                                                                                                    <input type="text" class="form-control col-xs-6">
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                    <label>Category</label>
+                                                                                                    <select class="form-control">
+                                                                                                            <option selected="selected">Smartphones</option>
+                                                                                                            <option>Tablets</option>
+                                                                                                            <option>Smart Watches</option>
+                                                                                                            <option>Desktops</option>
+                                                                                                            <option>Software</option>
+                                                                                                            <option>Accessories</option>
+                                                                                                    </select> 
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                    <a href="#" class="btn btn-default">Submit</a>
+                                                                                            </div>-->
+                                    <!--</form>-->
+                                    <!--</div>-->
+                                    <!-- filters end -->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!-- section end -->
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8">
+                                            <div style="font-size:12px;">By clicking below, you accept our <a style="color:#992020;text-decoration:none" th:href="@{/terms}" target="_blank">Terms of Use</a> and <a target="_blank" style="color:#992020;text-decoration:none" th:href="@{/privacy}">Privacy Policy</a>.</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8">
+                                            <button type="submit" class="btn btn-group btn-default btn-animated signup-page-btn-width radius-50">Sign Up <i class="fa fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- main end -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-top animated-text" style="background-color: #1d2223;border-bottom: solid 1px #282e2f;border-top: solid 1px #282e2f;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="call-to-action text-center">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h2 style="text-transform:none;color:#d6d6d6 !important;">Already have an account?</h2>
+                                        <h2 style="text-transform:none;color:#d6d6d6 !important;">Waste no more time <i class="pl-5 fa fa-angle-double-right"></i></h2>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p class="mt-10"><a th:href="@{/login}" class="btn btn-animated radius-50 btn-lg btn-gray-transparent">Log in<i class="fa fa-user pl-20"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- main-container end -->
+
+
+            <!--            <h1>Registration Page</h1>
+            <p th:if="${registrationError}" class="error"><div th:text="${error}"></div></p>
+            <form th:action="@{/registration}" th:object="${registrationPojo}" method="post">
+                <label for="email">Email</label>:
+                <input type="email" id="email" name="email" autofocus="autofocus" th:value="${em}"/><br />
+                <label for="username">Username</label>:
+                <input type="text" id="username" name="username" autofocus="autofocus" th:value="${un}"/><br />
+                <label for="password">Password</label>:
+                <input type="password" id="password" name="password" /> <br />
+                <label for="passwordConfirm">Password Confirmation</label>:
+                <input type="password" id="passwordConfirm" name="passwordConfirm" /> <br />
+                <input class="btn btn-primary" type="submit"  value="Sign Up" />
+            </form>-->
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+      
+        <div class="contents container">
+            <h1>Welcome <div th:text="${userInfo.username}"></div></h1>
+            <h2>Your Teams</h2>
+            <div th:each="team : ${myTeams}">
+                 <div th:text="${team.name}">
+                </div>
+            </div>
+
+
+            <h2>Your Matches</h2>
+                    <div th:each="match : ${myMatches}">
+                        <div th:text="${match.matchType}">
+
+                        </div>
+
+                        <div th:object="${match}">
+                            <div th:text="*{game}"></div>
+                            <div th:text="*{platform}"></div>
+                        </div>
+                    </div>
+
+            <h3>Your User Details</h3>
+            <div th:object="${userObject}">
+                <div th:text="*{firstName}">
+
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

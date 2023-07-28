@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <div class="section dark-bg" style="padding: 20px;">
+                <!--<h3>Edit Settings</h3>-->
+                <h1 style="text-transform: none !important;">XMS Bank</h1>
+                <p>See your bank amounts and withdraw your game cash.</p>
+            </div>
+            <br />
+
+            <ul class="nav nav-pills" role="tablist">
+                <li><a th:href="@{/account}" title="general settings" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> General</a></li>
+                <li><a th:href="@{/account/profile}" title="profile" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> Profile</a></li>
+                <li class="active"><a th:href="@{/account/bank}" title="bank" aria-expanded="true" style="font-size:18px !important;text-transform: none !important;"> Bank</a></li>
+            </ul>
+            <hr />
+            
+            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                <div th:text="${error}"></div>
+            </div>
+            
+            <div class="bankInfo">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 10px">
+                        <h4>
+                             Current Balance: $<span th:text="${bankAmount}"></span>
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        
+                    </div>
+                </div>
+            </div>
+            <br />
+            <h4>Transfer</h4>
+            <div class="transferForm">
+                <div class="row">
+                    <div class="col-md-2">
+                        
+                    </div>
+                    <div class="col-md-8">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <form th:action="@{/bank/account/transfer/process}" method="post" th:object="${transferGameCashForm}">
+                                    <input type="hidden" name="amount" th:value="${transferGameCashForm.amount}" />
+                                    <input type="hidden" name="recipientUsername" th:value="${transferGameCashForm.recipientUsername}" />
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2"><strong>From:</strong></div>
+                                        <div class="col-md-3"><span th:text="${user.username}"></span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2"><strong>To:</strong></div>
+                                        <div class="col-md-3"><span th:text="${transferGameCashForm.recipientUsername}"></span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2"><strong>Amount:</strong></div>
+                                        <div class="col-md-3">$<span th:text="${transferGameCashForm.amount}"></span> NLG</div>
+                                    </div>
+                                    <br />
+                                    <div class="text-center">
+                                        <button class="btn btn-success">Confirm</button>
+                                        <a th:href="@{/account/bank}" class="btn">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

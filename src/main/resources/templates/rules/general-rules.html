@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 10%;'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--                <h3>Edit Settings</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">General Rules</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+
+                        <p style="font-size:18px;">This is the ruleset that applies to all players and games on NLG.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountPage">
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+
+                <div class="status-option-links">
+                    <ul>
+                        <li class="active"><a th:href="@{/rules/general}">General Rules</a></li>
+                        <li><a th:href="@{/rules/xp}">XP Matches</a></li>
+                        <li><a th:href="@{/rules/cash}">Cash &amp; Tournament Matches</a></li>
+                        <li><a th:href="@{/rules/game}">Game Specific Rules</a></li>
+                        <!--<li><a th:href="@{/}">Upcoming</a></li>-->
+                    </ul>
+                </div>
+                <br />
+                    <div class="vertical">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> General</a></li>
+<!--                            <li><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-life-saver pr-10"></i>  Personal Information</a></li>
+                            <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-lock pr-10"></i> Edit Password</a></li>-->
+                            <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                        </ul>
+                        <!-- Tab panes -->
+                        <div style="color:#1d2223" class="tab-content container">
+
+                            <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                                <div th:text="${message}"></div>
+                            </div>
+                            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                <div th:text="${error}"></div>
+                            </div>
+                            <div class="tab-pane fade in active" id="vtab1">
+                                <!--<br />-->
+                                1. NLGO reserves the right to change or modify the rules at any time. Users must be aware
+of rule changes before creating/accepting a match. Judgements and decisions can be
+made outside the current set of rules in order to preserve the integrity of fair play. By
+playing on NLGO you are signifying that you agree with the rules and regulations as well
+as the privacy policy and terms of service of this site.
+<br />
+<br />
+<!--<p>-->
+2. All accounts and teams registered with NLGO are property of Universal Gaming LLC;
+purchasing, selling, or trading accounts and/or teams is not allowed. Perpetrators will
+have their accounts shut down and removed. NLGO reserves the right to terminate,
+suspend, or reset any accounts/teams that violate our terms and conditions.
+<br />
+<br />
+<!--<p>-->
+3. Third party communication services are allowed. However, at least one member of each
+team must be able to communicate with NLGO staff in game if necessary. 
+                            <br />
+<br />
+                            4. Players must be 18 years or older to compete in cash matches or cash tournaments.
+
+                                                        <br/>
+                            <br/>
+                            5. Players competing in any NLG tournament, must be a resident of the United States, Mexico, Puerto Rico and Canada. Players must not be a resident of the state of Arizona, Connecticut, Maryland or the territory of Quebec. 
+
+                                
+                                <!-- accordion start -->
+                                <!-- ================ -->
+<!--                                <div class="panel-group collapse-style-2 col-sm-12" id="accordion-3">
+                                    <div class="panel panel-title">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-3" href="#collapseOne-2" class="collapsed">
+                                                Tournaments
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Single Elimination: After losing a Match, Teams will be eliminated from the Bracket.
+                                            <br></br>
+                                            <br></br>
+                                            2. Default Start Time: All Round 1 Matches have the same default start time. After Round 1, all Matches have a unique default start time that is dependent upon the time at which the Teams’ previous Round results were submitted. Matches must be started by their default start time and played until completion. Postponing matches is only at the discretion of Online Tournament staff.
+                                            <br></br>
+                                            <br></br>
+
+                                            3. Double Forfeit: If a Match is not played and neither Team submits a Ticket requesting the Forfeit win, or both Teams otherwise Forfeit a Game/Match, the Game/Match win will be awarded to the higher seeded Team.
+                                            <br></br>
+                                            <br></br>
+
+                                            4. Seeding: Teams will be randomly seeded at of the close of Registration. Seeds are done in ascending order. Seed one is the highest seed.
+                                            <br></br>
+                                            <br></br>
+
+                                            5. Game Types in Rounds: Game Types will be set for each Round of the Bracket. These Game Types must be played and may not be substituted out.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-2" class="collapsed">
+                                                Hosting
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Definition: The Host is the Player who must create the Custom Game and ensure that the proper Settings and Map are used. The Host should set their party player limit to match the number of players for the specified match. (Example: Player Limit 8 for a 4 vs 4 match.)
+                                            <br></br>
+                                            <br></br>
+                                            2. Host and Side Choice for each Game: The higher seeded team at match time must host the first game. The lower seeded team will host the second game. This will alternate until a tie breaker game is required. The team with the higher combined Search and Destroy rounds won for all games leading up to the tie breaker in that match will host the tie breaker game. The teat that does not host must choose a side to play on.
+                                            <br></br>
+                                            <br></br>
+                                            3. Procedure: Hosting Players should create the Custom Game. As the hosting Team changes over the course of a Match, the new hosting Player should leave the Custom Game and create a new one. A lag test should be performed before the start of each game to ensure all players have an acceptable player to player connection.
+                                            <br></br>
+                                            <br></br>
+                                            4. Finish Games: If a player’s connection to the server becomes unreasonable during a game, the Game must still be played. The lag incident should be reported to tournament support immediately following that game.
+                                            <br></br>
+                                            <br></br>
+                                            5. Incorrect Ending: If the Host incorrectly ends a Game, their Team may Forfeit the Game.                    </div>
+                                    </div>
+                                                    <br></br>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseThree-2" class="collapsed">
+                                                All Matches
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Delays: Teams may not delay the start of a Match beyond its scheduled start time, without the approval of a Tournament Official. Teams may delay a Match between Games for up to five minutes. Teams can request that a Tournament Official enforce this five minute time limit. After five minutes of a Tournament Official enforced delay, if the delaying Team does not have the minimum required Players, they will Forfeit the Match.
+                                            <br></br>
+                                            <br></br>
+                                            2. Minimum Required Players: Teams may only be short handed by one player in order to start a Search and Destroy Game. A Team will Forfeit the Match if they are missing more than one player than the match specifies by 15 minutes after a Match’s default start time (Grace Period). Teams will be forced to start a Game at the end of a Grace Period.
+                                            <br></br>
+                                            <br></br>
+                                            3. Disconnections: Search and Destroy Games must be restarted if a Player disconnects in the first 30 seconds and before the first kill. If a Player disconnects from a Search and Destroy Game after the first 30 seconds or after the first kill, the Game must continue and the Player may rejoin the Game.
+                                            <br></br>
+                                            <br></br>
+                                            4. Normal Boundaries: Players who move their Character outside of the normal boundaries of a Map may Forfeit the Game. Moving outside of the normal boundaries of a Map includes but is not limited to part of the Character’s body passing through what should be a non-permeable surface or object, and moving into any area from which your Character registers shots on an opponent who is not able to register shots on your Character.
+                                            <br></br>
+                                            <br></br>
+                                            5. Outside Players/Spectators: After a Custom Game has been created, only eligible Players on the two Teams and Staff members may be invited/join. If an ineligible Player joins a Game, the Game must be ended if the player affects the game and/or doesn't leave within 30 seconds of joining. If a Player is found to have invited an ineligible Player to a Game, they will Forfeit the Game.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse4-2" class="collapsed">
+                                                Reporting
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse4-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. No Shows: The No Show grace period time is listed on your match page. When the time is up you must report all no shows to Live Support. In order to contact a Tournament Official use Live Support which is at the bottom right of every tournament and match page. The tournament official will then send the opposing team a 5 minute warning message before forfeiting them from the match. The Ticket must include proof that their opponent did not show. Select "I'm reporting: my opponent did not show" under “Report Problem” on the Match page.
+                                            <br></br>
+                                            <br></br>
+                                            2. Time Limit: Both teams must report the Match results within 10 minutes of its completion. Failure to report the Match results on time may result in a Forfeit.
+                                            <br></br>
+                                            <br></br>
+                                            3. Lag: You must report lag as soon as it happens. If you report the lag to Live Support immediatly we will have the round that lagged replayed. Continuing to play will result in you accepting the scores of the game and the lag. We may only have the most recent round that lag replayed. This is very important so please make sure to report it to us immediatly so we may have your opponents switch host or have a neutral host provided for you.
+                                            <br></br>
+                                            <br></br>
+                                            4. Report Match Score: To report the Match results, Teams must report the Match Score accurately, with overall Games won being reported. For example, the Match Score can be reported as 2-0, 2-1, 3-0, 3-1, or 3-2 depending upon the Match length. Reporting the individual points for each Game is optional.
+                                            <br></br>
+                                            <br></br>
+                                            5. Cheating: Breaking any rule and any form of cheating, glitching, abusing in-game mechanics, or unsportsmanlike behavior may result in a Forfeit of a Game, Match, or Ban from Ultra Arena. Cheating, glitching, and abusing in-game mechanics accusations must be verified by a Tournament Official. In order to contact a Tournament Official use Live Support. If a Tournament Official isn’t immediately available, a Ticket must be submitted immediately, along with proof, screenshot or video, of the cheating. Punishable unsportsmanlike behavior includes, but is not limited to, excessive use of foul or degrading language. For all cheating claims, the burden of proof is on the accuser.
+                                            <br></br>
+                                            <br></br>
+                                            6. Screenshots: At least one member of each Team should take a Screenshot(s) of each Game’s results in case proof is needed for a dispute. Screenshots should be clearly visible and contain the Game Score, all Players on both Teams, and a time stamp.
+                                            <br></br>
+                                            <br></br>
+                                            7. Disputes: In order to dispute Game results, Players/Teams must notify a Tournament Official, via Live Support or Ticket submission, that they would like to Protest the Game before a new Game has begun. In order to dispute Match results, Players/Teams must notify a Tournament Official, via Live Support or Ticket submission, that they would like to Protest the Match no longer than 15 minutes after the end of the Match.
+                                            <br></br>
+                                            <br></br>
+                                            8. Concessions: Teams may request that they be allowed to concede victory of a Game. Teams may request that their opponent not receive a Forfeit penalty. A Tournament Official must be contacted with these requests. In order to contact a Tournament Official use Live Support.
+                                            <br></br>
+                                            <br></br>
+                                            9. Dispute Evidence: If a Screenshot(s) is needed in order to resolve a dispute, it should be transferred to the user’s computer and uploaded to the user’s Ultra Arena live support. Videos may also be uploaded to a website such as YouTube. The URL for the image(s)/video must be attached to the dispute Ticket(s) or provided to a Tournament Official via Live Support. The issue must be clearly stated as well as the time in the video in which the issue occurred, and/or what the Tournament Official should be looking for in the picture.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse5-2" class="collapsed">
+                                                Support
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse5-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Tickets and Live Support: Tournament support can be requested by creating a Support Ticket or Live Support. For issues with registration, missing tournament achievements, and general tournament questions, a “Tournament Question/Issues” Ticket should be created. For all tournament match issues, a “Solve My Dispute” Ticket should be created.
+                                            <br></br>
+                                            <br></br>
+                                            2. Live Support Limit: Only 1 Player per Team should use Live Support for in-game issues and that Player should stay on Live Support until a Tournament Official answers their call.
+                                            <br></br>
+                                            <br></br>
+                                            3. Listen for Instructions: If a Tournament Official is called into a Custom Game, Players must keep the Tournament Official un-muted at all times.
+                                            <br></br>
+                                            <br></br>
+                                            4. Abuse: Verbal and/or written abuse of a Tournament Official will not be tolerated through any medium. This includes, but is not limited to, voice communications in game, voice messages, live support chats, written messages on Ultra Arena, Twitter, Facebook, etc. Violators of this rule may be disqualified from the Tournament.
+                                            <br></br>
+                                            <br></br>
+                                            5. Decisions Are Final: Tournament Staff have the final decision in all matters related to this competition. If a player feels the decision is unjust and/or goes against the rules listed for this competition, an Arena: Staff Report Ticket should be submitted for review. Please include any information and proof pertinent to the issue.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse6-2" class="collapsed">
+                                                Penalties
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse6-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Settings: For Search and Destroy, the hosting team will forfeit all rounds where the incorrect setting(s) affected the game. If a game is hosted out of order, the hosting team will forfeit that game that was played out of order. For example, if Search and Destroy - MayDay is the second game and played as the first game, the hosting team will forfeit Search and Destroy - MayDay. The first game will need to be played.
+                                            <br></br>
+                                            <br></br>
+                                            2. Restricted Items: For Search and Destroy, use of any restricted item(s) will result in the loss of the round(s) the item(s) were used in if it affected game play.
+                                            <br></br>
+                                            <br></br>
+                                            3. Premature Game Ending: Teams that force the game to end prematurely by player(s) switching teams, leaving the game, inviting outsite players, and/or the host ending the game may result in the loss of the round and/or game for Search and Destroy.
+                                            <br></br>
+                                            <br></br>
+                                            4. Equipment: Players may not use a Turbo controller, a Button Macro controller or Keyboard/Mouse. Turbo controllers allow Players to press a button that results in their Character performing a set of actions that would normally require the Player to press the same button multiple times. Button Macro controllers allow Players to press a button that results in their Character performing a set of actions that would normally require the Player to press multiple buttons. The team using the ineligible equipment will forfeit that games of the match it was used on.
+                                            <br></br>
+                                            <br></br>
+                                            5. IP Flooding (DDoS Attacks): Performing or assisting with a DDoS attack of your opponent will result in immediate disqualification of that team. All players on that team will be suspended from Ultra Arena for up to seven hundred and thirty (730) days.
+                                            <br></br>
+                                            <br></br>
+                                            6. Evading a Tournament or Servere Site Ban: Any player found evading a severe site ban or one related to Online Tournaments will be disqualified from this competition. If that player participates in any part of the match during the first tournament round, that team will forfeit the games that were played. If that player participates in any part of a match after the first tournament round, that team will be disqualified from the competition. The offending player(s) will be suspended from Ultra Arena for up to ninety (90) days.
+                                            <br></br>
+                                            <br></br>
+                                            7. Account Recovering XBL or PSN Accounts: Tournament participants are forbidden to allow others to play in this competition in place of them by sharing XBL or PSN accounts. The offending the team forfeit the entire match. The offending players will be suspended from the site for up to thirty (30) days.
+                                            <br></br>
+                                            <br></br>
+                                            8. Modified Console/Hacks/Mods: Use of a modified/jail broken console, in game hacks, and/or mods will result in the immediate disqualification of that team. The player(s) using the modified console, hacks, and/or mods will be suspended from Ultra Arena for up to seven hundred and thirty (730) days. The rest of the team will be suspended for up to ninety (90) days.
+                                            <br></br>
+                                            <br></br>
+                                            9. Evading a Ban: If a player is found evading a ban the team will be disqualified from this competition. The offending player(s) will be suspended from Ultra Arena for up to ninety (90) days.
+                                            <br></br>
+                                            <br></br>
+                                            10. Lack of Cooperation: Failing to comply with Support Staff's directions and/or requests may result in the forfeit of round(s), a map, or the entire match. Verbal or written abuse of a staff member will result in a suspension from Ultra Arena for up to twenty (20) days.
+                                            <br></br>
+                                            <br></br>
+                                            11. Failure to Report a Tournament Match: Any team leader/captain that fails to report their tournament match within ten (10) minutes after the conclusion of their match or upon receiving notification from support staff to do so, may be suspended from the site for up to twenty-four (24) hours.
+                                            <br></br>
+                                            <br></br>
+                                            12. Warnings: Tournament Officials may issue a Warning for infractions including, but not limited to, the use of profane words or phrases, discussion of controversial religious topics, threats/implied violence, lack of punctuality, and failure to follow tournament staff instructions. All warnings and penalties are given to the team, not the individual player. Teams may also be warned or incur a penalty for repeated warnings in regards to the same rule. Depending on the severity of the action or conduct by a player, multiple warnings may be handed out for a single infraction, up to and including bypassing warnings and resulting in an immediate penalty.
+                                            <br></br>
+                                            <br></br>
+                                            13. Penalties: After a maximum of three (3) warnings, post-warning penalties, including but not limited to the following, may be enforced: A Game Forfeit, a Match Forfeit, and a Ultra Arena Site Ban for a specified duration. Penalties may also be combined with other penalties.
+                                            <br></br>
+                                            <br></br>
+                                            14. Disqualification: Some infractions may result in warnings and penalties being bypassed with immediate disqualification from the remainder of the Tournament being enforced. Examples of behavior or actions that could result in this are physical acts violence, cheating, collusion/manipulating the bracket, drug/substance abuse on-site, any illegal activities, betting or gambling on a tournament or match results, hate speech, and harassment.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse7-2" class="collapsed">
+                                                General
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse7-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            1. Rules: The rules may be updated and modified at any time, for any reason. Rulings may be made outside the scope of these Rules in order to preserve fair play and tournament integrity. Participation in this Tournament constitutes entrant’s full and unconditional agreement to these Rules, the Official Rules on the Prize tab, and Tournament Official decisions, which are final and binding in all matters related to this tournament. Winning a prize is contingent upon fulfilling all requirements set forth herein.
+                                            <br></br>
+                                            <br></br>
+                                            2. Eligibility: United States, Canada, Mexico, and Central America Residents only. Not valid in Quebec, Maryland, Connecticut, and Arizona. Employees of UA, the Tournament's participating sponsors and their advertising agencies, and members of the immediate family of any such persons, are not eligible to participate and win. For the complete list of restrictions/limitations, please visit the prize tab. Any team found using a restricted player may be disqualified from the tournament without a refund of credits.
+                                            <br></br>
+                                            <br></br>
+                                            3. Players: Players must utilize their own unique Username for competing on Ultra Arena. This unique Username must have been registered on Ultra Arena personally by the user. The registered Username must contain the correct and complete Name, Address, and Email of the user. If a false Name, Address, or Email was entered, the user voids the privilege to participate in this Tournament and/or receive any prizes. As a user, you are personally responsible for accepting any invitation to a Team. If you receive a paid invite to a team, you accept the credits used for entry as your own in order to participate in this competition. If you do not personally accept a Team invitation, you may be disqualified from the Tournament and Forfeit any prize. All players must have an Xbox Live Gold account in good standing and be signed into Xbox Live for all Games. All Ultra Arena accounts, teams, roster spots and crowns are property of Ultra Arena LLC. Any advertising of, or attempts to buy, sell, trade, or exchange any aforementioned item is strictly prohibited. This also includes offering to forfeit matches in exchange for any item or service. Violators will be removed from all Ultra Arena online properties and all related accounts terminated. Furthermore, UA reserves the right to deactivate, reset or temporarily suspend any account or team, without notice, that violates our Terms of Use.
+                                            <br></br>
+                                            <br></br>
+                                            4. Team Management: If leadership of a tournament team is transferred to another member of that team, that person gives up all team editing privileges(adding/removing players, disbanding team, ect.). This includes any player/team "credit sponsors". As a warning, credits will not be refunded for any players the "credit sponsor" pays for if he/she is removed from the roster after leadership is transferred.
+                                            <br></br>
+                                            <br></br>
+                                            5. Valid Gamertags: All gamertags on a team’s roster must be valid. Each user on the Roster must legitimately own their gamertag. A Gamertag’s spelling and spaces must be exact, but the correct case is not necessary. Gamertags may not contain foul language, disparaging remarks, hateful or racist names. Any changes to a team roster after the tournament has been seeded is at the discretion of tournament staff. This includes changes to Xbox Live Gamertags, PSN IDs, Battle.net IDs, etc. Players may only be added to a roster (username and gamertag) up until the end of that team's first match. Gamertags must be linked to a player's UA Account before the start of the tournament bracket play.
+                                            <br></br>
+                                            <br></br>
+                                            6. Privacy and Impersonation: Individuals are prohibited from sharing account information stored on Ultra Arena with another person for any reason. This includes, but is not limited to, the following: usernames, passwords, gamertags, email accounts, etc. Individuals may not use another Player’s XBL Account in a Game. Individuals may not allow another Player to use their XBL Account in a Game. Players who break this rule may be disqualified from the Tournament. In game IP checks will be administered at the discretion of the Online Tournament Staff. This will ensure no one is account recovering and attempting to play on another person's account. However, IP checks will not be be given after the match has been completed.
+                                            <br></br>
+                                            <br></br>
+                                            7. Broadcast: UA reserves the right to broadcast any Match. If UA chooses to broadcast a Match, UA Staff members must be allowed into each Game.
+                                            <br></br>
+                                            <br></br>
+                                            8. Third Party Communication: Third party communication is allowed for this tournament. (i.e. skype, TeamSpeak, Party Chat, etc.). However, players must be able to communicate with any staff member that joins the Custom Game.
+                                            <br></br>
+                                            <br></br>
+                                            9. Definitions:
+                                            Game - One (1) competition played on one (1) map between two (2) teams
+                                            Map - The in-game level on which a game is played (ex. Crusher)
+                                            Game Mode - Competition type with specific win condition(s) (ex. Search and Destroy)
+                                            Match - a series made up of multiple games
+                                            Game Type - Combination of game mode and map (ex. Search and Destroy - Crusher)
+                                            <br></br>
+                                            <br></br>
+                                            11. Team Content: The Leader of a team can change the team name, blast message, logos, avatars and website links. The images/information submitted must be appropriate and cannot violate our Forum Rules. Attempting to bypass the automatic censor by misspelling, inserting spaces or symbols, transposing letters, using look-alike symbols, or any other method is not allowed. Teams that attempt to bypass the censor will be subject to penalties.
+                                            <br></br>
+                                            <br></br>
+                                            12. Prizing and Bracket Size: Tournament bracket size and prize are subject to change based on the total number of eligible teams at the end of registration. If the bracket is smaller than 6 teams second place will not recieve credits back. Only a trophy will be awarded.                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                    </div>
+                                </div>-->
+                            </div>
+<!--                            <div class="tab-pane fade" id="vtab2">
+
+                            </div>
+                            <div class="tab-pane fade" id="vtab3">
+
+                            </div>-->
+
+                        </div>
+
+                    </div>
+                <br />
+            </div>
+        </div>
+
+        <script>
+            /*
+             $(document).ready(function(){
+             setTimeout(function() {
+             activaTab('vtab2');
+             }, 250);
+             });
+             
+             function activaTab(tab){
+             $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+             };
+             */
+        </script>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

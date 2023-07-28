@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+            <div th:if="${error}" th:text="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+            </div>
+            <div th:if="${message}" class="message">
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:text="${message}"></div>
+            </div>
+
+        <div class="matchDetailsPage">
+            <div class="match-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/matches/match-details/shield.png" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="match-info" style="text-align:center !important;">
+                                <h3 style="font-size:36px !important;">
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War II</span>
+                                </h3>
+                                <h2 style="font-size:26px;color: #d8c668;">
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).WAGER}" th:text="${'Wager Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).XP}" th:text="${'XP Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT}" th:text="${'Tournament Match ID #' + match.matchId}"></span>
+                                </h2>
+                                <h2 style="font-size:26px" th:if="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></h2>
+                                <h2 style="font-size:26px" th:unless="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(null)}"></h2>
+
+
+                                <div th:if="${isTournamentMatch}">
+                                    <div>
+                                        <h2 style="font-size:20px">
+                                            <span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span> <span style="padding-top:100px !important"> VS </span> <span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div th:unless="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+<!--                        <div class="col-md-2" style="padding-top:15px;">
+                            <div th:unless="${isTournamentMatch}">
+                                <a th:if="${isEligibleToJoin}" th:href="@{'/matches/' +${match.pk} + '/accept'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Join Match
+                                </a>
+                                <a th:if="${canRequestMatchCancel}" th:href="@{'/matches/' +${match.pk} + '/request-cancel'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Request Match Cancel
+                                </a>
+                                <a th:if="${canCancelMatchForCreator}" th:href="@{'/matches/' +${match.pk} + '/cancel-match-game'}"
+                                   class="btn btn-default btn-lg radius-50">
+                                    Cancel Match
+                                </a>
+                            </div>
+                        </div>-->
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="match-menu-container">
+                <div class="match-menu container">
+                    <ul class="menu-items">
+                        <li><a th:href="@{'/matches/' + ${match.pk}}">DETAILS</a></li>
+                        <li th:if="${canDisputeMatch}"><a 
+                                th:href="@{'/matches/' + ${match.pk} + '/create-dispute'}">DISPUTE</a></li>
+                        <li th:if="${viewDispute}"><a 
+                                th:href="@{'/disputes/' + ${dispute.pk}}">VIEW DISPUTE</a></li>
+                        <li th:if="${canReportScore}" ><a
+                                th:href="@{'/matches/' + ${match.pk} + '/report-score'}">REPORT SCORE</a></li>
+                        <li><a 
+                                th:href="@{/rules/general}"  target="_blank">RULES</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="contents container" style="border: 1px solid #f3f3f3;">
+                <br />
+                <div th:if="${!isEligibleToJoin}">
+                    You do not have team to join with. <a th:href="@{'/matches/' + ${match.pk} + '/team/create'}">Click here to create one.</a>
+                </div>
+                <br />
+                <div class="match-details" th:if="${isEligibleToJoin}">
+                    <h3>Join Match</h3>
+                    <!--                <a th:href="@{/}" th:text="${match.matchInfo.gameEnum}"></a>
+                                    <p>Match Starts: 
+                                        <span th:if="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></span>
+                                        <span th:unless="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(null)}"></span>
+                                    </p>
+                                    <p><span th:text="${match.matchInfo.matchSizeEnum}"></span> Match</p>
+                                    
+                                    <div th:if="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+                                        <div th:text="${error}"></div>
+                                    </div>-->
+
+                    <!--                <br />
+                                    <div class="separator"></div>
+                                    <br />
+                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Match ID</strong></p>
+                                            <p><span th:text="${match.pk}"></span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Status</strong></p>
+                                            <p><span th:text="${match.matchInfo.matchStatus}"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Type</strong></p>
+                                            <p><span th:text="${match.matchInfo.matchType}"></span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                    
+                                        </div>
+                                    </div>-->
+
+
+                    <!--<br />-->
+                    <div class="separator-2"></div>
+                    <!--<br />-->
+
+                    <div class="teamInviteToMatch" th:if="${receiverTeam}">
+                        <h3>Invite Team Members</h3>
+                        <br />
+                        <div class="team">
+                            <h5 th:text="${'Team - ' + receiverTeam.teamPojo.teamName}"></h5>
+                            <form th:action="@{'/matches/accept/' + ${receiverTeam.pk} + '/' + ${match.pk}}" th:object="${form}" method="post">
+                                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                </div>
+
+                                <table class="table table-striped table-colored" th:if="${teamMembers}">
+                                    <tr>
+                                        <th style="color:white;background-color:#1d2223">Username</th>
+                                        <th style="color:white;background-color:#1d2223">Eligibility</th>
+                                        <th style="color:white;background-color:#1d2223">Invite</th>
+                                    </tr>
+                                    <tr th:each="member : ${teamMembers}">
+                                        <td th:text="${member.username}"></td>
+                                        <td>
+                                            ELIGIBLE
+                                        </td>
+                                        <td><input type="checkbox" name="userPks[]" th:value="${member.pk}" th:checked="${invitedUsers.contains(member) || member.username == #authentication.name}"
+                                                   th:disabled="${member.username == #authentication.name}"/>
+                                            <input type="hidden" name="userPks[]" th:value="${member.pk}" th:if="${member.username == #authentication.name}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <div>
+                                    <button class="btn btn-default disabledOnClick radius-50">
+                                        Join Match
+                                    </button>
+                                    <a th:href="@{'/matches/' + ${match.pk}}" class="btn btn-gray radius-50">
+                                        Back
+                                    </a>
+                                </div>  
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <!-- Cash game and Public -->
+                    <div th:if="${isCashGameAndPublic}">
+                        <!--<h3>Invite Team Users</h3>-->
+                        <!--<br />-->
+                        <div class="team">
+                            <form th:object="${form}" method="post" id="joinCashMatchForm">
+                                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                </div>
+                                <input type="hidden" name="matchPk" th:value="${match.pk}" />
+                                <input type="hidden" name="currentUser" th:value="${#authentication.name}" />
+                                <div class="" th:if="${teams}">
+                                    <div class="selectTeamSection">
+                                        <span style="font-size:18px">Select Your Team and Invite Users</span>
+                                        <select class="form-control" id="teamsSelector">
+                                            <option value="">Select team</option>
+                                            <option th:value="${team.pk}" th:each="team : ${teams}" th:text="${team.teamPojo.teamName}"></option>
+                                        </select>
+                                        <br />
+                                    </div>
+                                    <div class="selectUsersWithSsubmitTeamSection" style="display: none">
+                                        <table id="teamMembersTable" class="table table-striped table-colored">
+                                            <thead>
+                                                <tr>
+                                                    <th style="color:white;background-color:#1d2223">Username</th>
+                                                    <th style="color:white;background-color:#1d2223">Eligibility</th>
+                                                    <th style="color:white;background-color:#1d2223">Invite</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <br/>
+                                        <div class="actions">
+                                            <button class="btn btn-default disabledOnClick radius-50">
+                                                Join Match
+                                            </button>
+                                            <a th:href="@{'/matches/' + ${match.pk}}" class="btn btn-gray radius-50">
+                                                Back
+                                            </a>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+
+                    <script>
+                        $(function () {
+                            var teamPk = 0;
+                            $('.selectUsersWithSsubmitTeamSection').hide();
+                            $("#teamsSelector").change(function () {
+                                var value = $(this).val();
+                                if (value) {
+                                    teamPk = parseInt(value);
+                                    var re = /xms/i;
+                                    var found = location.href.match(re);
+
+                                    if (teamPk) {
+                                        var matchPk = $('input[name="matchPk"]').val();
+                                        var inviteTeamUsersInMatchURL = '/matches/accept/' + teamPk + '/' + matchPk;
+
+                                        if (found)
+                                            inviteTeamUsersInMatchURL = '/xms/matches/accept/' + teamPk + '/' + matchPk;
+
+                                        $('#joinCashMatchForm').attr('action', inviteTeamUsersInMatchURL);
+                                    }
+
+
+                                    var url = '/teams/' + teamPk + '/getAllUsersOnTeam';
+
+                                    if (found) {
+                                        url = '/xms/teams/' + teamPk + '/getAllUsersOnTeam';
+                                    }
+
+                                    $.get(url, function (data) {
+                                        setResultOnTableBody(data);
+                                    });
+                                } else {
+                                    $('#teamMembersTable tbody').html('');
+                                    $('#joinCashMatchForm').attr('action', '');
+                                    $('.selectUsersWithSsubmitTeamSection').hide();
+                                }
+                            });
+
+
+                            function setResultOnTableBody(data) {
+                                $('#teamMembersTable tbody').html('');
+                                if (data) {
+                                    var currentUser = $('input[name="currentUser"]').val();
+                                    $('.selectUsersWithSsubmitTeamSection').css({'display': 'block'});
+                                    $.each(data, function (index, user) {
+                                        var row = '<tr>';
+                                        row += '<td>' + user.username + '</td>';
+                                        row += '<td>Eligible</td>';
+                                        if (user.username == currentUser) {
+                                            row += '<td>';
+                                            row += '<input type="checkbox" value="' + user.pk + '" name="userPks[]" checked="checked" disabled="disabled" /></td>';
+                                            row += '<input type="hidden" value="' + user.pk + '" name="userPks[]" />';
+                                        } else
+                                            row += '<td><input type="checkbox" value="' + user.pk + '" name="userPks[]" /></td>';
+                                        row += '</tr>';
+                                        $('#teamMembersTable tbody').append(row);
+                                    });
+                                }
+                            }
+
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

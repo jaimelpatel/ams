@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="matchFinderPage">
+            <div class="matches-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div style="padding-top: 238px;" class="col-md-6 text-left">
+                            <div>
+                                <a th:href="@{/matches/create/team-select}" class="btn radius-50 btn-default btn-lg">
+                                    Create New Match
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="contents container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Public Matches</h3>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <div class="filter" style="padding: 10px 0px;">
+                            <select class="form-control gameEnum" style="width: 200px; display: inline-block;">
+                                <option value="">All Games</option>
+                                <option value="2">Call of Duty: World War II</option>
+                                <option value="1">Call of Duty: Infinite Warfare</option>
+                                <option value="0">Call of Duty: Modern Warfare Remastered</option>
+                            </select>
+                            <select class="form-control platformEnum" style="width: 150px; display: inline-block;">
+                                <option value="">All Consoles</option>
+                                <option value="4">Playstation 4</option>
+                                <option value="2">Xbox One</option>
+                            </select>
+                            <!--                            <a class="btn btn-default radius-50 btn-sm" th:href="@{/matches/create/team-select}" >
+                                                            Create Match
+                                                        </a>-->
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <!--                <tr th:if="${matches}" th:each="match : ${matches}">
+                                                <td th:text="${match.pk}"></td>
+                                                <td th:text="${match.matchInfo.numOfRounds}"></td>
+                                                <td th:if="${!isLoggedIn}" th:text="${match.matchInfo.getScheduledMatchTime(null)}"></td>
+                                                <td th:if="${isLoggedIn}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></td>
+                                                <td th:text="${match.matchInfo.gameEnum}"></td>
+                                                <td th:text="${match.matchInfo.teamTypeEnum}"></td>
+                                                <td th:text="${match.matchInfo.teamSizeEnum}"></td>
+                                                <td><a class="btn btn-default btn-sm" th:href="@{'/matches/' + ${match.pk}}">View</a></td>
+                                            </tr>
+                                            <tr th:if="${matches.isEmpty()}" class="text-center">
+                                                <td colspan="7">There are no public matches available to join.</td>
+                                            </tr>-->
+                <div class="matchList">
+                    <div th:if="${matches.isEmpty()}" class="text-center">
+                        <span style="font-size:20px" colspan="7">There are no public matches available to join.</span>
+                    </div>
+                    <br></br>
+                    <div class="match" th:if="${matches}" th:each="match : ${matches}">
+                        <a th:href="@{'/matches/' + ${match.pk}}">
+                            <div class="match-header">
+                                <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/matches/index/mwr_final2.jpg" width="100%" height="100%" />
+                                </div>
+                                <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/matches/index/iw3.png" width="100%" height="100%" />
+                                </div>
+                                <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/matches/index/ww2_final6.jpg" width="100%" height="100%" />
+                                </div>
+                                <div th:if="${match.matchInfo.teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).XP}" class="timeLeft">
+                                    <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_1}">XP - Best of 1</div>
+                                    <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_3}">XP - Best of 3</div>
+                                </div>
+
+                                <div th:if="${match.matchInfo.teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" class="timeLeft">
+                                    <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_1}">CASH - Best of 1</div>
+                                    <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_3}">CASH - Best of 3</div>
+                                </div>
+                            </div>
+                            <div class="match-content">
+                                <div class="row row-1">
+                                    <div class="col-md-12 text-center">
+                                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">
+
+                                            <h5 th:text="${'Call of Duty: MWR on ' + match.matchInfo.platform.getPlatformEnumDesc()}"></h5>
+                                        </div>
+                                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">
+
+                                            <h5 th:text="${'Call of Duty: WWIIsdfsdfsdfsdf on ' + match.matchInfo.platform.getPlatformEnumDesc()}"></h5>
+                                        </div>
+                                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">
+
+                                            <h5 th:text="${'Call of Duty: IW on ' + match.matchInfo.platform.getPlatformEnumDesc()}"></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row row-2">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                MATCH ID
+                                            </div>
+                                            <div th:text="${'#' + match.matchId}" class="col-md-6 text-right">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                BUY-IN
+                                            </div>
+
+                                            <div th:if="${match.matchInfo.teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).XP}">
+                                                <div class="col-md-6 text-right">FREE
+                                                </div>
+                                            </div>
+                                            <div th:if="${match.matchInfo.teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" >
+                                                <div class="col-md-6 text-right" th:text="${'$' + match.matchInfo.wagerAmountPerMember}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row row-3">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                TIME
+                                            </div>
+                                            <div th:if="${isLoggedIn}" class="col-md-9 text-right" th:text="${match.matchInfo.getScheduledMatchTime(user.getUserInfo().getTimeZone())}">
+                                            </div>
+                                            <div th:unless="${isLoggedIn}" class="col-md-9 text-right" th:text="${match.matchInfo.getScheduledMatchTime(null)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                REGION
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                North America
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-4">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                MODE
+                                            </div>
+                                            <div th:if="${match.matchInfo.gameModeEnumPojo.getGameModeEnumDesc() == 'Search And Destroy'}" class="col-md-9 text-right">
+                                                Search &amp; Destroy
+                                            </div>
+                                            <div th:if="${match.matchInfo.gameModeEnumPojo.getGameModeEnumDesc() == 'Variant'}" class="col-md-9 text-right">
+                                                Variant
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                SIZE
+                                            </div>
+                                            <div class="col-md-9 text-right" th:text="${match.matchInfo.matchSizeEnum.getMatchSizeEnumDesc()}">
+                                                2v2
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!--                <div class="panel">
+                                        <div class="myMatches">
+                                            <table class="table table-striped">
+                                                <tr>
+                                                    <th>Match #ID</th>
+                                                    <th>Match Set</th>
+                                                    <th>Start Time</th>
+                                                    <th>Game</th>
+                                                    <th>Team Type</th>
+                                                    <th>Team Size</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr th:if="${matches}" th:each="match : ${matches}">
+                                                    <td th:text="${match.pk}"></td>
+                                                    <td th:text="${match.matchInfo.numOfRounds}"></td>
+                                                    <td th:if="${!isLoggedIn}" th:text="${match.matchInfo.getScheduledMatchTime(null)}"></td>
+                                                    <td th:if="${isLoggedIn}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></td>
+                                                    <td th:text="${match.matchInfo.gameEnum}"></td>
+                                                    <td th:text="${match.matchInfo.teamTypeEnum}"></td>
+                                                    <td th:text="${match.matchInfo.teamSizeEnum}"></td>
+                                                    <td><a class="btn btn-default btn-sm" th:href="@{'/matches/' + ${match.pk}}">View</a></td>
+                                                </tr>
+                                                <tr th:if="${matches.isEmpty()}" class="text-center">
+                                                    <td colspan="7">There are no public matches available to join.</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>-->
+
+                </div>
+
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

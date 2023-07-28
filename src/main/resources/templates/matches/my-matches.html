@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container" style="border: 1px solid #f3f3f3;">
+            <h3>My Matches</h3>
+            <hr />
+            <div class="panel">
+                <div class="myMatches">
+                    <div class="text-right">
+                        <a th:href="@{/matches/create/team-select}" class="btn btn-default btn-sm">Create Match</a>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Match #ID</th>
+                            <th>Match Set</th>
+                            <th>Start Time</th>
+                            <th>Game</th>
+                            <th>Team Type</th>
+                            <th>Team Size</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        <tr th:if="${matches}" th:each="match : ${matches}">
+                            <td th:text="${match.matchId}"></td>
+                            <td th:text="${match.matchInfo.numOfRounds}"></td>
+                            <td th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></td>
+                            <td th:text="${match.matchInfo.gameEnum}"></td>
+                            <td th:text="${match.matchInfo.teamTypeEnum}"></td>
+                            <td th:text="${match.matchInfo.teamSizeEnum}"></td>
+                            <td th:text="${match.matchInfo.matchStatus}"></td>
+                            <td><a class="btn btn-default btn-sm" th:href="@{'/matches/' + ${match.pk}}">View</a></td>
+                        </tr>
+                        <tr th:if="${matches.isEmpty()}" class="text-center">
+                            <td colspan="7">You do not have any matches.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

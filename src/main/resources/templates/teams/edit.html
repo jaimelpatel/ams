@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div th:if="${successMessage}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+
+        <div th:if="${message}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+        <div th:if="${messageFailure}" th:text="${messageFailure}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+            <div th:text="${error}"></div>
+        </div>
+
+
+        <div class="profilePage">
+            <div class="profile-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 text-left" style="color:white">
+                            <br/>
+                            <br/>
+                            <h1 class="title" style="text-transform:none !important;font-size:44px;color:white !important;">Edit Team</h1>
+                            <div class="light separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                            <p style="font-size:18px;color:white;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Edit your team below.</p>
+                        </div>
+                        <div style="padding-top: 35px;" class="col-md-4 text-right">
+                            <div>
+                                <a th:href="@{'/teams/' + ${team.pk}}" class="btn radius-50 btn-default btn-lg">
+                                    Back
+                                </a>
+                                <a th:href="@{'/teams/' + ${team.pk} + '/disband'}" class="btn radius-50 btn-default btn-lg disbandButton">
+                                    Disband Team
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="userInfoContainer">
+                    <div class="userInfo container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="profile-placeholder" style="margin-top: -50px;">
+                                    <img th:src="${team.displayUrl}" />
+                                </div>
+                            </div>
+                            <div style="float:left" class="col-md-2">
+                                <h3 style="width:230px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:28px" th:text="${team.teamPojo.teamName}"></h3>
+                                <!--<p th:text="${timezone}"></p>-->
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4 th:text="${team.teamPojo.teamType.getTeamTypeEnumDesc()}"></h4>
+                                <h3 th:text="${'ID #' + team.teamId}"></h3>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Ladder Rank</h4>
+                                <h3 th:text="${team.rankXP.rank}"></h3>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Total XP</h4>
+                                <h3 th:text="${team.rankXP.totalTeamXp}"></h3>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Earnings</h4>
+                                <h3>$<span th:text="${team.rankXP.totalCashEarned}"></span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+                <div class="vertical">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-envelope-o pr-10"></i>Invite A User</a></li>
+                        <li><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Team Profile Picture</a></li>
+                        <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-remove pr-10"></i>Promote/Kick Members</a></li>
+                        <li th:if="${isCashAndWW2}"><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i>XP Gain/Loss Setting</a></li>
+                        <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-envelope-o pr-10"></i>Invite A User</a></li>-->
+                        <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                    </ul>   
+                    <div class="tab-content container">
+
+                        <div class="tab-pane fade" id="vtab1">
+                            <form method="POST" th:action="@{'/upload/' + ${team.pk}}" th:object="${uploadImageForm}" enctype="multipart/form-data">
+                                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                </div>
+                                <input type="file" name="file"/>
+                                <br/>
+                                <input class="btn radius-50 btn-default" type="submit" value="Update Team Picture" />
+                            </form>
+
+                        </div>
+                        <div class="tab-pane fade" id="vtab2">
+                            <table class="table table-striped table-colored">
+                                <thead>
+                                    <tr>
+                                        <th style="color:white;background-color:#1d2223">Username</th>
+                                        <th style="color:white;background-color:#1d2223">Playstation 4 ID</th>
+                                        <th style="color:white;background-color:#1d2223">Xbox One ID</th>
+                                        <th style="color:white;background-color:#1d2223">Role</th>
+                                        <th style="color:white;background-color:#1d2223"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:if="${teamMembers}" th:each="user : ${teamMembers}">
+                                        <td th:text="${user.username}"></td>
+                                        <td th:text="${user.userInfo.playStation4Name}"></td>
+                                        <td th:text="${user.userInfo.xboxOneGamerTag}"></td>
+                                        <td th:if="${user.pk == team.teamLeaderPk}">Leader</td>
+                                        <td th:unless="${user.pk == team.teamLeaderPk}">Member</td>
+                                        <td th:unless="${user.pk == team.teamLeaderPk}"><a th:href="@{'/teams/' + ${team.pk} + '/' + ${user.username} + '/promote'}" class="promoteButton btn radius-50 btn-primary btn-sm">
+                                                Promote To Leader
+                                            </a>
+                                            <a th:href="@{'/teams/' + ${team.pk} + '/' + ${user.username} + '/remove'}" class="btn radius-50 btn-default btn-sm">
+                                                Kick User
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div th:if="${isCashAndWW2}" class="tab-pane fade" id="vtab3">
+                            <!--<div th:if="${isCashAndWW2}">-->
+                            <div th:if="${!team.xpGainOn}" class="row">
+                                <div class="col-md-12">
+                                    <p> This team currently has XP Gain/Loss turned OFF. Turn it on by selecting the resume button. </p>
+                                    <a th:href="@{'/teams/' + ${team.pk} + '/xp-on'}" class="btn radius-50 btn-default btn-sm">
+                                        Resume XP Gain/Loss
+                                    </a>                        
+                                </div>
+                            </div>
+                            <div th:if="${team.xpGainOn}" class="row">
+                                <div class="col-md-12">
+                                    <p>This team currently has XP Gain/Loss turned ON. Turn it off by selecting the pause button. (Pausing XP Gain/Loss is not recommended unless this team is already highly ranked on the leaderboards and you want to play wager/tournament matches without fear of moving lower on the leaderboards. Cashout teams are ranked on the leaderboards by XP.)</p>
+                                    <a th:href="@{'/teams/' + ${team.pk} + '/xp-off'}" class="btn radius-50 btn-default btn-sm">
+                                        Pause XP Gain/Loss
+                                    </a>                        
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade in active" id="vtab4">
+
+                            <form th:action="@{'/teams/invite/' + ${team.pk}}" th:object="${teamInvitePojo}" method="post">
+                                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p style="font-size:18px"> Invite A User To the Team:</p>
+                                        <input type="text" id="usernameOfUserBeingInvited" name="usernameOfUserBeingInvited" placeholder="Username" class="form-control"/>
+                                        <input type="submit" value="Invite User" class="btn btn-default radius-50 btn" />
+
+                                    </div>
+
+                                </div>
+<br/>
+                                <div class="row" th:if="${isTeamInTournament}">
+                                    <div class="col-md-12">
+                                        <p style="font-size:20px">If you would like to invite a user to the tournament this team is currently in please click <a th:href="@{'/tournament/' + ${tournamentPk} + '/invite-users'}">here</a>. The input/button above will only invite a user to be a member of your cashout team but not the tournament.</p>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+            <br/>
+
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+        <script>
+            $(function () {
+                $('.disbandButton').click(function (e) {
+                    e.preventDefault();
+                    var disbandLink = $(this).attr('href');
+
+                    $.confirm({
+                        title: 'Disband Team',
+                        content: 'Are you sure you want to disband the team?',
+                        autoClose: 'cancelAction|5000',
+                        buttons: {
+                            disbandTeam: {
+                                text: 'Confirm',
+                                btnClass: 'btn-blue',
+                                action: function () {
+                                    window.location.href = disbandLink;
+                                }
+                            },
+                            cancelAction: {
+                                text: 'Cancel',
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+
+                });
+            });
+        </script>
+        <script>
+            $(function () {
+                $('.promoteButton').click(function (e) {
+                    e.preventDefault();
+                    var disbandLink = $(this).attr('href');
+
+                    $.confirm({
+                        title: 'Promote To Leader',
+                        content: 'Are you sure you want to promote this user to leader?',
+                        autoClose: 'cancelAction|5000',
+                        buttons: {
+                            disbandTeam: {
+                                text: 'Confirm',
+                                btnClass: 'btn-blue',
+                                action: function () {
+                                    window.location.href = disbandLink;
+                                }
+                            },
+                            cancelAction: {
+                                text: 'Cancel',
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+
+                });
+            });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div th:if="${message}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+        <div th:if="${messageFailure}" th:text="${messageFailure}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+        <div th:if="${error}" th:text="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+
+
+        <div class="invitesPage">
+            <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/nlg-template-img/support/cont22.jpg); background-position: 50% 25%;'">
+
+                <!-- breadcrumb end -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 text-left">
+                            <br />
+                            <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                            <h1 class="title" style="text-transform:none !important;font-size:44px;">Invites</h1>
+                            <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                            <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View all your team, match and tournament invites below.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            <div class="invites-header">
+                        </div>-->
+            <br />
+            <div class="contents container">
+                <h3>Team Invites</h3>
+                <!--<hr />-->
+
+
+                <!--                                <p class="info">See all your invites: Team, Match, and Tournament</p>
+                                                <div th:if="${isEmpty}" class="section light-gray-bg text-center">
+                                                    You have no invites.
+                                                </div>-->
+                <!--<br />-->
+                <div class="invite-list">
+                    <div class="inivite" th:if="${pendingInvites}" th:each="invite : ${pendingInvites}">
+                        <div class="row">
+                            <div class="col-md-1 inivite-details">
+                                <img class="envolop-img" src="https://storage.googleapis.com/nlg-template-img/invites/index/invite-envolope.gif" width="70" />
+                            </div>
+                            <div class="col-md-7 inivite-details">
+                                <h4><span th:text="${invite.getTeam().getTeamPojo().teamName}"></span> Team Invite </h4>
+                                <div class="sub-d">
+                                    Invited by User <a style="color:#1d2223" th:href="@{'/' + ${invite.getUserSender().username} + '/profile'}" th:text="${invite.getUserSender().username}" target="_blank"></a> at 
+                                    <span th:text="${invite.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 actions">
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/accept/team'}" class="accept disabledOnClick">Accept</a>
+                                | 
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/decline/team'}" href="" class="decline disabledOnClick">Decline</a>
+                                |
+                                <a th:href="@{'/teams/' + ${invite.getTeam().pk}}" href="" class="view disabledOnClick" target="_blank">View Team</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${noTeamInvites}" class="section light-gray-bg text-center">
+                        You have no team invites.
+                    </div>
+                    <br />
+                    <nav class="text-center" th:if="${pages}">
+                        <ul class="pagination" th:if="${pages.size() > 0}">
+                            <li th:if="${hasPrevPage}"><a th:href="@{'/' + ${#authentication.name} + '/invites/' + '?page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                            <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/' + ${#authentication.name} + '/invites/' + '?page=' + ${page}}" th:text="${page}"></a></li>
+                            <li th:if="${hasNextPage}"><a th:href="@{'/' + ${#authentication.name} + '/invites/' + '?page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                    
+                    <!--<br />-->
+                    <h3>Match Invites</h3>
+                    <!--<hr />-->
+                    <!--<br />-->
+                    <div class="inivite" th:if="${matchInvites}" th:each="invite : ${matchInvites}">
+                        <div class="row">
+                            <div class="col-md-1 inivite-details">
+                                <img class="envolop-img" src="https://storage.googleapis.com/nlg-template-img/invites/index/invite-envolope.gif" width="70" />
+                            </div>
+                            <div class="col-md-7 inivite-details" th:if="${!invite.isIsPrivateMatchInviteToLeader()}">
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">Call of Duty: MWR Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: IW Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: WWII Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+
+                                <div class="sub-d">
+                                    Invited by Team <a style="color:#1d2223" th:href="@{'/teams/' + ${invite.getTeam().pk}}" th:text="${invite.getTeam().getTeamPojo().teamName}" target="_blank"></a> at
+                                    <span th:text="${invite.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 actions" th:if="${!invite.isIsPrivateMatchInviteToLeader()}">
+                                <a th:if="${!invite.isIsPrivateMatchInviteToLeader()}" th:href="@{'/invites/' + ${invite.pk} + '/accept/match'}" class="accept disabledOnClick">Accept</a>
+                                <span th:if="${!invite.isIsPrivateMatchInviteToLeader()}" >|</span>
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/decline/match'}" href="" class="decline disabledOnClick">Decline</a>
+                                |
+                                <a th:href="@{'/matches/' + ${invite.getMatch().pk}}" href="" class="view disabledOnClick" target="_blank">View Match</a>
+
+                            </div>
+                            <div class="col-md-6 inivite-details" th:if="${invite.isIsPrivateMatchInviteToLeader()}">
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">Call of Duty: MWR Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: IW Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+                                <h4 th:if="${invite.getMatch().getMatchInfo().gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: WWII Match Invite <span th:if="${invite.getMatch().getMatchInfo().teamTypeEnum == T(com.ltlogic.constants.TeamTypeEnum).CASH}" th:text="${'($' + invite.getMatch().getMatchInfo().wagerAmountPerMember + ')'}"></span> </h4>
+
+                                <div class="sub-d">
+                                    Invited by Team <a style="color:#1d2223" th:href="@{'/teams/' + ${invite.privateMatchTeamSenderPk}}" th:text="${invite.privateMatchTeamSenderName}" target="_blank"></a> at
+                                    <span th:text="${invite.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-5 actions" th:if="${invite.isIsPrivateMatchInviteToLeader()}">
+                                <a th:if="${invite.isIsPrivateMatchInviteToLeader()}" th:href="@{'/matches/' + ${invite.match.pk} + '/accept/'}" class="accept disabledOnClick">Accept Private Match</a>
+                                <span th:if="${invite.isIsPrivateMatchInviteToLeader()}" >|</span> 
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/decline/match'}" href="" class="decline disabledOnClick">Decline</a>
+                                |
+                                <a th:href="@{'/matches/' + ${invite.getMatch().pk}}" href="" class="view disabledOnClick" target="_blank">View Match</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${noMatchInvites}" class="section light-gray-bg text-center">
+                        You have no match invites.
+                    </div>
+                    <br />
+                    <h3>Tournament Invites</h3>
+                    <!--<hr />-->
+                    <!--<br />-->
+                    <div class="inivite" th:if="${tournamentInvites}" th:each="invite : ${tournamentInvites}">
+                        <div class="row">
+                            <div class="col-md-1 inivite-details">
+                                <img class="envolop-img" src="https://storage.googleapis.com/nlg-template-img/invites/index/invite-envolope.gif" width="70" />
+                            </div>
+                            <div class="col-md-7 inivite-details">
+                                <h4 th:if="${invite.getTournamentTeam().getTeam().getTeamPojo().game == T(com.ltlogic.constants.GameEnum).COD_MWR}">Call of Duty: MWR Tournament Invite <span th:text="${'($' + invite.getTournament().getTournamentInfo().wagerAmountPerMember + ')'}"></span></h4>
+                                <h4 th:if="${invite.getTournamentTeam().getTeam().getTeamPojo().game == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: IW Tournament Invite <span th:text="${'($' + invite.getTournament().getTournamentInfo().wagerAmountPerMember + ')'}"></span></h4>
+                                <h4 th:if="${invite.getTournamentTeam().getTeam().getTeamPojo().game == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: WWII Tournament Invite <span th:text="${'($' + invite.getTournament().getTournamentInfo().wagerAmountPerMember + ')'}"></span></h4>                                
+                                <div class="sub-d">
+                                    Invited by Team <a style="color:#1d2223" th:href="@{'/teams/' + ${invite.getTournamentTeam().getTeam().pk}}" th:text="${invite.getTournamentTeam().getTeam().getTeamPojo().teamName}" target="_blank"></a> at
+                                    <span th:text="${invite.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 actions">
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/accept/tournament'}" class="accept disabledOnClick">Accept</a>
+                                |
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/decline/tournament'}" href="" class="decline disabledOnClick">Decline</a>
+                                |
+                                <a th:href="@{'/tournaments/' + ${invite.getTournament().pk}}" href="" class="view disabledOnClick" target="_blank">View Tournament</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${noTournamentInvites}" class="section light-gray-bg text-center">
+                        You have no tournament invites.
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

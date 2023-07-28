@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container" style="border: 1px solid #f3f3f3;">
+            <h3>My Disputes</h3>
+            <hr />
+            <div class="panel">
+                <div class="myMatches">
+                    <table class="table">
+                        <tr>
+                            <th>Dispute Id</th>
+                            <th>Reason</th>
+                            <th></th>
+                        </tr>
+                        <tr th:if="${!disputes.isEmpty()}" th:each="dispute : ${disputes}">
+                            <td th:text="${dispute.disputeId}"></td>
+                            <td th:text="${dispute.reasonForDispute}"></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" th:href="@{'/disputes/' + ${dispute.pk}}">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${disputes.isEmpty()}" class="text-center">
+                            <td colspan="3">You do not have any dispute.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

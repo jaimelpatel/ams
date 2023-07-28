@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Teams</title>      
+    </head>
+<body>
+<h1>Welcome <div th:text="${username}"></div></h1>
+<h1>Your Teams</h1>
+<div th:each="team : ${myTeams}">
+     <div th:text="${team.teamName}"></div>
+         <div th:text="${team.consoleEnum}"></div>
+         <div th:text="${team.teamTypeEnum}">
+    </div>
+</div>
+
+<form th:action="@{/logout}" method="get" id="logout">
+    <a href="javascript:document.getElementById('logout').submit()">Logout</a>
+        </form>
+</body>
+</html>

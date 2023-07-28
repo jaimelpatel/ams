@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <h3>Create Tournament:</h3>
+            <hr />
+
+            <form th:action="@{/admin/tournaments/create}" th:object="${createTournamentForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+                <h4>Tournament Settings</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Game <span class="text-danger small">*</span></label>
+                        <select name="game" class="form-control">
+                            <option value="">Select Game</option>
+                            <option th:value="0" th:selected="${createTournamentForm.game == 0}">Call of Duty: Modern Warfare Remastered</option>
+                            <option th:value="1" th:selected="${createTournamentForm.game == 1}">Call of Duty: Infinite Warfare</option>
+                            <option th:value="2" th:selected="${createTournamentForm.game == 2}">Call Of Duty: World War 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Console <span class="text-danger small">*</span></label>
+                        <select name="platform" class="form-control">
+                            <option value="">Select Console</option>
+                            <!--<option th:value="0" th:selected="${createTournamentForm.platform == 0}">PC</option>-->
+                            <!--<option th:value="1" th:selected="${createTournamentForm.platform == 1}">Xbox 360</option>-->
+                            <option th:value="2" th:selected="${createTournamentForm.platform == 2}">Xbox One</option>
+                            <!--<option th:value="3" th:selected="${createTournamentForm.platform == 3}">Playstation 3</option>-->
+                            <option th:value="4" th:selected="${createTournamentForm.platform == 4}">Playstation 4</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Region</label>
+                        <select name="region" class="form-control">
+                            <option value="">Select Region</option>
+                            <option th:value="0" th:selected="${createTournamentForm.region == 0}">North America</option>
+                            <option th:value="1" th:selected="${createTournamentForm.region == 1}">Europe</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Match Size <span class="text-danger small">*</span></label>
+                        <select name="matchSize" class="form-control">
+                            <option value="">Select Match Size</option>
+                            <option th:value="0" th:selected="${createTournamentForm.matchSize == 0}">Singles(1v1)</option>
+                            <option th:value="1" th:selected="${createTournamentForm.matchSize == 1}">Doubles(2v2)</option>
+                            <option th:value="2" th:selected="${createTournamentForm.matchSize == 2}">Threes(3v3)</option>
+                            <option th:value="3" th:selected="${createTournamentForm.matchSize == 3}">Fours(4v4)</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Tournament Status <span class="text-danger small">*</span></label>
+                        <select name="tournamentStatus" class="form-control">
+                            <option value="">Select Tournament Status</option>
+                            <option th:value="0" th:selected="${createTournamentForm.tournamentStatus == 0}">Pending</option>
+                            <option th:value="1" th:selected="${createTournamentForm.tournamentStatus == 1}">Active</option>
+                            <!--                            <option th:value="2" th:selected="${createTournamentForm.tournamentStatus == 2}">Ended</option>
+                                                        <option th:value="3" th:selected="${createTournamentForm.tournamentStatus == 3}">Cancelled</option>-->
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tournament Best Of <span class="text-danger small">*</span></label>
+                        <select name="bestOf" class="form-control">
+                            <option value="">Select How Many Maps </option>
+                            <option th:value="0" th:selected="${createTournamentForm.bestOf == 0}">Best of 1</option>
+                            <option th:value="1" th:selected="${createTournamentForm.bestOf == 1}">Best of 3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tournament How Many Maps For FINALS <span class="text-danger small">*</span></label>
+                        <select name="bestOfFinals" class="form-control">
+                            <option value="">Select Best of FINALS </option>
+                            <option th:value="0" th:selected="${createTournamentForm.bestOfFinals == 0}">Best of 1</option>
+                            <option th:value="1" th:selected="${createTournamentForm.bestOfFinals == 1}">Best of 3</option>
+                            <option th:value="2" th:selected="${createTournamentForm.bestOfFinals == 2}">Best of 5</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Game Mode <span class="text-danger small">*</span></label>
+                        <select name="gameModeEnum" class="form-control">
+                            <option value="">Select Game Mode </option>
+                            <option th:value="0" th:selected="${createTournamentForm.gameModeEnum == 0}">Search and Destroy</option>
+                            <option th:value="1" th:selected="${createTournamentForm.gameModeEnum == 1}">Variant</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <h4>Tournament Time and Team Count</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Scheduled Tournament Date <span class="text-danger small">*</span></label>
+                        <input type="text" name="scheduledTournamentTime" class="form-control scheduledTournamentTime" 
+                               th:value="${createTournamentForm.scheduledTournamentTime}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Max Team Count <span class="text-danger small">*</span></label>
+                        <input type="text" name="maxTeamCount" class="form-control" 
+                               th:value="${createTournamentForm.maxTeamCount}"/>
+                    </div>
+                </div>
+                <br />
+                <!--                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Tournament Start Date <span class="text-danger small">*</span></label>
+                                        <input type="text" name="tournamentStartTime" class="form-control tournamentStartTime"
+                                               th:value="${createTournamentForm.tournamentStartTime}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Tournament End Date <span class="text-danger small">*</span></label>
+                                        <input type="text" name="tournamentEndTime" class="form-control tournamentEndTime"
+                                               th:value="${createTournamentForm.tournamentEndTime}"/>
+                                    </div>
+                                </div>-->
+                <br />
+                <h4>Tournament Rewards</h4>
+                <div>
+                    <label>Tournament Title</label>
+                    <input type="text" name="title" class="form-control" th:value="${createTournamentForm.title}" />
+                </div>
+                <div>
+                    <label>Tournament Pot Amount <span class="text-danger small">*</span></label>
+                    <input type="number" name="potAmount" class="form-control" th:value="${createTournamentForm.potAmount}" />
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>First Place Award Amount <span class="text-danger small">*</span></label>
+                        <input type="number" name="amountAwardedToFirstPlace" class="form-control" th:value="${createTournamentForm.amountAwardedToFirstPlace}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Second Place Award Amount <span class="text-danger small">*</span></label>
+                        <input type="number" name="amountAwardedToSecondPlace" class="form-control" th:value="${createTournamentForm.amountAwardedToSecondPlace}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Third Place Award Amount <span class="text-danger small">*</span></label>
+                        <input type="number" name="amountAwardedToThirdPlace" class="form-control" th:value="${createTournamentForm.amountAwardedToThirdPlace}"  />
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <label>Wager Amount Per Member To Join<span class="text-danger small">*</span></label>
+                    <input type="number" name="wagerAmountPerMember" class="form-control" th:value="${createTournamentForm.wagerAmountPerMember}" />
+                </div>
+                <br />
+                <!--                <div>
+                                    <label>Pot Amount Without Donations</label>
+                                    <input type="number" name="potAmountWithoutDonations" class="form-control" th:value="${createTournamentForm.potAmountWithoutDonations}" />
+                                </div>-->
+                <br />
+
+                <hr />
+                <div class="text-left">
+                    <button class="btn btn-default btn-animated">
+                        <i class="fa fa-save"></i>
+                        Create Tournament
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <script type="text/javascript">
+            $(function () {
+                $('.scheduledTournamentTime, .tournamentStartTime, .tournamentEndTime').datetimepicker({
+                    sideBySide: true,
+                    format: 'MM/DD/YYYY hh:mm A'
+                });
+            });
+        </script>
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

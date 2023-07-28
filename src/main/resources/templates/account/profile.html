@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        
+        <div th:if="${message}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+        <div th:if="${successMessage}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 25%;'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--                <h3>Edit Settings</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Profile</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+
+                        <p style="font-size:18px;">Customize your profile information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountPage">
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+
+                <div class="status-option-links">
+                    <ul>
+                        <li><a th:href="@{/account}">General</a></li>
+                        <li class="active"><a th:href="@{/account/profile}">Profile</a></li>
+                        <li><a th:href="@{/account/bank}">Bank</a></li>
+                        <!--<li><a th:href="@{/}">Upcoming</a></li>-->
+                    </ul>
+                </div>
+                <br />
+                <form th:action="@{/account/profile}" th:object="${profileSettingsForm}" method="post">
+                    <div class="vertical">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Profile Picture</a></li>
+                            <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-life-saver pr-10"></i>  Social Media</a></li>
+                            <!--<li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-lock pr-10"></i> Edit Password</a></li>-->
+                            <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                        </ul>
+                        <div style="color:#1d2223" class="tab-content container">
+
+                            <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                                <div th:text="${message}"></div>
+                            </div>
+                            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                <div th:text="${error}"></div>
+                            </div>
+
+                            <div class="tab-pane fade" id="vtab2">
+                                <form th:action="@{/account/profile}" th:object="${profileSettingsForm}" method="post">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Twitch</label>
+                                            <input type="text" class="form-control" name="twitchUrl" th:value="${profileSettingsForm.twitchUrl}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Youtube</label>
+                                            <input type="text" class="form-control" name="youtubeUrl" th:value="${profileSettingsForm.youtubeUrl}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Facebook</label>
+                                            <input type="text" class="form-control" name="facebookUrl" th:value="${profileSettingsForm.facebookUrl}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Twitter</label>
+                                            <input type="text" class="form-control" name="twitterUrl" th:value="${profileSettingsForm.twitterUrl}" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <hr />
+                                        <button class="btn btn-default radius-50 disabledOnClick">
+                                            Save Profile Settings
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade in active" id="vtab1">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img style="height: 200px; width: 200px;" th:src="${user.displayUrl}" />
+
+                                        <form method="POST" th:action="@{/upload}" th:object="${uploadImageForm}" enctype="multipart/form-data">
+                                            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                                <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                            </div>
+                                            <input type="file" name="file"/>
+                                            <br/>
+                                            <input class="btn radius-50 btn-default" type="submit" value="Update Profile Picture" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <!--                    <div>
+                                        <hr />
+                                        <button class="btn btn-default radius-50">
+                                            Save Profile Settings
+                                        </button>
+                                    </div>-->
+
+                <!--
+                                <form method="POST" th:action="@{/upload}" th:object="${uploadImageForm}" enctype="multipart/form-data">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                </form>-->
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

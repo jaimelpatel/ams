@@ -1,0 +1,69 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <ul class="nav nav-tabs" role="tablist">
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/'}" >
+                        All Invites
+                    </a>
+                </li>
+                <li class="active">
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/team-invites/'}" >
+                        Team Invites
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/match-invites'}" >
+                        Match Invites
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/tournament-invites'}" >
+                        Tournament Invites
+                    </a>
+                </li>
+            </ul>
+
+            <h3>Team Invites</h3>
+            <form th:action="@{/}" th:object="${acceptTeamInviteForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+            </form>
+            
+            <div class="panel">
+                <div th:if="${pendingInvites.isEmpty()}">No Team Invites</div>
+                <div th:if="${!pendingInvites.isEmpty()}">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Team Name</th>
+                            <th>Invited By</th>
+                            <th>Requested Date</th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="invite : ${pendingInvites}">
+                            <td><a th:href="@{'/' + ${#authentication.name} + '/teams/' + ${invite.getTeam().pk}}" th:text="${invite.getTeam().getTeamPojo().teamName}"> </a></td>
+                            <td th:text="${invite.getUserSender().username}"></td>
+                            <td th:text="${invite.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></td>
+                            <td>
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/accept/team'}" class="btn btn-success btn-sm disabledOnClick">Accept</a> 
+                                <a th:href="@{'/invites/' + ${invite.pk} + '/decline/team'}" href="" class="btn btn-danger btn-sm disabledOnClick">Decline</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>-->

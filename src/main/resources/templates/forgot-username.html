@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        
+            <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 35%;'">
+
+				<!-- breadcrumb end -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 text-left">
+                                                    <br/>
+							<!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                                                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Forgot Username</h1>
+							<div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+							<p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Please enter your accounts' email address below and we will email you your username.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+        <div class="contents container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Forgot Username</h3>
+                    <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${hasSentResetLink == true}" th:text="${message}">                  
+                    </div>
+                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}" th:text="${error}">
+                    </div>
+                    <form th:action="@{/username/forgot}" method="post">
+                        <label>E-Mail Address</label>
+                        <input type="text" class="form-control" name="email" />
+                        <br/>
+                        <button class="btn btn-default radius-50 disabledOnClick">
+                            Send Email With Username
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>
+

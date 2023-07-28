@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 20%;'">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Future Features</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
+                            Find out about all the features we have in the pipeline.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <section class="main-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <!-- main start -->
+                    <!-- ================ -->
+                    <div class="main col-md-12">
+
+                        <!-- page-title start -->
+                        <!-- ================ -->
+                        <h3 style="font-size:28px" class="page-title">Future Features</h3>
+                        <div class="separator-2"></div>
+
+                        <div class="featured-news">
+                            <article class="blogpost">
+                                <div class="row grid-space-10">
+                                    <div class="col-md-6">
+                                        <div class="overlay-container">
+                                            <img style="height:260px" th:src="@{https://storage.googleapis.com/cod-pics/comingsoon4.png}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--                                        <header>
+                                                                                    <h2>About Us</h2>
+                                                                                    <div class="post-info">
+                                                                                        <span class="post-date">
+                                                                                            <i class="icon-calendar"></i>
+                                                                                            <span class="day">19</span>
+                                                                                            <span class="month">October 2017</span>
+                                                                                        </span>
+                                                                                        <span class="submitted"><i class="icon-user-1"></i> by <a href="#">Admin</a></span>
+                                                                                    </div>
+                                                                                </header>-->
+                                        <div class="blogpost-content">
+                                            <p>At NLG we are always striving to give our users the best competitive gaming experience. We released NLG with all the features we believe were necessary for our users, but we have a lot of other ideas that we think will make the experience even better. We will be developing these new features in the background and hope we can continue our work through NLG's success! Below are just some of the features we plan to work on and release in the future:
+                                                <br/>
+                                                <br/>
+                                                1. Android/iOS Mobile Application - A free to download mobile application where users can login to their NLG accounts and view their information. Users will be able to upload images taken from their phones as dispute proof for matches and receive live notifications about their upcoming matches and tournaments.
+                                            </p>
+                                            <!--<p><a href="#">Read More</a></p>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>2. XP Tournaments - Tournaments for XP teams where the buy in is a certain amount of xp. Works the same way as a cash tournament except users are wagering their xp in a chance to win a large amount of xp if they come out on top. A teams xp can be wagered as the buyin so if that team is victorious the team will be given the sum of the xp pot. </p>
+                                        <p>3. Community Match Dispute Resolution - A system for our users to solve disputes for XP matches. After a certain amount of correctly resolved disputes by a user, they will receive xp points as an incentive. In order for a user to become eligible as a match reviewer, they must have a minimum of
+                                            20 matches played and maintain a low percentage of dispute claim losses. However, if a
+                                            user is incorrectly deciding matches repetitively they will lose this privilege. </p>
+                                    </div>
+                                </div>
+<!--                                <footer class="clearfix">
+
+                                </footer>-->
+                            </article>
+                        </div>    
+
+
+                        <div class="news-list">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <article class="blogpost">
+                                        <header>
+                                            <h2><a th:href="@{/news/playoffs}">NLG Playoffs</a></h2>
+                                            <div class="post-info">
+                                                <span class="post-date">
+                                                    <i class="icon-calendar"></i>
+                                                    <span class="day">19</span>
+                                                    <span class="month">November 2017</span>
+                                                </span>
+                                                <span class="submitted"><i class="icon-user-1"></i> by Admin</span>
+
+                                            </div>
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>Here at NLG we want to reward teams competing hard on our site from both xp and cash ladders. Our Call of Duty: World War 2 leaderboards for Xbox One and Playstation 4 display the top teams in their respective ladders who will... </p>
+                                        </div>
+                                        <footer class="clearfix">
+                                            <div style="font-size:15px" class="link pull-left"><i class="icon-link"></i><a th:href="@{/news/playoffs}">Read More</a></div>
+                                        </footer>
+                                    </article>
+                                </div>
+                                <div class="col-md-6">
+                                    <article class="blogpost">
+                                        <header>
+                                            <h2><a th:href="@{/news}">About Us</a></h2>
+                                            <div class="post-info">
+                                                <span class="post-date">
+                                                    <i class="icon-calendar"></i>
+                                                    <span class="day">19</span>
+                                                    <span class="month">November 2017</span>
+                                                </span>
+                                                <span class="submitted"><i class="icon-user-1"></i> by Admin</span>
+
+                                            </div>
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>Here at NLG we offer Call of Duty gamers competitive free and cash matches/tournaments. Our only form of currency is NLG cash which can be used on both wagers and tournaments. NLG Cash is 100% refundable and... </p>
+                                        </div>
+                                        <footer class="clearfix">
+                                            <div style="font-size:15px" class="link pull-left"><i class="icon-link"></i><a th:href="@{/news}">Read More</a></div>
+                                        </footer>
+                                    </article>
+                                </div>
+                                <!--                                <div class="col-md-4">
+                                                                    <article class="blogpost">
+                                                                        <header>
+                                                                            <h2><a href="blog-post.html">Audio post</a></h2>
+                                                                            <div class="post-info">
+                                                                                <span class="post-date">
+                                                                                    <i class="icon-calendar"></i>
+                                                                                    <span class="day">10</span>
+                                                                                    <span class="month">May 2015</span>
+                                                                                </span>
+                                                                                <span class="submitted"><i class="icon-user-1"></i> by <a href="#">Admin</a></span>
+                                
+                                                                            </div>
+                                                                        </header>
+                                                                        <div class="blogpost-content">
+                                                                            <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
+                                                                        </div>
+                                                                        <footer class="clearfix">
+                                                                            <div class="link pull-left"><i class="icon-link"></i><a href="#">Read More</a></div>
+                                                                        </footer>
+                                                                    </article>
+                                                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- main end -->
+
+                </div>
+            </div>
+        </section>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

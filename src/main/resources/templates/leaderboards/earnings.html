@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container" style="border: 1px solid #f3f3f3;">
+            <div class="leaderboards">
+
+                <h1>Leaderboard</h1>
+                <p>This leaderboard displays the top players by Earnings in the site.</p>
+
+                <ul class="nav nav-pills" role="tablist">
+                    <li><a th:href="@{/leaderboards}" title="XP RANK" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> XP</a></li>
+                    <li class="active"><a th:href="@{/leaderboards/earnings}" title="EARNINGS" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> EARNINGS</a></li>
+                </ul>
+                <hr />
+
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            Rank
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Earnings
+                        </th>
+                    </tr>
+                    <tr th:if="${userRanksByEarnings.isEmpty()}">
+                        <td class="text-center" colspan="5">
+                            No rank history by Earnings.
+                        </td>
+                    </tr>
+                    <tr th:if="${!userRanksByEarnings.isEmpty()}" th:each="user : ${userRanksByEarnings}">
+                        <td th:text="${user.rankEarnings.rank}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="'$' + ${user.rankEarnings.totalEarnings}"></td>
+                    </tr>
+                </table>
+
+                <br/> 
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 10%;'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--                <h3>Edit Settings</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Cash Match Rules</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+
+                        <p style="font-size:18px;">This ruleset applies to all cash matches played as wagers or in tournaments on NLG.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountPage">
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+
+                <div class="status-option-links">
+                    <ul>
+                        <li><a th:href="@{/rules/general}">General Rules</a></li>
+                        <li><a th:href="@{/rules/xp}">XP Matches</a></li>
+                        <li class="active"><a th:href="@{/rules/cash}">Cash &amp; Tournament Matches</a></li>
+                        <li><a th:href="@{/rules/game}">Game Specific Rules</a></li>
+                    </ul>
+                </div>
+                <br />
+                <div class="vertical">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#vtab10" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i>General</a></li>
+                        <li ><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-check pr-10"></i>Player Eligibility</a></li>
+                        <li><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-user-plus pr-10"></i>  Hosting</a></li>
+                        <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-chain-broken pr-10"></i> Connection Issues &amp; Lag</a></li>
+                        <li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-ban pr-10"></i> Cheating &amp; Penalties</a></li>
+                        <li><a href="#vtab7" role="tab" data-toggle="tab"><i class="fa fa-trophy pr-10"></i> Tournaments</a></li>
+                        <li><a href="#vtab5" role="tab" data-toggle="tab"><i class="fa fa-ticket pr-10"></i> Dispute Center &amp; Proof</a></li>
+                        <li><a href="#vtab6" role="tab" data-toggle="tab"><i class="fa fa-trophy pr-10"></i> Seasons &amp; Playoffs</a></li>
+                        <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                    </ul>
+                    <!-- Tab panes -->
+                    <div style="color:#1d2223" class="tab-content container">
+
+                        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                            <div th:text="${message}"></div>
+                        </div>
+                        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                            <div th:text="${error}"></div>
+                        </div>
+                        <div class="tab-pane fade in active" id="vtab10">
+                            1. Cash teams are used for both cash matches and tournaments with NLG Cash being the currency used for both ($1.00 NLG Cash = $1.00 USD). Tournament seeding is
+                            completely random so that a team’s current record will have no impact on their seeding.
+                            <br/>
+                            <br/>
+                            2. Cash teams have the ability to turn on/off the XP gain/loss calculator for their wager and tournaments games before they are played. Turning off this feature is not recommended unless the team is already highly ranked on the leaderboards and you want to play a wager match or tournament without fear of moving lower on the leaderboards. 
+                            Cash teams are ranked by their total XP just like XP teams are.(This setting can be accessed through the edit team function)
+                            <br/>
+                            <br/>
+                            3. Each user may be on up to 3 cash teams in the same ladder (Example of a ladder: North America - Call of Duty: World War 2 - Playstation 4 - Doubles). 
+                            <br/>
+                            <br/>
+                            4. NLG takes a comission from every cash match and tournament played.
+                            
+                                                        <br/>
+                            <br/>
+                            5. All players playing in a tournament or cash match must accept their tournament/cash match invite in order to make their team eligible for play.
+                        </div>
+                        <div class="tab-pane fade" id="vtab1">
+                            1. Players must have a valid PSN or Xbox Gamer tag linked to their NLGO account
+                            (Spelling and spaces must be exact). To set your account sign in above and click <a th:href="@{/account}">here</a>.
+                            <br/>
+                            <br/>
+                            2. You can change the PSN or Xbox Gamer tag associated with your account. However,
+                            doing so will result in that user being ineligible for the next 4 hours on the ladders that
+                            the change applies to (Example: changing a PSN will only make that user ineligible for
+                            PSN games, it will not affect Xbox game eligibility).
+                            <br/>
+                            <br/>
+                            3. Players can be on two cash teams at once and are allowed unlimited team changes. 
+                            <br/>
+                            <br/>
+                            4. Players can only have one pending/active match at a time, this means you will not be able
+                            to post/accept matches from two teams at the same time. NLGO blocks users from
+                            competing in multiple matches at the same time.
+                            <br/>
+                            <br/>
+                            5. Once a team leader has created/accepted a match, all members of that team must also
+                            accept the match for it to become active.
+                            <br/>
+                            <br/>
+                            6. Players must be 18 years or older to compete in cash matches or cash tournaments.
+                            <br/>
+                            <br/>
+                            7. Players competing in any NLG tournament, must be a resident of the United States, Mexico, Puerto Rico and Canada. Players must not be a resident of the state of Arizona, Connecticut, Maryland or the territory of Quebec. 
+                                                        <br/>
+                            <br/>
+                            8. Each player playing in a tournament or cash match has to accept their cash match or tournament invite in order to play and make their team eligible for play.
+                        </div>
+                        <div class="tab-pane fade" id="vtab2">
+                            1. If a team disagrees with the connection, the hosting team must switch hosts until a reasonable host is found. Teams cannot deny such request without risking an automatic forfeit of the map. Your team is to acquire proof of requesting a host change and the opposing team denying your request and should leave immediately after acquiring such proof and then submit a Dispute claim with that proof provided.
+                            <br/>
+                            <br/>
+                            2. If a player disconnects during a kill-dependent game mode (e.g. Search and Destroy), the round must be completed. Upon completing the round, the host can end the game or the non-hosting team can switch teams in the first ten seconds of the next round at which
+                            point the host must end the game and wait for the player to reconnect to the lobby within 5 minutes. The map will be replayed from the round count when the host ended the game. After the 5 minutes given to the player to reconnect, the host may start the match with or without the player that disconnected from the last completed round. In the event of a host drop, the same rules apply.
+                            <br/>
+                            <br/>
+                            3. If a player disconnects during a non kill-dependent game mode (e.g. Hardpoint), the host can end the game or the non-hosting team can switch teams at which point the host must end the game and wait for the player to reconnect to the lobby within 5 minutes. The map will be replayed from the amount of points when the host ended the game. After the 5 minutes given to the player to reconnect, the host may start the match with or without the player that disconnected from the map. In the event of a host drop, the same rules apply.
+                        </div>
+                        <div class="tab-pane fade" id="vtab3">
+                            1. The host is the player who must create the custom game and ensure that the proper
+                            settings and map are used (Check game specific rules for more information on the setting
+                            requirements). The host should set their party player limit to match the number of players
+                            for the specified match if possible. (Example: Player Limit 8 for a 4 vs 4 match)
+                            <br/>
+                            <br/>
+                            2. The team that hosts the first game has the responsibility of adding a member of the
+                            opposing team. All matches are required to start within 10 minutes of their scheduled
+                            time, this is known as the grace period (Example: if a match is scheduled to start at 1:30
+                            pm, all players must be in the lobby and ready to start at 1:40 pm). The second and third
+                            game must start within 5 minutes of the previous games ending.
+                            <br/>
+                            <p style="margin-left:50px"><br/>a. If the hosting team does not send a game invite to the opposing team they risk
+                                forfeiting the match.</p>
+                            <p style="margin-left:50px">b. If the hosting team delays the sending of game invites to the opposing team until
+                                the very end of the 10-minute grace period, the opposing team will still have 5
+                                additional minutes to join the match.</p>
+                            <br/>
+                            3. For a best of 3, the lower seeded team at match time must host the first game. The higher
+                            seeded team will host the second game. If a tie breaker game is required, the team with
+                            the most combined search and destroy rounds or variant game mode points for all games
+                            leading up to the tie breaker will host the tie breaker match.
+                            <br/>
+                            <br/>
+                            4. For search and destroy, the hosting team must spawn in on offense at the start of the
+                            match. This means that the non-hosting team must spawn in on defense. If a player
+                            spawns in on the incorrect team and is unable to spawn in on the correct team, the host
+                            must restart the match. If this issue occurs more than once, the host can refuse to restart
+                            the match.
+                            <br/>
+                            <br/>
+                            5. For all other game modes, the non-hosting team gets to choose their spawn. This means
+                            the hosting team must go to the opposite side. If a player spawns in on the incorrect team
+                            and is unable to spawn in on the correct team, the host must restart the match. If this issue
+                            occurs more than once, the host can refuse to restart the match.
+                            <br/>
+                            <br/>
+                            6. Outside Players/Spectators: After a custom game has been created, only eligible Players
+                            on the two Teams and Staff members may be invited/join. If an ineligible player joins and
+                            affects the game and/or doesn't leave within 30 seconds of joining, the game must be
+                            ended. If a player is found to have invited an ineligible player to a game, they will forfeit
+                            the game.
+                        </div>
+
+                        <div class="tab-pane fade" id="vtab4">
+                            1. Teams and players found to be incorrectly reporting matches will be subject to
+                            suspension.
+                            <br/>
+                            <br/>
+                            2. Users that incorrectly choose a region/time zone to gain a competitive advantage will be
+                            suspended.
+                            <br/>
+                            <br/>
+                            3. Breaking any rule and any form of cheating, glitching, and abusing in-game mechanics
+                            may result in a forfeit of a game.
+                            <br/>
+                            <br/>
+                            4. Users may not allow others to play on their accounts during an NLGO match.
+                            <br/>
+                            <br/>
+                            5. Players who move their character outside of the normal boundaries of a map may forfeit
+                            the game. Moving outside of the normal boundaries of a map includes but is not limited
+                            to part of the character’s body passing through what should be a non-permeable surface
+                            or object, and moving into any area from which your character registers shots on an
+                            opponent who is not able to register shots on your character.
+                            <br/>
+                            <br/>
+                            6. Settings: For Search and Destroy, the hosting team will forfeit all rounds where the
+                            incorrect setting(s) affected the game. If a game is hosted out of order, the hosting team
+                            will forfeit the game that was played out of order. For example, if Search and Destroy -
+                            Overgrown is the second game and played as the first game, the hosting team will forfeit
+                            Search and Destroy - Overgrown. The first game will still need to be played.
+                            <br/>
+                            <br/>
+                            7. Restricted Items: For Search and Destroy, the use of any restricted items will result in the
+                            loss of the rounds that the items were used if gameplay was affected. For respawn game
+                            modes, the use of restricted items will result in a loss of the current game being played.
+                            <br/>
+                            <br/>
+                            8. Premature Game Ending: Teams that force a game to end prematurely by players
+                            switching teams, leaving the game, inviting outside players, and/or the host ending the
+                            game may result in the loss of the round for Search and Destroy and the loss of the game
+                            for respawn modes.
+                            <br/>
+                            <br/>
+                            9. Equipment: The use of a keyboard/mouse during a Ps4 or Xbox One match is prohibited.
+                            Additionally, the use of a controller with turbo or macro buttons is also prohibited. The
+                            use of these items will result in losses for games in which they were used and the user
+                            guilty of this behavior may be suspended.
+                            <br/>
+                            <br/>
+                            10. The use of a modified console, hacks, or mods is strictly prohibited and will result in a
+                            loss of the current match and disqualification of that team from their respective ladder.
+                            The player responsible will be suspended from NLGO.
+                            <br/>
+                            <br/>
+                            11. Players may not use verbal or written abuse directed at other players or staff on NLGO
+                            through any medium.
+                            <br/>
+                            <br/>
+                            12. Disqualification: Some actions may result in immediate disqualification from a cash
+                            match or tournament and may result in that user being banned from NLGO. Examples of
+                            behavior or actions that could result in this include but are not limited to, physical acts
+                            violence, cheating, collusion/manipulating the bracket, drug/substance abuse on-site, any
+                            illegal activities, betting or gambling on a tournament or match results, hate speech, and
+                            harassment.
+                        </div>
+                        <div class="tab-pane fade" id="vtab5">
+
+                            1. You can access the dispute center by clicking here or by selecting it from the drop-down
+                            list from the support tab at the top of the page.
+                            <br/>
+                            <br/>
+                            2. Proof must be provided to the extent that a clear decision can be made when determining
+                            the winner. For example, screenshots should be clearly visible and contain the game
+                            score, all players on both teams if possible, and a time stamp.
+                            <br/>
+                            <br/>
+                            3. Proof can be submitted via JPEG directly on a NLGO dispute claim and/or by attaching a
+                            link from a third-party website such as YouTube. Ensure that your uploads are NOT
+                            private since this will prevent us from being able to view them!
+                            <br/>
+                            <br/>
+                            4. Make sure that the issue of the dispute is clear and that the support staff is aware of what
+                            they are looking for in the provided proof. This includes letting the staff know at what
+                            time in a video the issue occurs.
+                            <br/>
+                            <br/>
+                            5. When a match is disputed, both teams will have 24 hours to submit a claim before the
+                            match is reviewed.
+                            <br/>
+                            <br/>
+                            6. Providing faulty doctored or edited proof can result in the suspension of your account.
+                            <br/>
+                            <br/>
+                            7. Tournaments will have live support and expedited ticket resolution to help maintain the
+                            pace of play.
+                            <br/>
+                            <br/>
+                            8. If a cash team/user does not agree with the outcome of a dispute claim they have the
+                            ability to escalate this claim two more times, at which point the decision made by NLGO
+                            staff regarding the match will be final.
+                            <br/>
+                            <br/>
+                            9. If a team/user repetitively disputes matches and loses, that team/user may be suspended
+                            and/or deducted experience points.
+
+                        </div>
+                        <div class="tab-pane fade" id="vtab6">
+                            1. Certain games and ladders (Call of Duty: World War 2 as of now) will have seasons that allow users to qualify for a cash prize
+                            playoff. You can read more about NLG playoffs <a th:href="@{/news/playoffs}"> here</a>.
+                            <br/>
+                            <br/>
+                            2. Playoffs will include the top teams from both the XP and cash ladders that fall under the
+                            same game, team size, and platform.
+                        </div>
+
+                        <div class="tab-pane fade" id="vtab7">
+                            1. Cash teams are used for both cash matches and tournaments. Tournament seeding is
+                            completely random so that a team’s current record will have no impact on their seeding.
+                            <br/>
+                            <br/>
+                            2. Cash teams have the ability to allow/disallow tournaments and cash matches to have an effect on their ladder ranking by not giving/taking xp on a win or loss of a match. (This setting can be
+                            accessed through the edit team function). Cash teams are entered into playoffs same as XP teams so their ranking does matter!
+                            <br/>
+                            <br/>
+                            3. Once tournament registration is closed, teams will be assigned a random seed. Seed 1 is
+                            the highest seed.
+                            <br/>
+                            <br/>
+                            4. All first round matches will start at the same time. After the first round, matches will
+                            have a unique start time that is determined by the time that a team submits its previous
+                            match score. Delaying the start time of a match unless authorized by a NLGO staff
+                            member is not permitted and could result in a forfeit.
+                            <br/>
+                            <br/>
+                            5. If a match is not played and neither team submits a dispute claim for a no show, both
+                            teams will be forfeited from the tournament.
+                            <br/>
+                            <br/>
+                            6. If you have any problems/concerns while playing a tournament contact live support to
+                            help resolve these issues.
+                            <br/>
+                            <br/>
+                            7. The prize value listed for all tournaments is based upon registration capacity being full. If
+                            a tournament starts and is not at capacity, prize values will be adjusted proportionally.
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+            </div>
+        </div>
+
+        <script>
+            /*
+             $(document).ready(function(){
+             setTimeout(function() {
+             activaTab('vtab2');
+             }, 250);
+             });
+             
+             function activaTab(tab){
+             $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+             };
+             */
+        </script>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div th:if="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+            <div th:text="${error}"></div>
+        </div>
+
+        <div class="contents">
+            <!-- main-container start -->
+            <!-- ================ -->
+            <div class="main-container dark-translucent-bg" th:style="'background:url(https://storage.googleapis.com/nlg-template-img/login/ww2.jpg);'">
+                <div class="container">
+                    <div class="row">
+                        <!-- main start -->
+                        <!-- ================ -->
+                        <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+                            <div class="form-block center-block p-90 light-gray-bg border-clear">
+                                <h2 class="title">Login</h2>
+                                <div id="failureMessage" th:if="${loginError}" th:text="${failureMessage}" class="alert-anim-failure" style="display: none;"></div>
+                                <div id="successMessage" th:if="${loginSuccess}" th:text="${successMessage}" class="alert-anim-success" style="display: none;">
+                                </div>
+                                <form class="form-horizontal" id="loginForm1" role="form" th:action="@{/login}" th:object="${loginDetailsPojo}" method="post">
+                                    <div class="form-group has-feedback">
+                                        <label for="username" class="col-sm-2 control-label">Username<span class="text-danger small mandatory-width">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="username" name="username" autofocus="autofocus" th:value="${un}" class="form-control" placeholder=""/>
+                                            <i class="fa fa-user form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="password" class="col-sm-2 control-label">Password<span class="text-danger small mandatory-width">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="password" id="password" name="password" class="form-control" placeholder=""/>
+                                            <i class="fa fa-lock form-control-feedback"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="remember-me" checked="checked" /> <span> Remember Username</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-group btn-default btn-animated login-page-btn-width radius-50">Login <i class="fa fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <a th:href="@{/username/forgot}" class="forgot-btn-login-page">Forgot your username?</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <a th:href="@{/password/forgot}" class="forgot-btn-login-page">Forgot your password?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- main end -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-top animated-text" style="background-color: #1d2223;border-bottom: solid 1px #282e2f;border-top: solid 1px #282e2f;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="call-to-action text-center">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h2 style="text-transform:none;color:#d6d6d6 !important;">Don't have an account?</h2>
+                                        <h2 style="text-transform:none;color:#d6d6d6 !important;">Waste no more time <i class="pl-5 fa fa-angle-double-right"></i></h2>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p class="mt-10"><a th:href="@{/register}" class="btn btn-animated radius-50 btn-lg btn-gray-transparent">Register<i class="fa fa-user pl-20"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- main-container end -->
+
+
+            <!--                <div class="contents container">
+                        <h1>Login Page</h1>
+                        <p th:if="${loginError}" class="error">Wrong user or password</p>
+                        <form th:action="@{/login}" th:object="${loginDetailsPojo}" method="post" class="form-signin">
+                            <label for="username">Username</label>:
+                            <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+                            <label for="password">Password</label>:
+                            <input type="password" id="password" name="password"/> <br />
+                            <input class="btn btn-primary" type="submit" value="Log In" />
+                        </form>
+                        <br />
+                        <a th:href="@{/register}">Create An Account</a>
+                        <br />
+                    </div>-->
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+
+    </body>
+</html>

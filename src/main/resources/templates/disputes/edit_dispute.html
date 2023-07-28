@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+
+
+        <div class="matchDetailsPage">
+                       <div class="match-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/matches/match-details/shield.png" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="match-info" style="text-align:center !important;">
+                                <h3 style="font-size:36px !important;">
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War 2</span>
+                                </h3>
+                                <h2 style="font-size:26px;color: #d8c668;">
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).WAGER}" th:text="${'Wager Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).XP}" th:text="${'XP Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT}" th:text="${'Tournament Match ID #' + match.matchId}"></span>
+                                </h2>
+                                <h2 style="font-size:26px" th:if="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></h2>
+                                <h2 style="font-size:26px" th:unless="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(null)}"></h2>
+
+
+                                <div th:if="${isTournamentMatch}">
+                                    <div>
+                                        <h2 style="font-size:20px">
+                                            <span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span> <span style="padding-top:100px !important"> VS </span> <span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div th:unless="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+<!--                        <div class="col-md-2" style="padding-top:15px;">
+                            <div th:unless="${isTournamentMatch}">
+                                <a th:if="${isEligibleToJoin}" th:href="@{'/matches/' +${match.pk} + '/accept'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Join Match
+                                </a>
+                                <a th:if="${canRequestMatchCancel}" th:href="@{'/matches/' +${match.pk} + '/request-cancel'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Request Match Cancel
+                                </a>
+                                <a th:if="${canCancelMatchForCreator}" th:href="@{'/matches/' +${match.pk} + '/cancel-match-game'}"
+                                   class="btn btn-default btn-lg radius-50">
+                                    Cancel Match
+                                </a>
+                            </div>
+                        </div>-->
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="match-menu-container">
+                <div class="match-menu container">
+                    <ul class="menu-items">
+                        <li>
+                            <a th:href="@{'/matches/' + ${match.pk}}">DETAILS</a>
+                        </li>
+                        <li class="active">
+                            <a th:href="@{'/matches/' + ${match.pk} + '/create-dispute'}">DISPUTE</a>
+                        </li>
+                        <li th:if="${viewDispute}"><a 
+                                th:href="@{'/disputes/' + ${dispute.pk}}">VIEW DISPUTE</a></li>
+                                <li th:if="${canReportScore}" ><a
+                                th:href="@{'/matches/' + ${match.pk} + '/report-score'}">REPORT SCORE</a></li>
+                        <li><a 
+                                th:href="@{/rules/general}"  target="_blank">RULES</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contents container" style="border: 1px solid #f3f3f3;">
+                <br />
+
+                <h3>Edit Dispute</h3>
+                <!--            <div class="match-details" th:if="${match}">
+                                <div>
+                                    <h2 th:text="${match.matchInfo.gameEnum}"></h2>
+                                </div>
+                
+                                <div>Match Size: <span th:text="${match.matchInfo.matchSizeEnum}"></span></div>
+                                <div>Platform: <span th:text="${match.matchInfo.platform}"></span></div>
+                            </div>-->
+                <div class="separator-2"></div>
+                <form th:action="@{'/disputes/' + ${dispute.getPk()} + '/edit'}" th:object="${editDisputeForm}" method="post">
+                    <!--                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                    <div class="alert alert-danger" th:if="${error}">
+                                        <div th:text="${error}"></div>
+                                    </div>
+                                    <div class="alert alert-danger" th:if="${message}">
+                                        <div th:text="${message}"></div>
+                                    </div>-->
+                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                    </div>
+                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                        <div th:text="${error}"></div>
+                    </div>
+                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${message}">
+                        <div th:text="${message}"></div>
+                    </div>
+                    <!--<br />-->
+
+                    <div>
+                        <span style="font-size:20px">What is the reason?</span>
+                        <input type="text" name="reason" class="form-control" th:value="${editDisputeForm.reason}"  />
+                    </div>
+                    <br />
+                    <div>
+                        <label>Link 1</label>
+                        <input type="text" name="url1" class="form-control" th:value="${editDisputeForm.url1}" />
+                    </div>    
+                    <br />
+                    <div>
+                        <label>Link 2</label>
+                        <input type="text" name="url2" class="form-control" th:value="${editDisputeForm.url2}" />
+                    </div>    
+                    <br />
+                    <div>
+                        <label>Link 3</label>
+                        <input type="text" name="url3" class="form-control" th:value="${editDisputeForm.url3}" />
+                    </div>
+                    <br />
+                    <div>
+                        <label>Link 4</label>
+                        <input type="text" name="url4" class="form-control" th:value="${editDisputeForm.url4}" />
+                    </div>    
+                    <br />  
+                    <!--<hr />-->
+                    <div>
+                        <button class="btn btn-default radius-50">
+                            Update Dispute
+                        </button>
+                    </div>
+                    <br/> 
+                </form>
+            </div>
+
+        </div>
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

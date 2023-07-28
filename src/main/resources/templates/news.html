@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 20%;'">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">News</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
+                            Find out what's happening at NLG below.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+        <section class="main-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <!-- main start -->
+                    <!-- ================ -->
+                    <div class="main col-md-12">
+
+                        <!-- page-title start -->
+                        <!-- ================ -->
+                        <!--                        <h3 style="font-size:28px" class="page-title">Latest News</h3>
+                                                <div class="separator-2"></div>-->
+
+                        <div class="featured-news">
+                            <article class="blogpost">
+                                <div class="row grid-space-10">
+                                    <div class="col-md-4">
+                                        <div class="overlay-container">
+                                            <img style="height:335px;" th:src="@{https://storage.googleapis.com/nlg-template-img/logo/NL1red.jpg}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <header>
+                                            <h2 th:href="@{/news}">About Us</h2>
+                                            <div class="separator-2"></div>
+
+                                            <!--                                            <div class="post-info">
+                                                                                            <span class="post-date">
+                                                                                                <i class="icon-calendar"></i>
+                                                                                                <span class="day">19</span>
+                                                                                                <span class="month">October 2017</span>
+                                                                                            </span>
+                                                                                            <span class="submitted"><i class="icon-user-1"></i> by <a href="#">Admin</a></span>
+                                                                                        </div>-->
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>Here at NLG we offer Call of Duty gamers competitive free and cash matches/tournaments. Our only form of currency is NLG cash which can be used to play both wagers and tournaments. NLG Cash can be withdrawn by our users at any time after purchase. Our payouts are the highest across all websites while also getting deposited instantly into our match/tournament winners' account. As of right now we only offer Call of Duty titles to compete in with our primary focus being on the newly released Call of Duty World War II. 
+
+                                                We strive to offer the best customer service we can because we want to show appreciation to anybody using NLG as their competitive gaming arena. As a group of gamers ourselves we wanted to create a environment and community where competition thrives. We welcome suggestions on any new games or features that our users would like to see in the future so feel free to let us know through a support ticket or social media. Thank you for visiting our website and please read more below about NLG playoffs and some features that we will look to be releasing in the future!</p>
+                                            <!--<p><a href="#">Read More</a></p>-->
+                                        </div>
+                                    </div>
+                                </div>
+<br />
+<br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <h3 style="font-size:28px" th:href="@{/news}" class="page-title">2018 Kickoff Tournaments</h3>
+                                            <div class="separator-2"></div>
+                                            <!--                                            <div class="post-info">
+                                                                                            <span class="post-date">
+                                                                                                <i class="icon-calendar"></i>
+                                                                                                <span class="day">19</span>
+                                                                                                <span class="month">October 2017</span>
+                                                                                            </span>
+                                                                                            <span class="submitted"><i class="icon-user-1"></i> by <a href="#">Admin</a></span>
+                                                                                        </div>-->
+                                        <div>
+                                            <p>In the new year we will be hosting 2 kick off tournaments to officially launch the NLG competitive gaming platform! The first tournament will be held on February 2nd for Xbox One users and the second will be held on February 3rd for Playstation 4 users. The start time of these tournaments will be specified sometime in the near future. Both tournmaments offer a GUARANTEED $2000.00 to the finalists ($1600.00 for the winning team and $400.00 for the runner up) with a $1.00 entry fee per player. The tournament details are as follows: Call of Duty: World War II - Search &AMP; Destroy - Best of 3 (Finals Best of 5) - 4v4 - North America - 128 Team Bracket. Registration is open now so go to the tournaments page <a th:href="@{/tournaments}"> here </a> and sign up! If you have any questions regarding these tournaments please feel free to create a support ticket or ask a support agent via live chat. With enough support we hope to run more tournaments like this in the future for our users. Thank you! </p>
+                                            <!--<p><a href="#">Read More</a></p>-->
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <footer class="clearfix">
+
+                                </footer>-->
+                            </article>
+                        </div>    
+
+
+                        <div class="news-list">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <article class="blogpost">
+                                        <header>
+                                            <h2><a th:href="@{/news/playoffs}">NLG Playoffs</a></h2>
+                                            <div class="post-info">
+                                                <span class="post-date">
+                                                    <i class="icon-calendar"></i>
+                                                    <span class="day">19</span>
+                                                    <span class="month">November 2017</span>
+                                                </span>
+                                                <span class="submitted"><i class="icon-user-1"></i> by Admin</span>
+
+                                            </div>
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>Here at NLG we want to reward teams competing hard on our site from both xp and cash ladders. Our Call of Duty: World War 2 leaderboards for Xbox One and Playstation 4 display the top teams in their respective ladders who will... </p>
+                                        </div>
+                                        <footer class="clearfix">
+                                            <div style="font-size:15px" class="link pull-left"><i class="icon-link"></i><a th:href="@{/news/playoffs}">Read More</a></div>
+                                        </footer>
+                                    </article>
+                                </div>
+                                <div class="col-md-6">
+                                    <article class="blogpost">
+                                        <header>
+                                            <h2><a th:href="@{/news/features}">Future Features</a></h2>
+                                            <div class="post-info">
+                                                <span class="post-date">
+                                                    <i class="icon-calendar"></i>
+                                                    <span class="day">19</span>
+                                                    <span class="month">November 2017</span>
+                                                </span>
+                                                <span class="submitted"><i class="icon-user-1"></i> by Admin</span>
+
+                                            </div>
+                                        </header>
+                                        <div class="blogpost-content">
+                                            <p>At NLG we are always striving to give our users the best competitive gaming experience. We released NLG with all the features we believe were necessary for our users, but we have a lot of other ideas that we think will make the...</p>
+                                        </div>
+                                        <footer class="clearfix">
+                                            <div style="font-size:15px" class="link pull-left"><i class="icon-link"></i><a th:href="@{/news/features}">Read More</a></div>
+                                        </footer>
+                                    </article>
+                                </div>
+                                <!--                                <div class="col-md-4">
+                                                                    <article class="blogpost">
+                                                                        <header>
+                                                                            <h2><a href="blog-post.html">Audio post</a></h2>
+                                                                            <div class="post-info">
+                                                                                <span class="post-date">
+                                                                                    <i class="icon-calendar"></i>
+                                                                                    <span class="day">10</span>
+                                                                                    <span class="month">May 2015</span>
+                                                                                </span>
+                                                                                <span class="submitted"><i class="icon-user-1"></i> by <a href="#">Admin</a></span>
+                                
+                                                                            </div>
+                                                                        </header>
+                                                                        <div class="blogpost-content">
+                                                                            <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
+                                                                        </div>
+                                                                        <footer class="clearfix">
+                                                                            <div class="link pull-left"><i class="icon-link"></i><a href="#">Read More</a></div>
+                                                                        </footer>
+                                                                    </article>
+                                                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- main end -->
+
+                </div>
+            </div>
+        </section>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

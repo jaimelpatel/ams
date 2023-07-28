@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <div class="errorDetails text-center">
+                <br /><br />
+                <h1>Oops! <span th:text="${errorCode}"></span></h1>
+                <h3 th:text="${message}"></h3>
+                <br /><br />
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

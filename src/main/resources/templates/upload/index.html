@@ -1,0 +1,113 @@
+<!--<form method="POST" th:action="@{/upload}" enctype="multipart/form-data">
+    <input type="file" name="file" /><br/><br/>
+    <input type="submit" value="Submit" />
+</form>-->
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+</head>
+
+<body>
+    <div id="paypal-button"></div>
+
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', // Or 'sandbox',
+            
+        style: {
+            label: 'buynow',
+            fundingicons: true, // optional
+            branding: true, // optional
+            size:  'large', // small | medium | large | responsive
+            shape: 'pill',   // pill | rect
+            color: 'black'   // gold | blue | silve | black
+        },
+
+            client: {
+                sandbox:    'AZL8LL-k9REEDC8smja5AzYDuXP_Wz-R3E7eaOsSVp6EMjzqKQ94ipZgolw6lNrXtvX7qEx9xIW9hp9G',
+                production: 'ARkv4sBWNLeyVQJd6DdiPbCtX3HcbxVK5nXxm1rYrlx_35eebIlSPdkJqtgdweXGte3DCKGdHKyNU4SG'
+            },
+        
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function(data, actions) {
+               try{ 
+        return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '1.00', currency: 'USD' },
+                            item_list: {
+                                items: [
+                                    {
+                                      "name": "Item 1",
+                                      "description": "Its an item",
+                                      "price": "1.00",
+                                      "currency": "USD",
+                                      "tax": "1.00",
+                                      "quantity": 1
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                experience: {
+//                    flow_config: {
+//                        landing_page_type: "billing"
+//                    },
+//                    presentation: {
+//                        "logo_image": "http://emojis.slackmojis.com/emojis/images/1459365617/335/tesla.jpg"
+//                    },
+                    input_fields: {
+                        no_shipping: 1
+                    }
+
+                }
+                
+                
+            });}catch(err){
+                console.log(err, "fsfsdsffsdfsd");
+            }
+            },
+            
+            onAuthorize: function(data, actions) {
+//                return paypal.request.post('https://requestb.in/1n49g1r1', {
+//                    paymentID: data.paymentID,
+//                    payerID:   data.payerID
+//                }).then(function() {
+                    return actions.payment.execute().then(function(data) {
+                       console.log("Response: ", data);  
+                       console.log("transaction id: ", data.transactions[0].related_resources[0].sale.id);
+//                       if (error === 'INSTRUMENT_DECLINED') {
+//                           actions.restart();
+//                       }
+                       document.querySelector('#paypal-button').innerText = 'Payment Complete!';
+                    });
+                    
+//                if (error === 'INSTRUMENT_DECLINED') {
+//                    actions.restart();
+//                }
+                window.alert('Payment Complete!');
+//                });
+           },
+           
+        onError: function(err) {
+            // Show an error page here, when an error occurs
+        }
+
+       }, '#paypal-button');
+
+//            onAuthorize: function(data, actions) {
+//                return actions.payment.execute().then(function(payment) {
+//                // The payment is complete!
+//                // You can now show a confirmation message to the customer
+//            });
+//           }
+//
+//        }, '#paypal-button');
+    </script>
+</body>

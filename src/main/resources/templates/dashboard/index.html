@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="dashboardPage">
+            <!--<div class="match-header">-->
+            <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 15%;'">
+
+                <!-- breadcrumb end -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 text-left">
+                            <br />
+                            <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                            <h1 class="title" style="text-transform:none !important;font-size:44px;">Dashboard</h1>
+                            <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                            <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View all of your active matches and tournaments below along with on-going disputes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <!--</div>-->
+            <div class="contents container">
+                <!--                <h1>Dashboard</h1>
+                                <hr />-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="white-panel">
+                            <div class="row">
+                                <div class="col-xs-7">
+                                    <h3>Active Matches</h3>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div class="text-right" style="">
+                                        <a class="btn btn-default radius-50 btn-sm" th:href="@{/matches/create/team-select}" 
+                                           style="margin-top: 21px;">
+                                            Create Match
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                       <div class="myMatches">
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="color:white;background-color:#1d2223" >Match ID</th>
+                                            <th style="color:white;background-color:#1d2223">Game</th>
+                                            <th style="color:white;background-color:#1d2223">Start Time</th>
+                                            <th style="color:white;background-color:#1d2223">Status</th>
+                                            <!--<th></th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${matches.isEmpty()}">
+                                            <td class="text-center" colspan="5">No upcoming/active matches.</td>
+
+                                        </tr>
+                                        <tr th:if="${!matches.isEmpty()}" th:each="match : ${matches}">
+                                            <td> <a th:text="${'#' + match.matchId}" th:href="@{'/matches/' + ${match.pk}}" target="_blank"></a> </td>
+                                            <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: MWR</td>
+                                            <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">CoD: IW</td>
+                                            <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">CoD: WW2</td>
+                                            <td>
+                                                <span th:if="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></span>
+                                                <span th:unless="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(null)}"></span>
+                                            </td>
+                                            <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_FIRST_ACCEPT OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).PENDING OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_SECOND_ACCEPT}">PENDING</td>
+                                            <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).READY_TO_PLAY}">READY</td>
+                                            <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ACTIVE}">ACTIVE</td>
+                                            <!--                                    <td th:if="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></td>
+                                                                                <td th:unless="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(null)}"></td>-->
+                                            <!--<td><a class="btn btn-primary btn-sm radius-50" th:href="@{'/matches/' + ${match.pk}}">View</a></td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="white-panel">
+                            <h3>Active Tournaments</h3>
+
+                            <!--<div th:if="${tournaments.isEmpty()}">No upcoming/active tournaments.</div>-->
+                            <div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="color:white;background-color:#1d2223">Tournament ID</th>
+                                            
+                                            <th style="color:white;background-color:#1d2223">Game</th>
+                                            <!--<th>Match Size</th>-->
+                                            <!--<th>Platform</th>-->
+                                            <!--<th>Region</th>-->
+
+                                            <th style="color:white;background-color:#1d2223">Start Time</th>
+                                            <th style="color:white;background-color:#1d2223">Status</th>
+                                            <!--<th></th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${tournaments.isEmpty()}">
+                                            <td class="text-center" colspan="5">No upcoming/active tournaments.</td>
+
+                                        </tr>
+                                        <tr th:if="${!tournaments.isEmpty()}" th:each="tournament : ${tournaments}">
+                                            <td>  <a th:href="@{'/tournaments/' + ${tournament.pk}}" th:text="${'#' + tournament.tournamentId}" target="_blank"></a> </td>
+                                            <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: MWR</td>
+                                            <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">CoD: IW</td>
+                                            <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">CoD: WW2</td>
+                                            <!--<td th:text="${tournament.tournamentInfo.matchSize.getMatchSizeEnumDesc()}"></td>-->
+                                            <!--<td th:text="${tournament.tournamentInfo.platform.getPlatformEnumDesc()}"></td>-->
+                                            <!--<td th:text="${tournament.tournamentInfo.region.getRegionEnumDesc()}"></td>-->
+
+                                            <td>
+                                                <span th:if="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(user.getUserInfo().getTimeZone())}"></span>
+                                                <span th:unless="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(null)}"></span>
+                                            </td>
+                                                                                        <td th:text="${tournament.tournamentInfo.tournamentStatus}"></td>
+
+                                            <!--                                        <td>
+                                                                                        <a class="btn btn-primary btn-sm radius-50" th:href="@{'/tournaments/' + ${tournament.pk}}">View</a>
+                                                                                    </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <div class="white-panel">
+                    <h3>Disputes</h3>
+                    <!--<div>No disputes.</div>-->
+                    <div class="myMatches">
+                        <table class="table table-striped table-colored">
+                            <thead>
+                                <tr>
+                                    <th style="color:white;background-color:#1d2223">Dispute ID</th>
+                                    <th style="color:white;background-color:#1d2223">Match ID</th>
+                                    <th style="color:white;background-color:#1d2223">Match Type</th>
+                                    <th style="color:white;background-color:#1d2223">Date Submitted</th>
+                                    <th style="color:white;background-color:#1d2223">Status</th>
+                                    <!--<th style="color:white;background-color:#1d2223"></th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${disputes.isEmpty()}">
+                                    <td class="text-center" colspan="5">No disputes.</td>
+                                </tr>
+                                <tr th:if="${!disputes.isEmpty()}" th:each="dispute : ${disputes}">
+                                    <td> <a th:href="@{'/disputes/' + ${dispute.pk}}" th:text="${'#' + dispute.disputeId}" target="_blank"></a> </td>
+                                    <td th:text="${'#' + dispute.match.matchId}"></td>
+                                    <td th:text="${dispute.match.matchInfo.matchType.getMatchTypeEnumDesc()}"></td>
+                                    <td>
+                                        <span th:if="${user}" th:text="${dispute.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                        <span th:unless="${user}" th:text="${dispute.getRowCreatedTimestamp()}"></span>
+                                    </td>
+                                    <td th:text="${dispute.disputeStatus}"></td>
+
+
+                                    <!--<td th:text="${'#' + dispute.match.matchId}"></td>-->
+                                    <!--                                <td>
+                                                                        <a class="btn btn-primary btn-sm" th:href="@{'/disputes/' + ${dispute.pk}}">
+                                                                            View
+                                                                        </a>
+                                                                    </td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <br />
+
+                        <nav class="text-center" th:if="${pages}">
+                            <ul class="pagination" th:if="${pages.size() > 0}">
+                                <li th:if="${hasPrevPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                                <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/dashboard/' + '?d_page=' + ${page}}" th:text="${page}"></a></li>
+                                <li th:if="${hasNextPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+        </div>
+        <!--</div>-->
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <ul class="nav nav-tabs" role="tablist">
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/'}" >
+                        All Invites
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/team-invites/'}" >
+                        Team Invites
+                    </a>
+                </li>
+                <li class="active">
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/match-invites'}" >
+                        Match Invites
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{'/' + ${#authentication.name} + '/invites/tournament-invites'}" >
+                        Tournament Invites
+                    </a>
+                </li>
+            </ul>
+
+            <h3>Match Invites</h3>
+            <form th:action="@{/}" th:object="${acceptMatchForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+            </form>
+            
+            <div class="panel">
+                <div th:if="${matchInvites.isEmpty()}">No Match Invites</div>
+                <div th:if="${!matchInvites.isEmpty()}">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Team Name</th>
+                            <th>Invited By</th>
+                            <th>Requested Date</th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="matchInvite : ${matchInvites}">
+                            <td th:text="${matchInvite.getTeam().getTeamPojo().teamName}"></td>
+                            <td></td>
+                            <td th:text="${matchInvite.rowCreatedTimestamp}"></td>
+                            <td>
+                                a: <span th:text="${matchInvite.isIsPrivateMatchInviteToLeader()}"></span>
+                                <div th:if="${!matchInvite.isIsPrivateMatchInviteToLeader()}">
+                                    <a th:href="@{'/invites/' + ${matchInvite.pk} + '/accept/match'}" class="btn btn-success btn-sm disabledOnClick">Accept</a> 
+                                </div>
+                                <div th:if="${matchInvite.isIsPrivateMatchInviteToLeader()}">
+                                    <a th:href="@{'/matches/' + ${matchInvite.getMatch().pk} + '/accept'}" class="btn btn-success btn-sm disabledOnClick">
+                                        Accept Private Match
+                                    </a>
+                                </div>
+                                <a th:href="@{'/invites/' + ${matchInvite.pk} + '/decline/match'}" href="" class="btn btn-danger btn-sm disabledOnClick">Decline</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>-->

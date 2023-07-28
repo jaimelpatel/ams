@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+            <span th:text="${message}"></span>
+        </div>
+        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+            <span th:text="${error}"></span>
+        </div>
+        <div class="matchDetailsPage">
+            <div class="match-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/matches/match-details/shield.png" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="match-info" style="text-align:center !important;">
+                                <h3 style="font-size:36px !important;">
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War II</span>
+                                </h3>
+                                <h2 style="font-size:26px;color: #d8c668;">
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).WAGER}" th:text="${'Wager Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).XP}" th:text="${'XP Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT}" th:text="${'Tournament Match ID #' + match.matchId}"></span>
+                                </h2>
+                                <h2 style="font-size:26px" th:if="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></h2>
+                                <h2 style="font-size:26px" th:unless="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(null)}"></h2>
+
+
+                                <div th:if="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:unless="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-2" style="padding-top:15px;">
+                            <div th:if="${isTournamentMatch}">
+                                <a th:href="@{'/tournaments/' +${match.tournament.pk} + '/bracket'}" 
+                                   class="btn btn-default btn-lg radius-50" target="_blank">
+                                    View Bracket
+                                </a>
+                            </div>
+                            <div th:unless="${isTournamentMatch}">
+                                <a th:if="${isEligibleToJoin}" th:href="@{'/matches/' +${match.pk} + '/accept'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Join Match
+                                </a>
+                                <a th:if="${canRequestMatchCancel}" th:href="@{'/matches/' +${match.pk} + '/request-cancel'}" 
+                                   class="btn btn-default btn-lg radius-50">
+                                    Request Match Cancel
+                                </a>
+                                <a th:if="${canCancelMatchForCreator}" th:href="@{'/matches/' +${match.pk} + '/cancel-match-game'}"
+                                   class="btn btn-default btn-lg radius-50">
+                                    Cancel Match
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="match-menu-container">
+                <div class="match-menu container">
+                    <ul class="menu-items">
+                        <li class="active"><a th:href="@{'/matches/' + ${match.pk}}">DETAILS</a></li>
+                        <li th:if="${canDisputeMatch}"><a 
+                                th:href="@{'/matches/' + ${match.pk} + '/create-dispute'}">DISPUTE</a></li>
+                        <li th:if="${viewDispute}"><a 
+                                th:href="@{'/disputes/' + ${dispute.pk}}">VIEW DISPUTE</a></li>
+                        <li th:if="${canReportScore}" ><a
+                                th:href="@{'/matches/' + ${match.pk} + '/report-score'}">REPORT SCORE</a></li>
+                        <li><a 
+                                th:href="@{/rules/general}"  target="_blank">RULES</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contents container">
+                <br />
+                <div>
+                    <h3 class="matchId"><span style="font-size:23px">Match Status:</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_FIRST_ACCEPT OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).PENDING OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_SECOND_ACCEPT}" class="matchStatus">Pending</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).READY_TO_PLAY}" class="matchStatus">Ready</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ACTIVE}" class="matchStatus">Active</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" class="matchStatus">Ended</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).EXPIRED}" class="matchStatus">Expired</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).CANCELLED}" class="matchStatus">Cancelled</span>
+                        <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).DISPUTED}" class="matchStatus">Disputed</span>
+                    </h3>
+                </div>
+                <br /> <br />
+                <div class="match-details-4">
+                    <ul class="items">
+                        <li class="item">
+                            <p class="name">Region</p>
+                            <p class="value">North America</p>
+                        </li>
+                        <li class="item">
+                            <p class="name">Platform</p>
+                            <p class="value" th:text="${match.matchInfo.platform.getPlatformEnumDesc()}"></p>
+                        </li>
+                        <li class="item">
+                            <p class="name">Team Size</p>
+                            <p class="value" th:text="${match.matchInfo.matchSizeEnum.getMatchSizeEnumDesc()}"></p>
+                        </li>
+                        <li class="item" th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT}">
+                            <p class="name">Round</p>
+                            <p class="value" th:if="${finals}">Finals</p>
+                            <p class="value" th:if="${semifinals}">Semifinals</p>
+                            <p class="value" th:if="${quarterfinals}">Quarterfinals</p>
+                            <p class="value" th:if="${isNotFinals}" th:text="${round}"></p>
+
+                        </li>
+                        <li class="item" th:if="${!(match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT)}">
+                            <p class="name">Wager Amount</p>
+                            <p class="value" th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).WAGER}" th:text="${'$' + match.matchInfo.wagerAmountPerMember}"></p>
+                            <p class="value" th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).XP}">Free XP Match</p>
+                        </li>
+
+                    </ul>
+                </div>
+                <br /> <br />
+
+                <div class="side-panels clearfix">
+                    <div class="match-rules-panel">
+                        <h3>Match Rules</h3>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>HOST</p>
+                                <div>
+                                    <ol th:if="${hostNames}">
+                                        <h6><li th:each="map: ${hostNames}" th:text="${map}"></li></h6>
+                                    </ol>
+                                    <h6>
+                                        <div th:unless="${hostNames}">
+                                            Pending
+                                        </div></h6>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p>MAP</p>
+                                <div>
+                                    <ol th:if="${mapsToPlay}">
+                                        <h6><li th:each="map: ${mapsToPlay}" th:text="${map}"></li></h6>
+                                    </ol>
+                                    <h6><div th:unless="${mapsToPlay}">
+                                            Pending
+                                        </div></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>MATCH SET</p>
+                                <h6><div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_1}">Best of 1</div>
+                                    <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_3}">Best of 3</div>
+                                <div th:if="${match.matchInfo.bestOfEnum == T(com.ltlogic.constants.BestOfEnum).BEST_OF_5}">Best of 5</div></h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>GAME MODE</p>
+                                <h6 th:if="${match.matchInfo.gameModeEnumPojo.getGameModeEnumDesc() == 'Search And Destroy'}">Search &amp; Destroy
+                                </h6>
+                                <h6 th:if="${match.matchInfo.gameModeEnumPojo.getGameModeEnumDesc() == 'Variant'}">Variant
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-options-panel">
+                        <h3>Match Options</h3>
+                        <hr />
+                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>TACTICALS</p>
+                                    <h6><span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.tacticals ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>LETHALS</p>
+                                    <h6><span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.lethals ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>STOPPING POWER</p>
+                                    <h6><span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.stoppingPower ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>JUGGERNAUT</p>
+                                    <h6><span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.juggernaut ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>SCORESTREAKS</p>
+                                    <h6><span th:if="${iwMatch}" th:text="${iwMatch.iwMatchInfo.scoreStreaks ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>OVERKILL</p>
+                                    <h6><span th:if="${iwMatch}" th:text="${iwMatch.iwMatchInfo.overkill ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>SCORESTREAKS</p>
+                                    <h6><span th:if="${ww2Match}" th:text="${ww2Match.ww2MatchInfo.scoreStreaks ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>
+<!--                                <div class="col-md-6">
+                                    <p>OVERKILL</p>
+                                    <h6><span th:if="${ww2Match}" th:text="${ww2Match.ww2MatchInfo.overkill ? 'Enabled' : 'Disabled'}"></span></h6>
+                                </div>-->
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br /> 
+
+                <div th:if="${showTeams}">
+
+                    <div class="side-panels clearfix">
+                        <div class="participants-panel">
+                            <h3>Participants</h3>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="teamList">
+                                        <div class="team" th:if="${teamsInMatch}" th:each="team : ${teamsInMatch}" >
+
+                                            <h4><span>Team - </span> <a th:href="@{'/teams/' + ${team.pk}}" th:text="${team.teamPojo.teamName}"></a> 
+
+                                                <span th:if="${team.pk == match.pkOfTeamThatCreatedMatch}">
+
+                                                    <span style="color: #15c019;" th:if="${match.reportedScoreOfTeamCreated == true}"> (Reported WIN) </span>
+                                                    <span style="color: #a94442;" th:if="${match.reportedScoreOfTeamCreated == false}"> (Reported LOSS) </span>
+                                                </span>
+
+
+                                                <span th:if="${team.pk == match.pkOfTeamThatAcceptedMatch}">
+
+                                                    <span style="color: #15c019;" th:if="${match.reportedScoreOfTeamAccepted == true}"> (Reported WIN) </span>
+                                                    <span style="color: #a94442;" th:if="${match.reportedScoreOfTeamAccepted == false}"> (Reported LOSS)</span>
+                                                </span>
+
+                                            </h4>
+
+
+                                            <table class="table table-colored table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="color:white;background-color:#1d2223;text-align:center">Username</th>
+                                                        <th style="color:white;background-color:#1d2223;text-align:center">Gamertag</th>
+                                                        <th style="color:white;background-color:#1d2223;text-align:center">Role</th>
+                                                        <th style="color:white;background-color:#1d2223;text-align:center">Rank</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="member : ${team.members}">
+                                                <div th:if="${#lists.contains(match.pksOfCreatorTeamMembersPlaying, member.pk)}">
+                                                    <td style="text-align:center">
+                                                        <a th:href="@{'/' + ${member.username} + '/profile/'}" th:text="${member.username}"></a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).PS4}" th:text="${member.userInfo.playStation4Name}"></span> 
+                                                        <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).XBOXONE}" th:text="${member.userInfo.xboxOneGamerTag}"></span>
+                                                    </td>
+                                                    <td style="text-align:center" th:if="${member.pk == team.teamLeaderPk}">Leader</td>
+                                                    <td style="text-align:center" th:unless="${member.pk == team.teamLeaderPk}">Member</td>
+                                                    <td style="text-align:center" th:text="${member.rankXP.rank}"></td>
+
+                                                </div>
+                                                <div th:if="${#lists.contains(match.pksOfAcceptorTeamMembersPlaying, member.pk)}">
+                                                    <td style="text-align:center">
+                                                        <a th:href="@{'/' + ${member.username} + '/profile/'}" th:text="${member.username}"></a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).PS4}" th:text="${member.userInfo.playStation4Name}"></span> 
+                                                        <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).XBOXONE}" th:text="${member.userInfo.xboxOneGamerTag}"></span>
+                                                    </td>
+                                                    <td style="text-align:center" th:if="${member.pk == team.teamLeaderPk}">Leader</td>
+                                                    <td style="text-align:center" th:unless="${member.pk == team.teamLeaderPk}">Member</td>
+                                                    <td style="text-align:center" th:text="${member.rankXP.rank}"></td>
+                                                </div>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br /> <br />
+            </div>
+        </div>
+        <!--        <div class="contents container">
+                    
+                    <div class="match-details">
+                        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                            <span th:text="${message}"></span>
+                        </div>
+                        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                            <span th:text="${error}"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 th:text="${'Match #' + match.matchId}">Match</h1>
+                                <p>
+                                    Match Starts: 
+                                    <span th:if="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></span>
+                                    <span th:unless="${user}" th:text="${match.getMatchInfo().getScheduledMatchTime(null)}"></span>
+                                </p>
+                                <div th:if="${isTournamentMatch}">
+                                    <div>
+                                        <h4>
+                                            <span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span> <span> VS </span> <span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div th:unless="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div>
+                                            <h4>
+                                                <span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span> <span> VS </span> <span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-right" style="padding: 15px 0;">
+                                <a th:if="${canDisputeMatch}" 
+                                   th:href="@{'/matches/' + ${match.pk} + '/create-dispute'}" 
+                                   class="btn btn-default btn-sm">
+                                    Dispute Match
+                                </a>
+                                <a th:if="${canReportScore}" 
+                                   th:href="@{'/matches/' + ${match.pk} + '/report-score'}" 
+                                   class="btn btn-default btn-sm">
+                                    Report Score
+                                </a>
+                                <div th:unless="${isTournamentMatch}">
+                                    <a th:if="${isEligibleToJoin}" th:href="@{'/matches/' +${match.pk} + '/accept'}" 
+                                       class="btn btn-default btn-sm">
+                                        Join Match
+                                    </a>
+                                    <a th:if="${canRequestMatchCancel}" th:href="@{'/matches/' +${match.pk} + '/request-cancel'}" 
+                                       class="btn btn-default btn-sm">
+                                        Request Match Cancel
+                                    </a>
+                                    <a th:if="${canCancelMatchForCreator}" th:href="@{'/matches/' +${match.pk} + '/cancel-match-game'}"
+                                       class="btn btn-default btn-sm">
+                                        Cancel Match
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Status: <span th:text="${match.matchInfo.matchStatus}"></span></h3>
+                        <a th:href="@{/}" th:text="${match.matchInfo.gameEnum}"></a>
+                        <p><span th:text="${match.matchInfo.matchSizeEnum}"></span> Match</p>
+                        <br />
+                        <a th:if="${teamDispute}" th:href="@{'/disputes/' + ${teamDispute.pk}}" class="text-warning btn-lg-link">Disputed<i class="fa fa-warning pl-10"></i></a>
+                        <div>
+                            <p th:if="${reportedScoreBy == 0 || reportedScoreBy == 0}">
+                                <span class="alert alert-info">
+                                    <strong>You team has reported a score.</strong>
+                                </span>
+                            </p>
+                            <p th:if="${reportedScoreBy == 2}">
+                                <span class="alert alert-info">
+                                    <strong>Both teams have reported a score.</strong>
+                                </span>
+                            </p>
+                        </div>
+                        <div>
+                            <p th:if="${isWinnerTeam == 1}">
+                                <span class="alert alert-success">
+                                    <strong>Congratulations! Your team has won.</strong>
+                                </span>
+                            </p>
+                            <p th:if="${isWinnerTeam == 0}">
+                                <span class="alert alert-danger">
+                                    <strong>Your team has lost.</strong>
+                                </span>
+                            </p>
+                            <p th:if="${isWinnerTeam == -1}">
+                                <span class="alert alert-info">
+                                    <strong>Both teams have reported a score.</strong>
+                                </span>
+                            </p>
+                        </div>
+                        <br />
+                        <div class="separator"></div>
+                        <br />
+        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Match ID</strong></p>
+                                <p><span th:text="${match.matchId}"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status</strong></p>
+                                <p><span th:text="${match.matchInfo.matchStatus}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Type</strong></p>
+                                <p><span th:text="${match.matchInfo.matchType}"></span></p>
+                            </div>
+                            <div class="col-md-6">
+        
+                            </div>
+                        </div>
+        
+                        <br />
+                        <div class="separator"></div>
+                        <br />
+        
+                        <h3>Match Rules</h3>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Host</strong></p>
+                                <div>
+                                    <ol th:if="${hostNames}">
+                                        <li th:each="map: ${hostNames}" th:text="${map}"></li>
+                                    </ol>
+                                    <div th:unless="${hostNames}">
+                                        Pending
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Map</strong></p>
+                                <div>
+                                    <ol th:if="${mapsToPlay}">
+                                        <li th:each="map: ${mapsToPlay}" th:text="${map}"></li>
+                                    </ol>
+                                    <div th:unless="${mapsToPlay}">
+                                        Pending
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Match Set</strong></p>
+                                <p>Best of 3</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Game Type</strong></p>
+                                <p><span th:text="${match.matchInfo.teamTypeEnum}"></span></p>
+                            </div>
+                        </div>
+        
+                        <br />
+                        <div class="separator"></div>
+                        <br />
+        
+                        <h3>Match Options</h3>
+                        <br />
+                        <h5>Tacticals - <span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.tacticals ? 'Enabled' : 'Disabled'}"></span></h5>
+                        <h5>Lethals - <span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.lethals ? 'Enabled' : 'Disabled'}"></span></h5>
+                        <h5>Stopping Power - <span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.stoppingPower ? 'Enabled' : 'Disabled'}"></span></h5>
+                        <h5>Juggernaut - <span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.juggernaut ? 'Enabled' : 'Disabled'}"></span></h5>
+                        <h5>Radar On - <span th:if="${mWRMatch}" th:text="${mWRMatch.mwrMatchInfo.radarOn ? 'Enabled' : 'Disabled'}"></span></h5>
+        
+                        <br />
+                        <div class="separator"></div>
+                        <br />
+                        <div th:if="${showTeams}">
+                            <h3>Match Users</h3>
+                            <br />
+                            <div class="teamList">
+                                <div class="team" th:if="${teamsInMatch}" th:each="team : ${teamsInMatch}" >
+        
+                                    <span th:text="${'Team - ' + team.teamPojo.teamName}"></span>
+                                    <span th:if="${team.pk == match.pkOfTeamThatCreatedMatch}">
+        
+                                        <span style="color: #15c019;" th:if="${match.reportedScoreOfTeamCreated == true}"> (Reported WIN) </span>
+                                        <span style="color: #a94442;" th:if="${match.reportedScoreOfTeamCreated == false}"> (Reported LOSS) </span>
+                                    </span>
+                                    <span th:if="${team.pk == match.pkOfTeamThatAcceptedMatch}">
+        
+                                        <span style="color: #15c019;" th:if="${match.reportedScoreOfTeamAccepted == true}"> (Reported WIN) </span>
+                                        <span style="color: #a94442;" th:if="${match.reportedScoreOfTeamAccepted == false}"> (Reported LOSS)</span>
+                                    </span>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Gamertag</th>
+                                            <th>Role</th>
+                                        </tr>
+                                        <tr th:each="member : ${team.members}">
+                                        <div th:if="${#lists.contains(match.pksOfCreatorTeamMembersPlaying, member.pk)}">
+                                            <td>
+                                                <span th:text="${member.username}"></span>
+                                            </td>
+                                            <td>
+                                                <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).PS4}" th:text="${member.userInfo.playStation4Name}"></span> 
+                                                <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).XBOXONE}" th:text="${member.userInfo.xboxOneGamerTag}"></span>
+                                            </td>
+                                            <td th:if="${member.pk == team.teamLeaderPk}">Leader</td>
+                                            <td th:unless="${member.pk == team.teamLeaderPk}">Member</td>
+                                        </div>
+                                        <div th:if="${#lists.contains(match.pksOfAcceptorTeamMembersPlaying, member.pk)}">
+                                            <td>
+                                                <span th:text="${member.username}"></span>
+                                            </td>
+                                            <td>
+                                                <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).PS4}" th:text="${member.userInfo.playStation4Name}"></span> 
+                                                <span th:if="${team.teamPojo.platform == T(com.ltlogic.constants.PlatformEnum).XBOXONE}" th:text="${member.userInfo.xboxOneGamerTag}"></span>
+                                            </td>
+                                            <td th:if="${member.pk == team.teamLeaderPk}">Leader</td>
+                                            <td th:unless="${member.pk == team.teamLeaderPk}">Member</td>
+                                        </div>
+                                        </tr>
+                                    </table>
+                                    <br/> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents">
+
+            <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 35%;'">
+
+                <!-- breadcrumb end -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 text-left">
+                            <br />
+                            <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                            <h1 class="title" style="text-transform:none !important;font-size:44px;">Notifications</h1>
+                            <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                            <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View all notifications regarding your teams, matches and tournaments below.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                    <div th:text="${message}"></div>
+                </div>
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+
+                <h3 th:if="${!matchCancellationRequests.isEmpty()}"><br></br>Match Cancellation Requests</h3>
+                <div class="panel" th:if="${!matchCancellationRequests.isEmpty()}">
+                    <div>
+                        <table class="table table-striped table-colored">
+                            <tr>
+                                <th style="background-color:#1d2223;color:#f3f3f3">Match ID</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3">Requested By</th>
+
+                                <th style="background-color:#1d2223;color:#f3f3f3">Requested Date</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3"></th>
+                            </tr>
+                            <tr th:each="request : ${matchCancellationRequests}">
+                                <td><a th:text="${'#' + request.match.matchId}" th:href="@{'/matches/' + ${request.match.pk}}" target="_blank"></a></td>
+                                <td th:text="${request.getCancellationRequester().username}"></td>
+
+                                <td th:text="${request.getSentAt(user.getUserInfo().getTimeZone())}"></td>
+                                <td>
+                                    <a class="btn btn-success btn-sm disabledOnClick" th:href="@{'/match-cancellation-request/' + ${request.match.pk} + '/accept'}">Accept</a>
+                                    <a class="btn btn-danger btn-sm disabledOnClick" th:href="@{'/match-cancellation-request/' + ${request.match.pk} + '/decline'}">Decline</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!--<h3>Notifications</h3>-->
+                <!--<br></br>-->
+                <!--<br></br>-->
+                <!--<div class="panel">-->
+                <!--<div th:if="${notifications.isEmpty()}"><br></br> <br></br>There are no notifications.</div>-->
+                <div>
+                    <br></br> <br></br>
+                    <table class="table table-striped table-colored">
+                        <thead>
+                            <tr>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Notification Message</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;min-width: 50px;text-align:center;">Date</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3"></th> 
+                            </tr>
+                        </thead>  
+                        <tbody>
+                            <tr th:if="${notifications.isEmpty()}">
+                                <td class="text-center" colspan="5">No notifications.</td>
+
+                            </tr>
+                            <tr th:if="${!notifications.isEmpty()}" th:each="notification : ${notifications}">
+                                <td style="color:#333535;" th:text="${notification.notificationMessage}"></td>
+                                <td style="color:#333535;min-width: 180px !important;text-align:center;" th:text="${notification.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></td>
+                                <td style="min-width: 150px !important;text-align:center;">
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).CREATE_TEAM OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).JOINED_TEAM}">
+                                        <a th:href="@{'/teams/' + ${notification.team.pk}}">View Team</a> 
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).JOINED_XP OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).JOINED_WAGER OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).CREATE_WAGER_MATCH OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).CREATE_XP_MATCH OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).TEAM_LEFT_WAGER OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).CANCELLED_MATCH OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).MATCH_STARTED OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).EXPIRED_MATCH OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).UPCOMING_MATCH OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).DISPUTED_MATCH_BY_OTHER_TEAM}">
+                                        <a th:href="@{'/matches/' + ${notification.match.pk}}">View Match</a> 
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).DISPUTED_MATCH_OUTCOME OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).DISPUTED_MATCH}">
+                                        <a th:href="@{'/disputes/' + ${notification.dispute.pk}}">View Dispute</a> 
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).JOINED_TOURNAMENT OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).TEAM_LEFT_TOURNAMENT OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).TOURNAMENT_STARTED OR notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).UPCOMING_TOURNAMENT}">
+                                        <a th:href="@{'/tournaments/' + ${notification.tournament.pk}}">View Tournament</a> 
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).TEAM_INVITE}">
+                                        <a th:if="${notification.teamInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}" th:href="@{'/' + ${#authentication.name} + '/invites/'}">View Invites</a> 
+                                        <span th:unless="${notification.teamInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}">N/A</span> 
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).MATCH_INVITE}">
+                                        <a th:if="${notification.matchInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}" th:href="@{'/' + ${#authentication.name} + '/invites/'}">View Invites</a> 
+                                        <span th:unless="${notification.matchInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}">N/A</span>
+                                    </div>
+                                    <div th:if="${notification.notificationType == T(com.ltlogic.constants.NotificationTypeEnum).TOURNAMENT_INVITE}">
+                                        <a th:if="${notification.tournamentInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}" th:href="@{'/' + ${#authentication.name} + '/invites/'}">View Invites</a> 
+                                        <span th:unless="${notification.tournamentInvite.inviteEnum == T(com.ltlogic.constants.InvitesEnum).PENDING}">N/A</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <nav class="text-center" th:if="${pages}">
+                        <ul class="pagination" th:if="${pages.size() > 0}">
+                            <li th:if="${hasPrevPage}"><a th:href="@{'/' + ${#authentication.name} + '/notifications/' + '?page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                            <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/' + ${#authentication.name} + '/notifications/' + '?page=' + ${page}}" th:text="${page}"></a></li>
+                            <li th:if="${hasNextPage}"><a th:href="@{'/' + ${#authentication.name} + '/notifications/' + '?page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <br></br>
+                <!--</div>-->
+            </div>
+        </div>
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

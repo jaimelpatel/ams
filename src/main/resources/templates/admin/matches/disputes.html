@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <br />
+
+            <h3>Open Tournament Disputes</h3>
+            <!--<div>No disputes.</div>-->
+            <div class="myMatches">
+                <table class="table table-striped table-colored">
+                    <thead>
+                        <tr>
+                            <th style="color:white;background-color:#1d2223">Dispute ID</th>
+                            <th style="color:white;background-color:#1d2223">Match ID</th>
+                            <th style="color:white;background-color:#1d2223">Team ID</th>
+                            <th style="color:white;background-color:#1d2223">Match Type</th>
+                            <th style="color:white;background-color:#1d2223">Date Submitted</th>
+                            <th style="color:white;background-color:#1d2223">Status</th>
+                            <!--<th style="color:white;background-color:#1d2223"></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${openTournamentDisputes.isEmpty()}">
+                            <td class="text-center" colspan="6">No disputes.</td>
+                        </tr>
+                        <tr th:if="${!openTournamentDisputes.isEmpty()}" th:each="dispute : ${openTournamentDisputes}">
+                            <td> <a th:href="@{'/disputes/' + ${dispute.pk}}" th:text="${'#' + dispute.disputeId}" target="_blank"></a> </td>
+                            <td th:text="${'#' + dispute.match.matchId}"></td>
+                            <td> <a th:href="@{'/teams/' + ${dispute.team.pk}}" th:text="${'#' + dispute.team.teamId}" target="_blank"></a> </td>
+                            <td th:text="${dispute.match.matchInfo.matchType.getMatchTypeEnumDesc()}"></td>
+                            <td>
+                                <span th:if="${user}" th:text="${dispute.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                <span th:unless="${user}" th:text="${dispute.getRowCreatedTimestamp()}"></span>
+                            </td>
+                            <td th:text="${dispute.disputeStatus}"></td>
+
+
+                            <!--<td th:text="${'#' + dispute.match.matchId}"></td>-->
+                            <!--                                <td>
+                                                                <a class="btn btn-primary btn-sm" th:href="@{'/disputes/' + ${dispute.pk}}">
+                                                                    View
+                                                                </a>
+                                                            </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <!--                        <nav class="text-center" th:if="${pages}">
+                                            <ul class="pagination" th:if="${pages.size() > 0}">
+                                                <li th:if="${hasPrevPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                                                <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/dashboard/' + '?d_page=' + ${page}}" th:text="${page}"></a></li>
+                                                <li th:if="${hasNextPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>-->
+            </div>
+
+
+
+            <br />
+            <br />
+            <h3>Open Wager Disputes</h3>
+            <!--<div>No disputes.</div>-->
+            <div class="myMatches">
+                <table class="table table-striped table-colored">
+                    <thead>
+                        <tr>
+                            <th style="color:white;background-color:#1d2223">Dispute ID</th>
+                            <th style="color:white;background-color:#1d2223">Match ID</th>
+                            <th style="color:white;background-color:#1d2223">Team ID</th>
+
+                            <th style="color:white;background-color:#1d2223">Match Type</th>
+                            <th style="color:white;background-color:#1d2223">Date Submitted</th>
+                            <th style="color:white;background-color:#1d2223">Status</th>
+                            <!--<th style="color:white;background-color:#1d2223"></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${openWagerDisputes.isEmpty()}">
+                            <td class="text-center" colspan="6">No disputes.</td>
+                        </tr>
+                        <tr th:if="${!openWagerDisputes.isEmpty()}" th:each="dispute : ${openWagerDisputes}">
+                            <td> <a th:href="@{'/disputes/' + ${dispute.pk}}" th:text="${'#' + dispute.disputeId}" target="_blank"></a> </td>
+                            <td th:text="${'#' + dispute.match.matchId}"></td>
+                            <td> <a th:href="@{'/teams/' + ${dispute.team.pk}}" th:text="${'#' + dispute.team.teamId}" target="_blank"></a> </td>
+
+                            <td th:text="${dispute.match.matchInfo.matchType.getMatchTypeEnumDesc()}"></td>
+                            <td>
+                                <span th:if="${user}" th:text="${dispute.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                <span th:unless="${user}" th:text="${dispute.getRowCreatedTimestamp()}"></span>
+                            </td>
+                            <td th:text="${dispute.disputeStatus}"></td>
+
+
+                            <!--<td th:text="${'#' + dispute.match.matchId}"></td>-->
+                            <!--                                <td>
+                                                                <a class="btn btn-primary btn-sm" th:href="@{'/disputes/' + ${dispute.pk}}">
+                                                                    View
+                                                                </a>
+                                                            </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <!--                        <nav class="text-center" th:if="${pages}">
+                                            <ul class="pagination" th:if="${pages.size() > 0}">
+                                                <li th:if="${hasPrevPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                                                <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/dashboard/' + '?d_page=' + ${page}}" th:text="${page}"></a></li>
+                                                <li th:if="${hasNextPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>-->
+            </div>
+
+            <br />
+            <br />
+            <h3>Open XP Disputes</h3>
+            <!--<div>No disputes.</div>-->
+            <div class="myMatches">
+                <table class="table table-striped table-colored">
+                    <thead>
+                        <tr>
+                            <th style="color:white;background-color:#1d2223">Dispute ID</th>
+                            <th style="color:white;background-color:#1d2223">Match ID</th>
+                            <th style="color:white;background-color:#1d2223">Team ID</th>
+                            <th style="color:white;background-color:#1d2223">Match Type</th>
+                            <th style="color:white;background-color:#1d2223">Date Submitted</th>
+                            <th style="color:white;background-color:#1d2223">Status</th>
+                            <!--<th style="color:white;background-color:#1d2223"></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${openXPDisputes.isEmpty()}">
+                            <td class="text-center" colspan="6">No disputes.</td>
+                        </tr>
+                        <tr th:if="${!openXPDisputes.isEmpty()}" th:each="dispute : ${openXPDisputes}">
+                            <td> <a th:href="@{'/disputes/' + ${dispute.pk}}" th:text="${'#' + dispute.disputeId}" target="_blank"></a> </td>
+                            <td th:text="${'#' + dispute.match.matchId}"></td>
+                            <td> <a th:href="@{'/teams/' + ${dispute.team.pk}}" th:text="${'#' + dispute.team.teamId}" target="_blank"></a> </td>
+
+                            <td th:text="${dispute.match.matchInfo.matchType.getMatchTypeEnumDesc()}"></td>
+                            <td>
+                                <span th:if="${user}" th:text="${dispute.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                <span th:unless="${user}" th:text="${dispute.getRowCreatedTimestamp()}"></span>
+                            </td>
+                            <td th:text="${dispute.disputeStatus}"></td>
+
+
+                            <!--<td th:text="${'#' + dispute.match.matchId}"></td>-->
+                            <!--                                <td>
+                                                                <a class="btn btn-primary btn-sm" th:href="@{'/disputes/' + ${dispute.pk}}">
+                                                                    View
+                                                                </a>
+                                                            </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <!--                        <nav class="text-center" th:if="${pages}">
+                                            <ul class="pagination" th:if="${pages.size() > 0}">
+                                                <li th:if="${hasPrevPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                                                <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/dashboard/' + '?d_page=' + ${page}}" th:text="${page}"></a></li>
+                                                <li th:if="${hasNextPage}"><a th:href="@{'/dashboard/' + '?d_page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>-->
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

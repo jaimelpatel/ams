@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/nlg-template-img/support/cont22.jpg); background-position: 50% 25%;'">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:42px;">Shop</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Purchase NLG Cash to compete in wagers and tournaments!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<br/>-->
+        <!--<br/>-->
+        <div class="contents container">
+
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--<img src="https://storage.googleapis.com/nlg-template-img/shop/index/xms-shop-icon.png" />-->
+                    </div>
+                    <div class="col-md-6 text-center">
+<!--                        <br/>
+                        <br/>-->
+                        <!--<h4>Next Level Gaming Cash Amounts</h4>-->
+                        <!--<h6>Use NLG Cash to compete in Wagers and Tournaments for Cash Prizes!</h6>-->
+                        <!--<br/>-->
+                        <div class="form-group">
+                            <!--<label>NLG Cash Amounts</label>-->
+<!--                            <select class="form-control" id="NLGCashAmount">
+                                <option value="5">$5 NLG Cash ($5.45)</option>
+                                <option value="10">$10 NLG Cash ($10.60)</option>
+                                <option value="25">$25 NLG Cash ($20.90)</option>
+                                <option value="50">$50 NLG Cash ($51.80)</option>
+                                <option value="100">$100 NLG Cash ($103.30)</option>
+                            </select>
+                            <br />
+                            <br/>
+
+
+
+
+
+                            <div sec:authorize="isAuthenticated()">
+                                <div id="paypal-button"></div>
+                            </div>
+                            <div sec:authorize="!isAuthenticated()">
+                                <a th:href="@{/shop/authenticate}" class="btn btn-default">Login to checkout</a>
+                            </div>-->
+
+
+                            <script>
+                                $(function() {
+                                    var NLGCashAmountValue = '5';
+                                    $('.image-box').click(function(e) {
+                                        e.preventDefault();
+                                        $('.image-box').removeClass('selected');
+                                        $(this).addClass('selected');
+                                        NLGCashAmountValue = $(this).find('input').val();
+                                    });
+                                    
+                                    function getTransactions() {
+                                        var total_amount = 0, item_price = 0, currency = "USD";
+                                        
+                                        switch (NLGCashAmountValue) {
+                                            case '5':
+                                                item_price = '5.45';
+                                                break;
+                                            case '10':
+                                                item_price = '10.60';
+                                                break;
+                                            case '25':
+                                                item_price = '20.90';
+                                                break;
+                                            case '50':
+                                                item_price = '51.80';
+                                                break;
+                                            case '100':
+                                                item_price = '103.30';
+                                                break;
+                                            case '200':
+                                                item_price = '206.30';
+                                                break;
+                                        }
+
+                                        //Only one item for now
+                                        total_amount = item_price;
+
+                                        return [
+                                            {
+                                                amount: {total: total_amount, currency: currency},
+                                                item_list: {
+                                                    items: [
+                                                        {
+                                                            "name": "NLG Cash",
+                                                            "description": "NLG Cash to compete in wagers and tournaments.",
+                                                            "price": item_price,
+                                                            "currency": currency,
+                                                            "tax": "0.0",
+                                                            "quantity": 1
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+
+                                    }
+
+                                    paypal.Button.render({
+                                        env: 'production', // Or 'production',
+
+                                        style: {
+                                            label: 'buynow',
+                                            fundingicons: true, // optional
+                                            branding: true, // optional
+                                            size: 'large', // small | medium | large | responsive
+                                            shape: 'pill', // pill | rect
+                                            color: 'black'   // gold | blue | silve | black
+                                        },
+                                        client: {
+                                            sandbox: 'AZL8LL-k9REEDC8smja5AzYDuXP_Wz-R3E7eaOsSVp6EMjzqKQ94ipZgolw6lNrXtvX7qEx9xIW9hp9G',
+                                            production: 'ARkv4sBWNLeyVQJd6DdiPbCtX3HcbxVK5nXxm1rYrlx_35eebIlSPdkJqtgdweXGte3DCKGdHKyNU4SG'
+                                        },
+                                        commit: true, // Show a 'Pay Now' button
+
+                                        payment: function (data, actions) {
+                                            try {
+                                                return actions.payment.create({
+                                                    payment: {
+                                                        transactions: getTransactions()
+                                                    },
+                                                    experience: {
+                                                        //                    flow_config: {
+                                                        //                        landing_page_type: "billing"
+                                                        //                    },
+                                                        //                    presentation: {
+                                                        //                        "logo_image": "http://emojis.slackmojis.com/emojis/images/1459365617/335/tesla.jpg"
+                                                        //                    },
+                                                        input_fields: {
+                                                            no_shipping: 1
+                                                        }
+
+                                                    }
+
+
+                                                });
+                                            } catch (err) {
+                                                console.log(err, "fsfsdsffsdfsd");
+                                            }
+                                        },
+                                        onAuthorize: function (data, actions) {
+
+
+    //                                    return paypal.request.post('https://requestb.in/1n49g1r1', {
+    //                                        paymentID: data.paymentID,
+    //                                        payerID: data.payerID
+    //                                    }).then(function () {
+                                            return actions.payment.execute().then(function (data, error) {
+
+
+                                                /*
+                                                 data.transactions[0].amount.total
+                                                 data.transactions[0].item_list.items[0].currency
+                                                 data.transactions[0].item_list.items[0].description
+                                                 data.transactions[0].item_list.items[0].price
+                                                 data.transactions[0].item_list.items[0].quantity
+                                                 data.transactions[0].item_list.items[0].tax
+
+                                                 var payer_info = data.payer.payer_info;
+                                                 country_code
+                                                 email
+                                                 first_name
+                                                 last_name
+                                                 middle_name
+                                                 payer_id
+                                                 */
+
+                                                var data = {
+                                                    id: data.transactions[0].related_resources[0].sale.id,
+                                                    amount: data.transactions[0].amount.total
+                                                            /*
+                                                             items: [
+                                                             {
+                                                             price: data.transactions[0].item_list.items[0].description,
+                                                             quantity: data.transactions[0].item_list.items[0].price,
+                                                             description: data.transactions[0].item_list.items[0].quantity,
+                                                             tax: data.transactions[0].item_list.items[0].tax
+                                                             }
+                                                             ],
+                                                             pay_info: data.payer.payer_info,
+                                                             */
+                                                }
+
+                                                if (error === 'INSTRUMENT_DECLINED') {
+                                                    actions.restart();
+                                                }
+
+                                                var re = /xms/i;
+                                                var found = location.href.match(re);
+                                                var url = '/bank/account/deposit';
+                                                var url2 = '/account/bank';
+                                                if (found) {
+                                                    url = '/xms/bank/account/deposit';
+                                                    url2 = '/xms/account/bank';
+                                                }
+
+                                                //amount is in real cash amount, need to convert NLG cash
+                                                $.post(url, data, function (result) {
+                                                    document.location.href = url2;
+                                                });
+
+    //                                            document.querySelector('#paypal-button').innerText = 'Payment Complete!';
+                                            });
+    //                                    })
+                                        }
+                                    }, '#paypal-button');
+                                    
+                                })
+                                
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+
+<!--<br/>-->
+<!--<br/>-->
+
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<h1 class="text-center" style="text-transform:none;font-size:30px">Cash Amounts</h1>
+							<div class="separator"></div>
+							<p class="text-center" style="font-size:16px">Please select the tile with the amount of NLG Cash you would like to deposit into your account and then click on the paypal button below to checkout.</p>
+							<!--<div class="separator"></div>-->
+                                                        <br></br>
+						</div>
+					</div>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="image-box shadow text-center mb-20 redborder selected">
+                            <div class="overlay-container overlay-visible" >
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/5cashnew.png" alt=""></img>
+                                <div class="overlay-bottom">
+                                    <div class="text">
+                                        <input type="hidden" value="5" />
+                                        <p class="lead margin-clear">$5 NLG Cash ($5.45 USD)</p>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="image-box shadow text-center mb-20 redborder">
+                            <div class="overlay-container overlay-visible">
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/10cashnew.png" alt=""></img>
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <input type="hidden" value="10" />
+                                        <p class="lead margin-clear">$10 NLG Cash ($10.60 USD)</p>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="image-box shadow text-center mb-20 redborder">
+                            <div class="overlay-container overlay-visible">
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/20cashnew.png" alt=""></img>
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <input type="hidden" value="20" />
+                                        <p class="lead margin-clear">$20 NLG Cash ($20.90 USD)</p>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>									
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-4">
+                        
+                        <div class="image-box shadow text-center mb-20 redborder">
+                            <div class="overlay-container overlay-visible">
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/50cashnew.png" alt=""></img>
+                                <!--<a href="portfolio-item.html" class="overlay-link"><i class="fa fa-link"></i></a>-->
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <input type="hidden" value="50" />
+                                        <p class="lead margin-clear">$50 NLG Cash ($51.80 USD)</p>
+                                    </div>
+                                </div>											
+                            </div>
+                        </div>
+                           
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="image-box shadow text-center mb-20 redborder">
+                            <div class="overlay-container overlay-visible">
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/100cashnew.png" alt=""></img>
+                                <!--<a href="portfolio-item.html" class="overlay-link"><i class="fa fa-link"></i></a>-->
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <input type="hidden" value="100" />
+                                        <p class="lead margin-clear" style="font-size:19px">$100 NLG Cash ($103.30 USD)</p>
+                                    </div>
+                                </div>											
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="image-box shadow text-center mb-20 redborder">
+                            <div class="overlay-container overlay-visible">
+                                <img style="background: #000;" src="https://storage.googleapis.com/nlg-template-img/shop/index/200cashnew.png" alt=""></img>
+                                <!--<a href="portfolio-item.html" class="overlay-link"><i class="fa fa-link"></i></a>-->
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <input type="hidden" value="200" />
+                                        <p class="lead margin-clear" style="font-size:19px !important">$200 NLG Cash ($206.30 USD)</p>
+                                    </div>
+                                </div>											
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+
+                        <div sec:authorize="isAuthenticated()">
+                            <div id="paypal-button"></div>
+                        </div>
+                        <div sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/shop/authenticate}" class="btn btn-default radius-50 btn-lg">Login To Buy</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <br/>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+            <style>
+                .image-box {
+                    cursor: pointer;
+                }
+                .selected {
+                    border: 6px solid #992020;
+                }
+            </style>
+    </body>
+</html>

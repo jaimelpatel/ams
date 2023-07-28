@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container" style="border: 1px solid #f3f3f3;">
+            <h3>Upload Proof</h3>
+            
+            <form th:action="@{'/disputes/' + ${dispute.pk} + '/upload-proof'}" enctype="multipart/form-data" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+                <br />
+
+                <div>
+                    <input type="file" name="file" />
+                </div>
+                
+                <hr />
+                <div>
+                    <button class="btn btn-default">
+                        <i class="fa fa-save"></i>
+                        Upload
+                    </button>
+                </div>
+                <br/> 
+            </form>
+        </div>
+        
+
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

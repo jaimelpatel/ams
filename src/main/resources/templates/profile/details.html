@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="profilePage">
+            <div class="profile-header">
+                <div class="userInfoContainer">
+                    <div class="userInfo container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="profile-placeholder" style="margin-top: -50px;">
+                                    <img th:src="${user.displayUrl}" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <h3 style="width:230px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" th:text="${user.username}"></h3>
+                                <a th:if="${user.userInfo.twitterUrl != null AND user.userInfo.twitterUrl != '' AND user.userInfo.twitterUrl != ' '}" class="twitter" target="_blank" th:href="${twitter}"><i class="fa fa-twitter"></i></a>
+                                <a th:if="${user.userInfo.twitchUrl != null AND user.userInfo.twitchUrl != '' AND user.userInfo.twitchUrl != ' '}" class="twitch" target="_blank" th:href="${twitch}"><i class="fa fa-twitch"></i></a>
+                                <a th:if="${user.userInfo.facebookUrl != null AND user.userInfo.facebookUrl != '' AND user.userInfo.facebookUrl != ' '}" class="facebook" target="_blank" th:href="${facebook}"><i class="fa fa-facebook"></i></a>
+                                <a th:if="${user.userInfo.youtubeUrl != null AND user.userInfo.youtubeUrl != '' AND user.userInfo.youtubeUrl != ' '}" class="youtube" target="_blank" th:href="${youtube}"><i class="fa fa-youtube"></i></a>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Member Since</h4>
+                                <h3 th:text="${#temporals.format(user.rowCreatedTimestamp, 'MM-dd-yyyy')}"></h3>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <a th:href="@{/leaderboards}">
+                                <h4>Ladder Rank</h4>
+                                <h3 th:text="${user.rankXP.rank}"></h3>
+                                </a>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Total XP</h4>
+                                <h3><span th:text="${user.rankXP.totalXp}"></span></h3>
+                            </div>
+                            <div style="text-align:center" class="col-md-2">
+                                <h4>Total Earnings</h4>
+                                <h3>$<span th:text="${user.rankEarnings.totalEarnings}"></span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-stats">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div> 
+                        <div style="color:#dac100" class="col-md-3">
+                            <span th:text="${user.goldTrophyCount + ' Gold Trophies'}"></span>
+                        </div>
+                        <div class="col-md-1">
+                            |
+                        </div>    
+                        <div style="color:silver" class="col-md-3">
+                            <span th:text="${user.silverTrophyCount + ' Silver Trophies'}"></span>
+                        </div>
+                        <div class="col-md-1">
+                            |
+                        </div> 
+                        <div style="color:#7b470e" class="col-md-3">
+                            <span th:text="${user.bronzeTrophyCount + ' Bronze Trophies'}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="contents container">
+                <br />
+<!--                <h3>Teams</h3>
+                --><br />
+            <ul class="nav nav-tabs style-3" role="tablist">
+                <li class="active">
+                    <a href="#cashout-tab" role="tab" data-toggle="tab" title="video" aria-expanded="false">
+                        <i class="fa fa-dollar pr-10"></i>Cash Teams
+                    </a>
+                </li>
+                <li>
+                    <a href="#playoff-tab" role="tab" data-toggle="tab" title="images" aria-expanded="true">
+                        <i class="fa fa-level-up pr-10"></i>XP Teams
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane" id="playoff-tab">
+                    <!--                    <div id="create-team" class="text-right">
+                                            <a th:href="@{/teams/create}" class="btn btn-default btn-sm">Create Team</a>
+                                        </div>-->
+                    <div th:if="${playoffTeams.isEmpty()}">No XP Teams...</div>
+                    
+                    <div class="row">
+                        <div class="col-md-4" th:if="${playoffTeams}" th:each="team : ${playoffTeams}">
+
+                            <div class="image-box style-3-b">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="overlay-container">
+                                            <a th:href="@{'/teams/' + ${team.pk}}">
+                                                <img th:src="${team.displayUrl}" alt="" />
+                                            </a>
+                                            <div class="overlay-to-top">
+                                                <p class="small margin-clear">
+                                                    <em th:text="${team.teamPojo.teamName}"></em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a th:href="@{'/teams/' + ${team.pk}}">
+                                                        <h3 style="width:160px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title" th:text="${team.teamPojo.teamName}"></h3>
+                                                    </a>
+                                                </div>
+<!--                                                <div class="col-md-6 text-center">
+                                                    <a th:href="@{'/teams/' + ${team.pk}}">
+                                                        <i class="icon-eye" title="View"></i>
+                                                    </a>
+                                                    <div th:if="${isTeamLeader}">
+                                                        <a th:href="@{'/teams/' + ${team.pk} + '/edit'}">
+                                                            <i class="icon-cog" title="Edit"></i>
+                                                        </a>
+                                                        <a class="disbandButton" th:href="@{'/teams/' + ${team.pk} + '/disband'}">
+                                                            <i class="icon-trash" title="Disband"></i>
+                                                        </a>
+                                                    </div>
+                                                                                                        <div th:unless="${isMember}">
+                                                                                                            <a class="leaveButton" th:href="@{'/teams/' + ${team.pk} + '/leave'}">
+                                                                                                                <i class="icon-trash" title="Leave"></i>
+                                                                                                            </a>
+                                                                                                        </div>
+                                                </div>-->
+                                            </div>
+                                            <div class="separator-2"></div>
+                                            <div style="color:#2f2f2f"><span th:if="${team.teamPojo.game == T(com.ltlogic.constants.GameEnum).COD_MWR}">Call of Duty: MWR</span></div>
+                                            <div style="color:#2f2f2f"><span th:unless="${team.teamPojo.game == T(com.ltlogic.constants.GameEnum).COD_MWR}" th:text="${team.teamPojo.game.getGameEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.platform.getPlatformEnumDesc()}"></span> - <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).SINGLES}"> Singles - </span> <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).DOUBLES}"> Doubles - </span> <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).TEAM}"> Team -</span> <span th:text="${team.teamPojo.region}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="cashout-tab">
+                    <div th:if="${cashoutTeams.isEmpty()}">No Cash Teams...</div>
+                    <div class="row">
+                        <div class="col-md-4" th:if="${cashoutTeams}" th:each="team : ${cashoutTeams}">
+                            <div class="image-box style-3-b">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="overlay-container">
+                                            <a th:href="@{'/teams/' + ${team.pk}}">
+                                                <img th:src="${team.displayUrl}" alt="" />
+                                            </a>
+                                            <div class="overlay-to-top">
+                                                <p class="small margin-clear">
+                                                    <em th:text="${team.teamPojo.teamName}"></em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a th:href="@{'/teams/' + ${team.pk}}">
+                                                        <h3 style="width:160px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title" th:text="${team.teamPojo.teamName}"></h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="separator-2"></div>
+                                            <div style="color:#2f2f2f"><span th:if="${team.teamPojo.game == T(com.ltlogic.constants.GameEnum).COD_MWR}">Call of Duty: MWR</span></div>
+                                            <div style="color:#2f2f2f"><span th:unless="${team.teamPojo.game == T(com.ltlogic.constants.GameEnum).COD_MWR}" th:text="${team.teamPojo.game.getGameEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.platform.getPlatformEnumDesc()}"></span> - <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).SINGLES}"> Singles - </span> <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).DOUBLES}"> Doubles - </span> <span th:if="${team.teamPojo.teamSize == T(com.ltlogic.constants.TeamSizeEnum).TEAM}"> Team -</span> <span th:text="${team.teamPojo.region}"></span></div>
+                                            <!--<div style="color:#2f2f2f"><span th:text="${team.teamPojo.teamSize.getTeamSizeEnumDesc()}"></span></div>-->
+                                            <!--<div style="color:#2f2f2f">Record: <span th:text="${team.matchesWon}"></span> - <span th:text="${team.matchesLost}"></span></div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br /> <br />
+                <h3>Match Records</h3>
+<hr />
+                <div class="match-list">
+                    <table class="table table-striped table-colored">
+                        <thead>
+                            <tr>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Match ID</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Game</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Date</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Type</th> 
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Status</th>
+                                <!--<th style="background-color:#1d2223;color:#f3f3f3;"></th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${matches.isEmpty()}">
+                                <td class="text-center" colspan="6">No match records.</td>
+                            </tr>
+                            <tr th:if="${!matches.isEmpty()}" th:each="match : ${matches}">
+                                <td> <a th:text="${'#' + match.matchId}" th:href="@{'/matches/' + ${match.pk}}" target="_blank"></a> </td>
+                                <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</td>
+                                <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</td>
+                                <td th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War II</td>
+                                <td>
+                                    <span th:if="${user}" th:text="${match.matchInfo.getScheduledMatchTime(user.getUserInfo().getTimeZone())}">
+                                    </span>
+                                    <span th:unless="${user}" th:text="${match.matchInfo.getScheduledMatchTime(null)}">
+                                    </span>
+                                </td>
+                                <td th:text="${match.matchInfo.matchType.getMatchTypeEnumDesc()}"></td>
+
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_FIRST_ACCEPT OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).PENDING OR match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).WAITING_ON_SECOND_ACCEPT}">PENDING</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).READY_TO_PLAY}">READY</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ACTIVE}">ACTIVE</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).CANCELLED}">CANCELLED</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}">ENDED</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).EXPIRED}">EXPIRED</td>
+                                <td th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).DISPUTED}">DISPUTED</td>
+                                <!--<td style="text-align: right"><a th:href="@{'/matches/' + ${match.pk}}" class="btn btn-primary btn-sm">View</a></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <nav class="text-center" th:if="${matchPages}">
+                        <ul class="pagination" th:if="${matchPages.size() > 0}">
+                            <li th:if="${matchHasPrevPage}"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?match_page=' + ${matchPrevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                            <li th:each="page : ${matchPages}" th:classappend="${matchCurrentPage == page} ? active : ''"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?match_page=' + ${page}}" th:text="${page}"></a></li>
+                            <li th:if="${matchHasNextPage}"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?match_page=' + ${matchNextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--<br />-->
+                <h3>Tournament Records</h3>
+<hr />
+                <div class="tournament-list">
+                    <table class="table table-striped table-colored">
+                        <thead>
+                            <tr>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Tournament ID</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Game</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Date</th>
+                                <th style="background-color:#1d2223;color:#f3f3f3;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${tournaments.isEmpty()}">
+                                <td class="text-center" colspan="5">No tournament records.</td>
+
+                            </tr>
+                            <tr th:if="${!tournaments.isEmpty()}" th:each="tournament : ${tournaments}">
+                                <td> <a th:href="@{'/tournaments/' + ${tournament.pk}}" th:text="${'#' + tournament.tournamentId}" target="_blank"></a></td>
+                                <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</td>
+                                <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</td>
+                                <td th:if="${tournament.tournamentInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War II</td>                                <td>
+                                    <span th:if="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(user.getUserInfo().getTimeZone())}">
+                                    </span>
+                                    <span th:unless="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTime(null)}">
+                                    </span>
+                                </td>
+                                <td th:text="${tournament.tournamentInfo.tournamentStatus}"></td>
+                                <!--<td style="text-align: right"><a th:href="@{'/tournaments/' + ${tournament.pk}}" class="btn btn-primary btn-sm">View</a></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <nav class="text-center" th:if="${tournamentPages}">
+                        <ul class="pagination" th:if="${tournamentPages.size() > 0}">
+                            <li th:if="${tournamentHasPrevPage}"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?tournament_page=' + ${tournamentPrevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                            <li th:each="page : ${tournamentPages}" th:classappend="${tournamentCurrentPage == page} ? active : ''"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?tournament_page=' + ${page}}" th:text="${page}"></a></li>
+                            <li th:if="${tournamentHasNextPage}"><a th:href="@{'/' + ${#authentication.name} + '/profile/' + '?tournament_page=' + ${tournamentNextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <br />
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

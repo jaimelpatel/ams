@@ -1,0 +1,1139 @@
+/* Theme Name: The Project - Responsive Website Template
+Author:HtmlCoder
+Author URI:http://www.htmlcoder.me
+Author e-mail:htmlcoder.me@gmail.com
+Version:1.4.0
+Created:December 2014
+License URI:http://support.wrapbootstrap.com/
+File Description: Place here your custom CSS styles
+*/
+
+
+/******* Default Settings ********/
+
+label {
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    padding: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.clearfix {
+    clear: both;
+}
+
+
+
+/********* MatchFinder Page ***********/
+.matchFinderPage {
+    padding: 0;
+    margin: 0;
+}
+
+.matchFinderPage .matches-header {
+    background: url("https://storage.googleapis.com/nlg-template-img/matches/custom-css/matchesoffset.png") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+}
+
+.matchFinderPage .matchList {
+    margin: 0;
+    padding: 0;
+}
+
+.matchFinderPage .matchList .match {
+    margin-right: 5%;
+    margin-bottom: 50px;
+    padding: 0;
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+.matchFinderPage .matchList .match:hover .match-header, .matchFinderPage .matchList .match:hover .match-header img {
+    height: 75px;
+}
+
+.matchFinderPage .matchList .match:hover .match-content {
+    height: 225px;
+}
+
+.matchFinderPage .matchList .match:nth-child(3n+1) {
+    margin-right: 0%;
+}
+
+.matchFinderPage .matchList .match .match-header {
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    overflow: hidden;
+    height: 125px;
+    position: relative;
+    transition: all 0.2s ease-out;
+}
+
+.matchFinderPage .matchList .match .match-header .timeLeft {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 25px;
+    background: #992020;
+    color: white;
+    padding: 5px 15px;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.matchFinderPage .matchList .match .match-header img {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 125px;
+    margin: 0px;
+    transition: all 0.2s ease-out;
+}
+
+.matchFinderPage .matchList .match .match-content {
+    height: 200px;
+    background: #212627;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding: 10px 20px;
+    color: #dfdfdf;
+    transition: all 0.2s ease-out;
+}
+
+.matchFinderPage .matchList .match .match-content h5 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #dfdfdf;
+    text-transform: none;
+}
+
+.matchFinderPage .matchList .match .match-content .row {
+    font-size: 11px;
+}
+
+.matchFinderPage .matchList .match .match-content .row .col-md-3 {
+    font-weight: 400;
+}
+
+.matchFinderPage .matchList .match .match-content .row .col-md-9 {
+    padding-left: 0px;
+    color: #bbbbbb;
+}
+
+.matchFinderPage .matchList .match .match-content .row-1 {
+    margin-bottom: 15px;
+}
+
+.matchFinderPage .matchList .match .match-content .row-4, .matchFinderPage .matchList .match .match-content .row-3 {
+    margin-top: 13px;
+}
+
+.matchFinderPage .matchList .match .match-content .divider {
+    width: 100%;
+    height: 1px;
+    background: #505454;
+}
+
+.matchFinderPage .matchList .match .match-content .row-2 {
+    padding: 10px 0;
+}
+
+/********* END MatchFinder Page ***********/ 
+
+
+
+
+/********* MatchDetails Page ***********/
+.matchDetailsPage {
+    padding: 0;
+    margin: 0;
+    background: #f6f6f6;
+}
+
+.matchDetailsPage .match-header {
+    background: url(https://storage.googleapis.com/cod-pics/xboxbg.jpg) no-repeat center center;
+    background-position: 50% 30%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 360px;
+}
+
+.matchDetailsPage .match-header .row {
+    margin: 50px 0;
+}
+
+.matchDetailsPage .match-header .match-info {
+    margin: 0;
+    padding: 0px 0px;
+}
+
+
+.matchDetailsPage .match-header .match-info h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.matchDetailsPage .match-header .match-info h3 span:nth-child(1) {
+    color: #a70c0c;
+    /*text-decoration: underline;*/
+}
+
+.matchDetailsPage .match-header .match-info h3 span:nth-child(2) {
+    color: #d8c668;
+}
+
+.matchDetailsPage .match-header .match-info h2 {
+    color: #ececec;
+    text-transform: none;
+    font-weight: bold;
+}
+
+.matchDetailsPage .match-header .match-info p {
+    font-size: 16px;
+    color: #ececec;
+    margin: 16px 0;
+}
+.matchDetailsPage .match-header .match-info-sub {
+    float: right;
+    margin-top: 10px;
+    width: 300px;
+    padding: 18px;
+    background: rgba(183,183,183,0.2);
+    text-align: center;
+    color: #ececec;
+    border-radius: 5px;
+}
+
+.matchDetailsPage .match-header .gameTitle {
+    position: relative;
+}
+
+.matchDetailsPage .match-header .gameTitle img {
+    position: absolute;
+    top: 10px;
+    left: 2px;
+}
+
+.matchDetailsPage .match-menu-container .match-menu {
+    padding: 15px 0;
+}
+.matchDetailsPage .match-menu-container {
+    background: #d7d7d7;
+}
+
+.matchDetailsPage .match-menu-container .match-menu ul.menu-items {
+    list-style: none;
+}
+
+.matchDetailsPage .match-menu-container .match-menu ul.menu-items li {
+    display: inline-block;
+    margin-left: 50px;
+    font-weight: 400;
+}
+
+.matchDetailsPage .match-menu-container .match-menu ul.menu-items li:first-child {
+    margin-left: 0;
+}
+
+.matchDetailsPage .match-menu-container .match-menu ul.menu-items li.active > a {
+    color: #b1170f;
+}
+
+.matchDetailsPage .match-menu-container .match-menu ul.menu-items li a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #000;
+}
+
+
+.matchDetailsPage .contents span.matchStatus {
+    background: #992020;
+    font-size: 20px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    position: relative;
+    top: -3px;
+}
+
+.matchDetailsPage .contents h3.matchId {
+    border-bottom: 1px solid #d5d7e0;
+    padding: 10px 0;
+}
+
+.matchDetailsPage .contents .matchStatus {
+    background: #747cbb;
+    font-size: 11px;
+    padding: 3px 15px;
+    border-radius: 3px;
+    position: relative;
+    top: -3px;
+    margin-left: 20px;
+    color: white;
+}
+
+.matchDetailsPage .contents .match-details-4 {
+    margin: 25px 0;
+}
+
+.matchDetailsPage .contents .match-details-4 ul.items {
+    list-style: none;
+}
+
+.matchDetailsPage .contents .match-details-4 ul.items li {
+    display: inline-block;
+    width: 20%;
+    position: relative;
+    padding: 0px 30px;
+}
+
+.matchDetailsPage .contents .match-details-4 ul.items li {
+    display: inline-block;
+    width: 24%;
+    position: relative;
+    padding: 0px 30px;
+}
+
+.matchDetailsPage .contents .match-details-4 ul.items li:before {
+    content: '';
+    width: 7px;
+    border-radius: 25px;
+    height: 73px;
+    z-index: 99;
+    background: #1d2223;
+    position: absolute;
+    top: 0;
+    left: 0px;
+}
+
+
+.matchDetailsPage .contents .match-details-4 ul.items li p.name {
+    color: #777777;
+    font-weight: 500;
+}
+
+.matchDetailsPage .contents .match-details-4 ul.items li p.value {
+    color: #222;
+    font-weight: bold;
+}
+
+.matchDetailsPage .contents .side-panels {
+    margin: 0;
+    padding: 0;
+}
+
+.matchDetailsPage .contents .side-panels {
+    margin: 20px 0;
+}
+
+.matchDetailsPage .contents .side-panels .match-rules-panel {
+    float: left;
+    width: 47%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+.matchDetailsPage .contents .side-panels .participants-panel {
+    /*float: left;*/
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+.tournamentDetailsPage .contents .side-panels .participants-panel {
+    /*float: left;*/
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+.matchDetailsPage .contents .side-panels .match-options-panel {
+    float: right;
+    width: 47%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+/********* END MatchDetails Page ***********/
+
+
+
+
+/********* Tournaments Page ***********/
+.tournamentsPage {
+    padding: 0;
+    margin: 0;
+}
+
+.tournamentsPage .tournaments-header {
+    background: url(https://storage.googleapis.com/nlg-template-img/tournaments/custom-css/tournamentshead.png) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+}
+
+.tournamentsPage .contents .status-option-links {
+    margin-top: 20px;
+    padding: 0px 10px;
+}
+
+.tournamentsPage .contents .status-option-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tournamentsPage .contents .status-option-links ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.tournamentsPage .contents .status-option-links ul li a {
+    color: #222;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    padding: 20px;
+}
+
+.tournamentsPage .contents .status-option-links ul li.active, .tournamentsPage .contents .status-option-links ul li:hover {
+    border-bottom: 4px solid #992020;
+    color: #a1e1e2;
+
+}
+
+.tournamentsPage .contents .tournament-list {
+    margin: 20px 0;
+}
+
+.tournamentsPage .contents .tournament-list .tournament {
+    padding: 5px 10px;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.tournamentsPage .contents .tournament-list .tournament:last-child {
+    border-bottom: none;
+}
+
+.tournamentsPage .contents .tournament-list .tournament:hover {
+    background: #ebebeb;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .tournament-details {
+    line-height: 27px;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .tournament-details h4, .tournamentsPage .contents .tournament-list .tournament .tournament-details span {
+    margin-left: 20px;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .tournament-details .sub-d {
+    color: #7b7b7b;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .datetime,
+.tournamentsPage .contents .tournament-list .tournament .totalTeams,
+.tournamentsPage .contents .tournament-list .tournament .actions {
+    height: 100%;
+    text-align: right;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .datetime {
+    margin-top: 26px;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .totalTeams {
+    margin-top: 15px;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .actions {
+    margin-top: 24px;
+    color:  #3aa054;
+}
+
+.tournamentsPage .contents .tournament-list .tournament .actions a {
+    text-decoration: none;
+    color: #3aa054;
+    font-weight: 400;
+}
+
+/********* END Tournaments Page ***********/
+
+
+/********* ACCOUNT Page START***********/
+
+.accountPage {
+    padding: 0;
+    margin: 0;
+}
+
+.accountPage .contents .status-option-links {
+    margin-top: 20px;
+    padding: 0px 10px;
+}
+
+.accountPage .contents .status-option-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.accountPage .contents .status-option-links ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.accountPage .contents .status-option-links ul li a {
+    color: #222;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    padding: 20px;
+}
+
+.accountPage .contents .status-option-links ul li.active, .accountPage .contents .status-option-links ul li:hover {
+    border-bottom: 4px solid #992020;
+    color: #a1e1e2;
+
+}
+
+
+
+
+
+
+/********* TournamentDetails Page ***********/
+.tournamentDetailsPage {
+    padding: 0;
+    margin: 0;
+    background: #f6f6f6;
+}
+
+.tournamentDetailsPage .match-header {
+    background: url(https://storage.googleapis.com/cod-pics/xboxbg.jpg) no-repeat center center;
+    background-position: 50% 35%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 360px;
+}
+
+.tournamentDetailsPage .match-header .row {
+    margin: 65px 0;
+}
+
+.tournamentDetailsPage .match-header .match-info {
+    padding-top:0px !important;
+    margin: 0;
+    padding: 0px 15px;
+}
+
+
+.tournamentDetailsPage .match-header .match-info h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.tournamentDetailsPage .match-header .match-info h3 span:nth-child(1) {
+    color: #a70c0c;
+    /*text-decoration: underline;*/
+}
+
+.tournamentDetailsPage .match-header .match-info h3 span:nth-child(2) {
+    color: #d8c668;
+}
+
+.tournamentDetailsPage .match-header .match-info h2 {
+    color: #ececec;
+    text-transform: none;
+    font-weight: bold;
+}
+
+.tournamentDetailsPage .match-header .match-info p {
+    font-size: 16px;
+    color: white;
+    margin: 16px 0;
+}
+.tournamentDetailsPage .match-header .match-info-sub {
+    /*float: right;*/
+    margin-top: 35px;
+    width: 300px;
+    padding: 35px;
+    background: rgba(183,183,183,0.2);
+    text-align: center;
+    color: white;
+    /*padding: 32px;*/
+    /*border-radius: 5px;*/
+}
+
+.tournamentDetailsPage .match-header .apply {
+    margin-top: 0;
+    background: #54de4b;
+    padding: 0;
+    /*float: right;*/
+    width: 300px;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.tournamentDetailsPage .match-header .apply2 {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+.tournamentDetailsPage .match-header .apply a {
+    display: block;
+    padding: 8px;
+    color: #312723
+}
+
+.tournamentDetailsPage .match-header .apply p {
+    padding: 10px 0;
+    display: block;
+}
+
+.tournamentDetailsPage .match-header .match-info-sub p {
+    margin: 0;
+}
+
+.tournamentDetailsPage .match-header .gameTitle {
+    position: relative;
+}
+
+.tournamentDetailsPage .match-header .gameTitle img {
+    position: absolute;
+    top: -5px;
+    left: 2px;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu {
+    padding: 15px 0;
+}
+.tournamentDetailsPage .match-menu-container {
+    background: #d7d7d7;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu ul.menu-items {
+    list-style: none;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu ul.menu-items li {
+    display: inline-block;
+    margin-left: 50px;
+    font-weight: 400;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu ul.menu-items li:first-child {
+    margin-left: 0;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu ul.menu-items li.active > a {
+    color: #a9160f;
+}
+
+.tournamentDetailsPage .match-menu-container .match-menu ul.menu-items li a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #000;
+}
+
+
+.tournamentDetailsPage .contents span.matchStatus {
+    background: #272a33;
+    font-size: 20px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    position: relative;
+    top: -3px;
+}
+
+.tournamentDetailsPage .contents h3.matchId {
+    border-bottom: 1px solid #d5d7e0;
+    padding: 10px 0;
+}
+
+.tournamentDetailsPage .contents .matchStatus {
+    background: #747cbb;
+    font-size: 11px;
+    padding: 3px 15px;
+    border-radius: 3px;
+    position: relative;
+    top: -3px;
+    margin-left: 20px;
+    color: white;
+}
+
+.tournamentDetailsPage .contents .match-details-4 {
+    margin: 25px 0;
+}
+
+.tournamentDetailsPage .contents .match-details-4 ul.items {
+    list-style: none;
+}
+
+.tournamentDetailsPage .contents .match-details-4 ul.items li {
+    display: inline-block;
+    width: 17%;
+    position: relative;
+    padding: 0px 20px;
+}
+
+.tournamentDetailsPage .contents .match-details-4 ul.items li:last-child {
+    display: inline-block;
+    width: 12%;
+    position: relative;
+    padding: 0px;
+    padding-left:20px;
+    
+}
+
+.tournamentDetailsPage .contents .match-details-4 ul.items li:before {
+    content: '';
+    width: 7px;
+    border-radius: 25px;
+    height: 73px;
+    z-index: 99;
+    background: #272a33;
+    position: absolute;
+    top: 0;
+    left: 0px;
+}
+
+
+.tournamentDetailsPage .contents .match-details-4 ul.items li p.name {
+    color: #992020;
+    font-weight: 500;
+}
+
+.tournamentDetailsPage .contents .match-details-4 ul.items li p.value {
+    color: #222;
+    font-weight: bold;
+}
+
+.tournamentDetailsPage .contents .side-panels {
+    margin: 0;
+    padding: 0;
+}
+
+.tournamentDetailsPage .contents .side-panels {
+    margin: 20px 0;
+}
+
+.tournamentDetailsPage .contents .side-panels .match-rules-panel {
+    float: left;
+    width: 47%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+.tournamentDetailsPage .contents .side-panels .match-options-panel {
+    float: right;
+    width: 47%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 10px 18px;
+}
+
+/********* END TournamentDetails Page ***********/
+
+
+
+
+/********* Invites Page ***********/
+.invitesPage {
+    padding: 0;
+    margin: 0;
+}
+
+.invitesPage .invites-header {
+    background: url(https://storage.googleapis.com/nlg-template-img/invites/custom-css/invites-header-bg.gif) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+}
+
+.invitesPage .contents .info {
+    color: #919191;
+}
+
+.invitesPage .contents .status-option-links {
+    margin-top: 20px;
+    padding: 0px 10px;
+}
+
+.invitesPage .contents .status-option-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.invitesPage .contents .status-option-links ul li {
+    display: inline-block;
+    padding: 20px;
+    margin: 20px;
+}
+
+.invitesPage .contents .status-option-links ul li.active, .invitesPage .contents .status-option-links ul li:hover {
+    border-bottom: 4px solid #a1e1e2;
+    color: #a1e1e2;
+}
+
+.invitesPage .contents .status-option-links ul li a {
+    color: #222;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.invitesPage .contents .invite-list {
+    margin: 20px 0;
+}
+
+.invitesPage .contents .invite-list .envolop-img {
+    margin-top: 16px;
+}
+
+.invitesPage .contents .invite-list .inivite {
+    padding: 5px 10px;
+    border-bottom: 1px solid #d1d1d1;
+
+}
+
+.invitesPage .contents .invite-list .inivite:first-child {
+    border-top: 1px solid #d1d1d1;
+}
+
+
+.invitesPage .contents .invite-list .inivite .inivite-details {
+    line-height: 27px;
+}
+
+.invitesPage .contents .invite-list .inivite .invite-details h4, .invitesPage .contents .invite-list .inivite .invite-details span {
+    margin-left: 20px;
+}
+
+.invitesPage .contents .invite-list .inivite .invite-details .sub-d {
+    color: #969696;
+}
+
+.invitesPage .contents .invite-list .inivite .datetime,
+.invitesPage .contents .invite-list .inivite .totalTeams,
+.invitesPage .contents .invite-list .inivite .actions {
+    height: 100%;
+    text-align: right;
+}
+
+.invitesPage .contents .invite-list .inivite .datetime {
+    margin-top: 26px;
+}
+
+.invitesPage .contents .invite-list .inivite .totalTeams {
+    margin-top: 15px;
+}
+
+.invitesPage .contents .invite-list .inivite .actions {
+    font-size:18px;
+    padding: 21px;
+    color: black;
+}
+
+.invitesPage .contents .invite-list .inivite .actions a {
+    text-decoration: none;
+    color: #55c572;
+    font-weight: 400;
+}
+
+.invitesPage .contents .invite-list .inivite .actions a.accept {
+    color: #41c0cb;
+    margin: 0px 7px;
+}
+
+.invitesPage .contents .invite-list .inivite .actions a.decline {
+    color: #9d9d9d;
+    margin: 0px 7px;
+}
+
+.invitesPage .contents .invite-list .inivite .actions a.view {
+    color: #992020;
+    margin: 0px 7px;
+}
+
+/********* END Invites Page ***********/
+
+
+
+/********* Profile Page ***********/
+.profilePage {
+    padding: 0;
+    margin: 0;
+}
+
+.profilePage .profile-header {
+    background: url(https://storage.googleapis.com/nlg-template-img/profile/custom-css/tournamentshead.png) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 360px;
+    position: relative;
+}
+
+.profilePage .profile-header .userInfoContainer {
+    position: absolute;
+    bottom: 0;
+    height: 190px;
+    background: rgba(66,66,66,0.25);
+    width: 100%;
+}
+.profilePage .profile-header .userInfoContainer .userInfo {
+    margin-top: 65px;
+}
+
+.profilePage .profile-header .userInfoContainer .userInfo h4 {
+    margin-top: 21px;
+    text-transform: none;
+    color: #888888;
+}
+
+.profilePage .profile-header .userInfoContainer .userInfo h3 {
+    color: #fff;
+    font-weight: 400;
+}
+
+.profilePage .profile-header .userInfoContainer .userInfo h2 {
+    color: #fff;
+    margin-top: 21px;
+}
+
+.profilePage .profile-header .userInfoContainer .userInfo p {
+    color: #fff;
+}
+
+.profilePage .user-stats {
+    background: #262626;
+    padding: 30px;
+    font-size: 17px;
+    color: white;
+    font-weight: 400;
+}
+
+.profilePage .contents .teamSlides {
+
+}
+
+.profilePage .contents .teamSlides .team {
+    background: url(https://storage.googleapis.com/nlg-template-img/profile/custom-css/team-bg.gif);
+    width: 300px;
+    height: 280px;
+    float: left;
+    margin-right: 27px;
+    margin-bottom: 25px;
+}
+
+.profilePage .contents .teamSlides .team:nth-child(4n+4) {
+    margin-right: 0;
+}
+
+.profilePage .contents .teamSlides .team h3 {
+    color: white;
+}
+
+.profilePage .contents .teamSlides .team img {
+    margin-top: 0;
+    display: inline;
+}
+.profilePage .contents .teamSlides .team a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #ffffff;
+    color: white;
+}
+
+.profilePage .contents .match-list {
+    margin: 20px 0;
+}
+
+.profilePage .contents .match-list table th, .profilePage .contents .match-list table td {
+    text-align: center;
+}
+
+.profilePage .contents .match-list table th:nth-child(1), .profilePage .contents .match-list table td:nth-child(1){
+    text-align: left;
+}
+
+.profilePage .contents .tournament-list {
+    margin: 20px 0;
+}
+
+.profilePage .contents .tournament-list table th, .profilePage .contents .tournament-list table td {
+    text-align: center;
+}
+
+.profilePage .contents .tournament-list table th:nth-child(1), .profilePage .contents .tournament-list table td:nth-child(1){
+    text-align: left;
+}
+
+/********* END Profile Page ***********/
+
+
+/********* Team Page ***********/
+
+.teamPage {
+}
+
+.teamPage .team-image-box {
+    height: 250px;
+    width: 300px;
+    margin: 30px 0;
+    background: #e8e8e8;
+}
+
+.teamPage .team-image-box img {
+    margin-top: 15px;
+    width: 90px;
+    display: inline;
+}
+
+.teamPage .team-details {
+    margin: 40px 0;
+}
+
+.teamPage .team-details a.links {
+    padding: 6px;
+    border: 1px solid #121212;
+    border-radius: 3px;
+    color: #121212;
+    text-decoration: none;
+}
+
+.teamPage .team-details .name {
+    margin-top: 20px;
+}
+
+.teamPage .team-details .value {
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.teamPage .team-members {
+    margin-top: 40px;
+}
+
+.teamPage .team-members {
+    margin-top: 40px;
+}
+
+.teamPage .team-members .member {
+    width: 80px;
+    height: 85px;
+    background: white;
+    box-shadow: 0px 0px 4px;
+    border-radius: 15px;
+    text-overflow: ellipsis;
+}
+.teamPage .team-members .member img {
+    width: 35px;
+    margin-top: 10px;
+    display: inline;
+}
+
+.teamPage .team-members .member a {
+    color: #333333;
+}
+
+/********* END Team Page ***********/
+
+
+
+/********* Dashboard Page ***********/
+.dashboardPage {
+    padding: 0;
+    margin: 0;
+    background: #f6f6f6;
+}
+
+.dashboardPage .match-header {
+    background: url(https://storage.googleapis.com/nlg-template-img/matches/custom-css/xboxcontroller.jpeg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+}
+
+.dashboardPage .contents .white-panel {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+/********* END Dashboard Page ***********/
+
+
+
+/********* Dashboard Page ***********/
+.createMatchPage {
+    padding: 0;
+    margin: 0;
+    background: #f6f6f6;
+}
+
+.createMatchPage .header {
+    background: url(https://storage.googleapis.com/nlg-template-img/matches/custom-css/xboxcontroller.jpeg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+}
+
+.createMatchPage .contents .white-panel {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 24px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+/********* END Dashboard Page ***********/

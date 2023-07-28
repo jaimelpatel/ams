@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="tournamentsPage">
+            <div class="tournaments-header">
+            </div>
+            <br />
+            <div class="contents container">
+                <h3>Tournaments</h3>
+                <hr />
+
+                <div class="status-option-links">
+                    <ul>
+                        <li><a th:href="@{/tournaments}">Open</a></li>
+                        <li class="active"><a th:href="@{/tournaments/upcoming}">Upcoming</a></li>
+                        <li><a th:href="@{/tournaments/active}">Ongoing</a></li>
+                        <li><a th:href="@{/tournaments/closed}">Closed</a></li>
+                        <!--<li><a th:href="@{/}">Upcoming</a></li>-->
+                    </ul>
+                </div>
+                <br />
+                <div class="tournament-list">
+                    <div class="text-center" style="font-size:20px">There are no upcoming tournaments.</div>
+<!--                    <div th:if="${!tournaments.isEmpty()}">
+                        <div th:each="tournament : ${tournaments}">
+                            <a th:href="@{'/tournaments/' + ${tournament.pk}}">
+                                <div class="tournament">
+                                    <div class="row">
+                                        <div class="col-md-5 tournament-details">
+                                        <h4 th:if="${tournament.tournamentInfo.gameModeEnum == T(com.ltlogic.constants.GameModeEnum).SearchAndDestroy}" th:text="${tournament.tournamentInfo.gameEnum.getGameEnumDesc() + ' - S&AMP;D ' + tournament.tournamentInfo.title}"></h4>
+                                        <h4 th:if="${tournament.tournamentInfo.gameModeEnum == T(com.ltlogic.constants.GameModeEnum).Variant}" th:text="${tournament.tournamentInfo.gameEnum.getGameEnumDesc() + ' - Variant ' + tournament.tournamentInfo.title}"></h4>                                            <span th:text="${tournament.tournamentInfo.platform.getPlatformEnumDesc() + ' - ' + tournament.tournamentInfo.matchSize.getMatchSizeEnumDesc()}" class="sub-d"></span>
+                                        </div>
+                                        <div style="color:#86868e" class="col-md-2 datetime" th:if="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(user.getUserInfo().getTimeZone())}"></div>
+                                        <div style="color:#86868e" class="col-md-2 datetime" th:unless="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(null)}"></div>
+                                        <div style="color:#86868e" class="col-md-2 datetime" th:text="${'$' + tournament.tournamentInfo.potAmount + ' Prize'}">
+                                        </div>
+                                        <div style="color:#86868e" class="col-md-2 totalTeams">
+                                            5 / 10 <br />
+                                            Teams
+                                        </div>
+                                        <div class="col-md-2 actions">
+                                            <a style="color:#992020" th:href="@{'/tournaments/' + ${tournament.pk}}">Registration Closed</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>-->
+                </div>
+
+                <!--                
+                                <div class="tournament">
+                                        <div class="row">
+                                            <div class="col-md-4 tournament-details">
+                                                <h4>Call of Duty: Infinite Warfare </h4>
+                                                <span class="sub-d">Playstation 4 - 2v2 By XMS</span>
+                                            </div>
+                                            <div class="col-md-3 datetime">
+                                                Sept 22, 2017 12:00 AM
+                                            </div>
+                                            <div class="col-md-2 totalTeams">
+                                                5 / 10 <br />
+                                                Teams
+                                            </div>
+                                            <div class="col-md-3 actions">
+                                                <a th:href="@{/}">Registration Open</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                -->
+
+
+                <br />
+            </div>
+        </div>
+        <!--        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+        
+                    <h3>Game Tournaments</h3>
+                    <div class="panel">
+                        <div th:if="${tournaments.isEmpty()}">No tournaments available.</div>
+                        <div th:if="${!tournaments.isEmpty()}">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Match Size</th>
+                                    <th>Platform</th>
+                                    <th>Region</th>
+                                    <th>Pot Amount</th>
+                                    <th>Wager Amount</th>
+                                    <th>Status</th>
+                                    <th>Scheduled Time</th>
+                                    <th></th>
+                                </tr>
+                                <tr th:each="tournament : ${tournaments}">
+                                    <td th:text="${tournament.tournamentInfo.gameEnum}"></td>
+                                    <td th:text="${tournament.tournamentInfo.matchSize}"></td>
+                                    <td th:text="${tournament.tournamentInfo.platform}"></td>
+                                    <td th:text="${tournament.tournamentInfo.region}"></td>
+                                    <td th:text="${tournament.tournamentInfo.potAmount}"></td>
+                                    <td th:text="${tournament.tournamentInfo.wagerAmountPerMember}"></td>
+                                    <td th:text="${tournament.tournamentInfo.tournamentStatus}"></td>
+                                    <td>
+                                        <span th:if="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(user.getUserInfo().getTimeZone())}"></span>
+                                        <span th:unless="${user}" th:text="${tournament.tournamentInfo.getScheduledTournamentTimeForFE(null)}"></span>
+                                    </td>
+                                    <td th:text="${#temporals.format(tournament.tournamentInfo.tournamentStartTime, 'MM-dd-yyyy hh:mm a')}"></td>
+                                    <td th:text="${#temporals.format(tournament.tournamentInfo.tournamentEndTime, 'MM-dd-yyyy hh:mm a')}"></td>
+                                    <td><a class="btn btn-default btn-sm" th:href="@{'/tournaments/' + ${tournament.pk}}">View</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+        
+                </div>-->
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

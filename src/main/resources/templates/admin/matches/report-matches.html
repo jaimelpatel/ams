@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container light-gray-bg" style="border: 1px solid #f3f3f3;">
+            <h3>Admin Report Match Outcome</h3>
+            <hr />
+
+            <form th:action="@{/admin/match/report}" th:object="${reportMatchForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                    <div th:text="${message}"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Match ID# <span class="text-danger small">*</span></label>
+                        <input type="number" name="matchID" class="form-control" th:value="${reportMatchForm.matchID}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Team ID# (ID# of team that lost)<span class="text-danger small">*</span></label>
+                        <input type="number" name="teamID" class="form-control" th:value="${reportMatchForm.teamID}" />
+                    </div>
+<!--                    <div class="col-md-4">
+                        <label>Third Place Award Amount <span class="text-danger small">*</span></label>
+                        <input type="number" name="amountAwardedToThirdPlace" class="form-control" th:value="${createTournamentForm.amountAwardedToThirdPlace}"  />
+                    </div>-->
+                </div>
+                <br />
+                
+                
+                <div class="text-left">
+                    <button class="btn btn-default btn-animated">
+                        <i class="fa fa-save"></i>
+                        Report Match
+                    </button>
+                </div>
+            </form>
+            <hr />
+            <br />
+            <br />
+            <h3>Admin Cancel Match</h3>
+            <form th:action="@{/admin/match/cancel}" th:object="${cancelMatchForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                    <div th:text="${message}"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Match ID# <span class="text-danger small">*</span></label>
+                        <input type="number" name="matchID" class="form-control" th:value="${cancelMatchForm.matchID}" />
+                    </div>
+                </div>
+                <br />
+                
+                
+                <div class="text-left">
+                    <button class="btn btn-default btn-animated">
+                        <i class="fa fa-save"></i>
+                        Cancel Match
+                    </button>
+                </div>
+            </form>
+            <hr />
+             <br />
+            <br />
+            <h3>Send Admin Notification to all users in match</h3>
+            <form th:action="@{/admin/match/notification}" th:object="${adminNotificationMatchForm}" method="post">
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                    <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                </div>
+                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                    <div th:text="${error}"></div>
+                </div>
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                    <div th:text="${message}"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Match ID# <span class="text-danger small">*</span></label>
+                        <input type="number" name="matchID" class="form-control" th:value="${adminNotificationMatchForm.matchID}" />
+                    </div>
+                     <div class="col-md-6">
+                        <label>Admin Name <span class="text-danger small">*</span></label>
+                        <input type="text" name="adminName" class="form-control" th:value="${adminNotificationMatchForm.adminName}" />
+                    </div>
+                </div>
+                <br />
+                
+                <div class="text-left">
+                    <button class="btn btn-default btn-animated">
+                        <i class="fa fa-save"></i>
+                        Send Admin Notification
+                    </button>
+                </div>
+            </form>
+            <hr />
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

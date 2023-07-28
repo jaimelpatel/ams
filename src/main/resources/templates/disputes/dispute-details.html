@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div th:if="${message}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+        <div th:if="${messageFailure}" th:text="${messageFailure}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+
+        <div class="matchDetailsPage">
+
+            <div class="match-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 gameTitle">
+                            <img src="https://storage.googleapis.com/nlg-template-img/matches/match-details/shield.png" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="match-info" style="text-align:center !important;">
+                                <h3 style="font-size:36px !important;">
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_MWR}">CoD: Modern Warfare Remastered</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_IW}">Call of Duty: Infinite Warfare</span>
+                                    <span th:if="${match.matchInfo.gameEnum == T(com.ltlogic.constants.GameEnum).COD_WW2}">Call of Duty: World War II</span>
+                                </h3>
+                                <h2 style="font-size:26px;color: #d8c668;">
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).WAGER}" th:text="${'Wager Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).XP}" th:text="${'XP Match ID #' + match.matchId}"></span>
+                                    <span th:if="${match.matchInfo.matchType == T(com.ltlogic.constants.MatchTypeEnum).TOURNAMENT}" th:text="${'Tournament Match ID #' + match.matchId}"></span>
+                                </h2>
+                                <h2 style="font-size:26px" th:if="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(user.getUserInfo().getTimeZone())}"></h2>
+                                <h2 style="font-size:26px" th:unless="${user}" th:text="${'Start Time: ' + match.getMatchInfo().getScheduledMatchTime(null)}"></h2>
+
+
+                                <div th:if="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:unless="${isTournamentMatch}">
+                                    <div th:if="${creatorTeam}">
+                                        <div style="font-size:20px; font-weight: bold;">
+                                            <div class="match-info-sub" style="float:left"><span th:text="${creatorTeam}"> </span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatCreatedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div> <span style="line-height: 4"> VS </span> <div class="match-info-sub"><span th:text="${acceptorTeam}"></span> <span th:if="${match.matchInfo.matchStatus == T(com.ltlogic.constants.MatchStatusEnum).ENDED}" th:text="${match.pkOfTeamThatAcceptedMatch == match.pkOfTeamWonMatch ? ' (W) ' : ' (L) '}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!--                        <div class="col-md-2" style="padding-top:15px;">
+                                                    <div th:unless="${isTournamentMatch}">
+                                                        <a th:if="${isEligibleToJoin}" th:href="@{'/matches/' +${match.pk} + '/accept'}" 
+                                                           class="btn btn-default btn-lg radius-50">
+                                                            Join Match
+                                                        </a>
+                                                        <a th:if="${canRequestMatchCancel}" th:href="@{'/matches/' +${match.pk} + '/request-cancel'}" 
+                                                           class="btn btn-default btn-lg radius-50">
+                                                            Request Match Cancel
+                                                        </a>
+                                                        <a th:if="${canCancelMatchForCreator}" th:href="@{'/matches/' +${match.pk} + '/cancel-match-game'}"
+                                                           class="btn btn-default btn-lg radius-50">
+                                                            Cancel Match
+                                                        </a>
+                                                    </div>
+                                                </div>-->
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="match-menu-container">
+                <div class="match-menu container">
+                    <ul class="menu-items">
+                        <li><a th:href="@{'/matches/' + ${match.pk}}">DETAILS</a></li>
+                        <li class="active"><a 
+                                th:href="@{'/disputes/' + ${dispute.pk}}">VIEW DISPUTE</a></li>
+                        <li><a 
+                                th:href="@{/rules/general}"  target="_blank">RULES</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="contents container" style="border: 1px solid #f3f3f3;">
+                <br/>
+                <div class="vertical">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Dispute Details</a></li>
+                        <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-upload pr-10"></i>  Upload Proof</a></li>
+                        <li><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-comments pr-10"></i> Dispute Messages</a></li>
+                        <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                    </ul>
+                    <!-- Tab panes -->
+                    <div style="color:#1d2223" class="tab-content container">
+                        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                            <div th:text="${message}"></div>
+                        </div>
+                        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                            <div th:text="${error}"></div>
+                        </div>
+                        <div class="tab-pane fade in active" id="vtab1">
+                            <h3>Dispute ID #<span th:text="${dispute.disputeId}"></span></h3>
+                            <!--                <a th:href="@{'/matches/' + ${dispute.match.pk}}">
+                                                Match #<span th:text="${dispute.match.pk}"></span>
+                                            </a>-->
+                            <div class="separator-2"></div>
+                            <div style="display:block-inline">
+                                <div style="font-size:18px">
+                                    <strong>Reason:</strong>
+                                    <span th:text="${dispute.reasonForDispute}"></span>
+                                </div>
+
+                                <ul class="dispute-links" th:if="${!dispute.getLinks().isEmpty()}">
+                                    <li th:each="link : ${dispute.getLinks()}">
+                                        <a th:href="${link}" th:text="${link}"></a>
+                                    </li>
+                                </ul>            
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="vtab2">
+                            <form th:action="@{'/disputes/' + ${dispute.pk} + '/upload-proof'}" enctype="multipart/form-data" method="post">
+                                <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                    <div th:text="${error}"></div>
+                                </div>
+
+                                <div>
+                                    <input type="file" name="file" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-default radius-50">
+                                        Upload Proof
+                                    </button>
+                                </div>
+                            </form>    
+
+                            <hr />
+                            
+                            <h5>
+                                Submitted Proof
+                            </h5>
+                            <div class="panel panel-default" th:if="${dispute.cloudMedia.isEmpty()}">
+                                You have not uploaded any proof yet. Please upload any proof you may have.
+                            </div>
+                            <div class="panel panel-default" th:if="${dispute}" th:each="media: ${dispute.cloudMedia}">
+                                <a th:href="${media.displayUrl}" target="_blank">View Attachment</a>
+                                <!--<img th:src="${media.displayUrl}" alt="" />-->
+                            </div>
+                            <br />
+                        </div>
+                        <div class="tab-pane fade" id="vtab3">
+                            <h3>Messages</h3>
+                            <hr />
+                            <div class="dispute-conversation">
+                                <div class="conversation">
+                                    <div class="panel panel-default" th:if="${conversations.isEmpty()}">
+                                        You may send messages to explain the situation further or link to more proof.
+                                    </div>
+                                    <div class="conversation-message" th:if="${!conversations.isEmpty()}" th:each="conversation : ${conversations}">
+                                        <div>
+                                            <span th:if="${conversation.isTeam}" class="message-name" th:text="${conversation.getTeam().teamPojo.teamName}"></span>
+                                            <span th:unless="${conversation.isTeam}" class="message-name">NLG Admin</span>
+                                            <span class="message-date" th:text="${conversation.getRowCreatedTimestampTimezone(user.getUserInfo().getTimeZone())}"></span>
+                                        </div>
+                                        <div th:if="${conversation.isTeam}" style="margin-top: 15px;">
+                                            <span class="message" th:text="${conversation.message}"></span>
+                                        </div>
+                                        <div th:unless="${conversation.isTeam}" style="margin-top: 15px;">
+                                            <span class="message2" th:text="${conversation.message}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message-form">
+                                    <form th:action="@{'/disputes/' + ${dispute.pk} + '/create-message'}" method="post" th:object="${conversationForm}">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label>Message</label>
+                                                <textarea type="text" class="form-control" name="message" style="margin-top: 0px; margin-bottom: 0px; height: 90px;"></textarea>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input class="btn btn-default radius-50" type="submit" value="Send Message" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <style>
+                ul.dispute-links {
+                    margin: 15px 0;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                ul.dispute-links li {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+
+                .conversation-message {
+                    margin-bottom: 15px;
+                }
+
+                .conversation-message .message-name {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+
+                .conversation-message .message-date {
+                    font-size: 13px;
+                    color: #9e9e9e;
+                }
+
+                .conversation-message .message {
+                    background: #999999;
+                    padding: 10px 25px;
+                    border-radius: 7px;
+                    color: white;
+                }
+                
+                .conversation-message .message2 {
+                    background: #992020;
+                    padding: 10px 25px;
+                    border-radius: 7px;
+                    color: white;
+                }
+            </style>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+
+    </body>
+</html>

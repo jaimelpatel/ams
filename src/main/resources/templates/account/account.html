@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 15%;'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--                <h3>Edit Settings</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">General</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+
+                        <p style="font-size:18px;">Edit your general account settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountPage">
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+
+                <div class="status-option-links">
+                    <ul>
+                        <li class="active"><a th:href="@{/account}">General</a></li>
+                        <li><a th:href="@{/account/profile}">Profile</a></li>
+                        <li><a th:href="@{/account/bank}">Bank</a></li>
+                        <!--<li><a th:href="@{/}">Upcoming</a></li>-->
+                    </ul>
+                </div>
+                <br />
+                <form th:action="@{/account}" th:object="${generalAccountForm}" method="post">
+                    <div class="vertical">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Account Information</a></li>
+                            <li><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-life-saver pr-10"></i>  Personal Information</a></li>
+                            <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-lock pr-10"></i> Edit Password</a></li>
+                            <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                        </ul>
+                        <!-- Tab panes -->
+                        <div style="color:#1d2223" class="tab-content container">
+
+                            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                            </div>
+                            <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                                <div th:text="${message}"></div>
+                            </div>
+                            <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                <div th:text="${error}"></div>
+                            </div>
+                            <div class="tab-pane fade in active" id="vtab1">
+                                <div class="row" >
+                                    <div class="col-md-6" style="padding-bottom: 10px !important">
+                                        <label>E-mail Address</label>
+                                        <input type="text" disabled="disabled" class="form-control" th:value="${generalAccountForm.email}" />
+                                        <input type="hidden" name="email" th:value="${generalAccountForm.email}" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Username</label>
+                                        <input type="text" disabled="disabled" class="form-control" th:value="${generalAccountForm.username}" />
+                                        <input type="hidden" name="username" th:value="${generalAccountForm.username}" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom: 10px !important">
+                                        <label for="inputName">Timezone</label>
+                                        <div>
+                                            <select class="form-control" name="timeZone" id="timeZoneEnumId">
+                                                <option value="0">Please select your Timezone</option>
+                                                <option th:each="TimeZoneEnum : ${timeZoneEnumList}" 
+                                                        th:value="${TimeZoneEnum.getTimeZonesEnumId()}" 
+                                                        th:text="${TimeZoneEnum.getTimeZonesEnumDesc()}"
+                                                        th:selected="${generalAccountForm.timeZone == TimeZoneEnum.getTimeZonesEnumId()}"></option>
+                                            </select>
+                                            <!--                            <i class="glyphicon glyphicon-time padding-icon-right form-control-feedback"></i>-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>PayPal Email</label>
+                                        <input type="text" class="form-control" name="paypayEmail" th:value="${generalAccountForm.paypayEmail}" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom:5px !important;">
+                                        <label>Xbox ID</label>
+                                        <input type="text" class="form-control" name="xboxOneGamerTag" th:value="${generalAccountForm.xboxOneGamerTag}" />
+                                        <p>Only letters, digits and spaces are allowed.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>PSN ID</label>
+                                        <input type="text" class="form-control" name="playStation4Name" th:value="${generalAccountForm.playStation4Name}" />
+                                        <p>Only letters, digits, dashes and underscores are allowed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="vtab2">
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom: 10px !important">
+                                        <div>
+                                            <label>Old Password</label>
+                                            <input type="password" class="form-control" name="oldPassword" th:value="${generalAccountForm.oldPassword}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom:10px !important;">
+                                        <div>
+                                            <label>New Password (Min 6 Characters)</label>
+                                            <input type="password" class="form-control" name="password" th:value="${generalAccountForm.password}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label>Confirm New Password</label>
+                                            <input type="password" class="form-control" name="passwordConfirm" th:value="${generalAccountForm.passwordConfirm}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="vtab3">
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom: 10px !important">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="firstName" th:value="${generalAccountForm.firstName}" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="lastName" th:value="${generalAccountForm.lastName}" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-bottom: 10px !important">                   
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="address" th:value="${generalAccountForm.address}" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-bottom: 10px !important">
+                                        <div>
+                                            <label>City</label>
+                                            <input type="text" class="form-control" name="city" th:value="${generalAccountForm.city}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label>Country</label>
+                                            <select class="form-control" name="country" id="countryEnumId">
+                                                <option value="0">Please select country</option>
+                                                <option value="1" th:selected="${generalAccountForm.country == 1}">United States</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" style="padding-bottom:10px !important;">
+                                        <div>
+                                            <label>State/Province</label>
+                                            <select class="form-control" name="stateOrProvince" id="stateOrProvince">
+                                                <option value="0">Please state or province</option>
+                                                <option value="1" th:selected="${generalAccountForm.stateOrProvince == 1}">California</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div>
+                                            <label>Zip/Postal Code</label>
+                                            <input type="text" class="form-control" name="zip1" th:value="${generalAccountForm.zip1}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div>
+                                            <label>Phone</label>
+                                            <input type="text" class="form-control" name="phoneNumber" th:value="${generalAccountForm.phoneNumber}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="text-left">
+                        <button class="btn btn-default radius-50 disabledOnClick">
+                            Save General Settings
+                        </button>
+                    </div>
+                </form>
+                <!--            <ul class="nav nav-pills" role="tablist">
+                                <li class="active"><a th:href="@{/account}" title="general settings" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> General</a></li>
+                                <li><a th:href="@{/account/profile}" title="profile" aria-expanded="false" style="font-size:18px !important;text-transform: none !important;"> Profile</a></li>
+                                <li><a th:href="@{/account/bank}" title="bank" aria-expanded="true" style="font-size:18px !important;text-transform: none !important;"> Bank</a></li>
+                            </ul>-->
+
+
+
+                <!--                <form th:action="@{/account}" th:object="${generalAccountForm}" method="post">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                    <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                                        <div th:text="${message}"></div>
+                                    </div>
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                        <div th:text="${error}"></div>
+                                    </div>
+                                    <h4 style="padding-top:10px !important;">Account Information:</h4>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 10px !important">
+                                            <label>E-mail Address</label>
+                                            <input type="text" disabled="disabled" class="form-control" th:value="${generalAccountForm.email}" />
+                                            <input type="hidden" name="email" th:value="${generalAccountForm.email}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Username</label>
+                                            <input type="text" disabled="disabled" class="form-control" th:value="${generalAccountForm.username}" />
+                                            <input type="hidden" name="username" th:value="${generalAccountForm.username}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 10px !important">
+                                            <label for="inputName">Timezone</label>
+                                            <div>
+                                                <select class="form-control" name="timeZone" id="timeZoneEnumId">
+                                                    <option value="0">Please select your Timezone</option>
+                                                    <option th:each="TimeZoneEnum : ${timeZoneEnumList}" 
+                                                            th:value="${TimeZoneEnum.getTimeZonesEnumId()}" 
+                                                            th:text="${TimeZoneEnum.getTimeZonesEnumDesc()}"
+                                                            th:selected="${generalAccountForm.timeZone == TimeZoneEnum.getTimeZonesEnumId()}"></option>
+                                                </select>
+                                                                            <i class="glyphicon glyphicon-time padding-icon-right form-control-feedback"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>PayPal Email</label>
+                                            <input type="text" class="form-control" name="paypayEmail" th:value="${generalAccountForm.paypayEmail}" />
+                                        </div>
+                                    </div>
+                
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom:5px !important;">
+                                            <label>Xbox ID</label>
+                                            <input type="text" class="form-control" name="xboxOneGamerTag" th:value="${generalAccountForm.xboxOneGamerTag}" />
+                                            <p>Only letters, digits and spaces are allowed.</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>PSN ID</label>
+                                            <input type="text" class="form-control" name="playStation4Name" th:value="${generalAccountForm.playStation4Name}" />
+                                            <p>Only letters, digits and spaces are allowed.</p>
+                                        </div>
+                                    </div>
+                
+                
+                                    <hr />
+                
+                                    <h4 style="padding-top:10px !important;">Change Your Password:</h4>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 10px !important">
+                                            <div>
+                                                <label>Old Password</label>
+                                                <input type="password" class="form-control" name="oldPassword" th:value="${generalAccountForm.oldPassword}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom:10px !important;">
+                                            <div>
+                                                <label>New Password (Min 6 Characters)</label>
+                                                <input type="password" class="form-control" name="password" th:value="${generalAccountForm.password}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label>Confirm New Password</label>
+                                                <input type="password" class="form-control" name="passwordConfirm" th:value="${generalAccountForm.passwordConfirm}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                                    <div>
+                                                        <label>Auto-Renew Prime</label>
+                                                        <ul>
+                                                            <li><input type="radio" name="autoRenewPremium" value="1" th:checked="${generalAccountForm.autoRenewPremium}" /> Yes</li>
+                                                            <li><input type="radio" name="autoRenewPremium" value="0" th:checked="${!generalAccountForm.autoRenewPremium}"/> Do not Renew</li>
+                                                        </ul>
+                                                    </div>
+                                    <hr />
+                                    <h4 style="padding-top:10px !important;">Personal Information:</h4>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 10px !important">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" name="firstName" th:value="${generalAccountForm.firstName}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" name="lastName" th:value="${generalAccountForm.lastName}" />
+                                        </div>
+                                    </div>
+                
+                                    <div style="padding-bottom: 10px !important">                   
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" name="address" th:value="${generalAccountForm.address}" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 10px !important">
+                                            <div>
+                                                <label>City</label>
+                                                <input type="text" class="form-control" name="city" th:value="${generalAccountForm.city}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label>Country</label>
+                                                <select class="form-control" name="country" id="countryEnumId">
+                                                    <option value="0">Please select country</option>
+                                                    <option value="1" th:selected="${generalAccountForm.country == 1}">United States</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4" style="padding-bottom:10px !important;">
+                                            <div>
+                                                <label>State/Province</label>
+                                                <select class="form-control" name="stateOrProvince" id="stateOrProvince">
+                                                    <option value="0">Please state or province</option>
+                                                    <option value="1" th:selected="${generalAccountForm.stateOrProvince == 1}">California</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>
+                                                <label>Zip/Postal Code</label>
+                                                <input type="text" class="form-control" name="zip1" th:value="${generalAccountForm.zip1}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>
+                                                <label>Phone</label>
+                                                <input type="text" class="form-control" name="phoneNumber" th:value="${generalAccountForm.phoneNumber}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <hr />
+                                    <div class="text-left">
+                                        <button class="btn btn-default radius-50">
+                                            Save Account Settings
+                                        </button>
+                                    </div>
+                                </form>-->
+            </div>
+        </div>
+        
+        <script>
+            /*
+            $(document).ready(function(){
+                setTimeout(function() {
+                    activaTab('vtab2');
+                }, 250);
+            });
+
+            function activaTab(tab){
+                $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+            };
+            */
+        </script>
+        <div th:replace="fragments/footer :: footer">
+        
+        </div>
+    </body>
+</html>

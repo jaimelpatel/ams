@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 40%;'">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Team Select</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Please select a team from below that you would like to create a match with.</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a th:href="@{/teams/create}" class="btn radius-50 btn-default btn-lg">Create New Team</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="contents container">
+            <!--            <ul class="nav nav-tabs" role="tablist">
+                            <li>
+                                <a th:href="@{'/' + ${#authentication.name} + '/profile/'}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a th:href="@{'/' + ${#authentication.name} + '/teams/'}">
+                                    Teams
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{'/' + ${#authentication.name} + '/invites/'}" >
+                                    Invites
+                                </a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{'/' + ${#authentication.name} + '/notifications/'}">
+                                    Notifications
+                                </a>
+                            </li>
+                        </ul>-->
+            <br></br>
+            <br></br>
+            <div th:if="${message}" class="message">
+                <div id="successMessage" class="alert-anim-success" style="display: none;" th:text="${message}"></div>
+            </div>
+            <div th:if="${error}" th:text="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+            </div>
+
+            <div th:if="${messageFailure}" th:text="${messageFailure}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+            </div>
+
+            <ul class="nav nav-tabs style-3" role="tablist">
+                <li class="active">
+                    <a href="#cashout-tab" role="tab" data-toggle="tab" title="video" aria-expanded="false">
+                        <i class="fa fa-dollar pr-10"></i>Cash Teams
+                    </a>
+                </li>
+                <li>
+                    <a href="#playoff-tab" role="tab" data-toggle="tab" title="images" aria-expanded="true">
+                        <i class="fa fa-level-up pr-10"></i>XP Teams
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane" id="playoff-tab">
+                    <!--                    <div id="create-team" class="text-right">
+                                            <a th:href="@{/teams/create}" class="btn btn-default btn-sm">Create Team</a>
+                                        </div>-->
+                    <div th:if="${playoffTeams.isEmpty()}">You have no XP Teams...</div>
+
+                    <div class="row">
+                        <div class="col-md-6" th:if="${playoffTeams}" th:each="team : ${playoffTeams}">
+
+                            <div class="image-box style-3-b">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="overlay-container">
+                                            <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                <img th:src="${team.displayUrl}" alt="" />
+                                            </a>
+                                            <div class="overlay-to-top">
+                                                <p class="small margin-clear">
+                                                    <em th:text="${team.teamPojo.teamName}"></em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                        <h3 class="title" th:text="${team.teamPojo.teamName}"></h3>
+                                                    </a>
+                                                </div>
+                                                <!--                                                <div class="col-md-6 text-center">
+                                                                                                    <a th:href="@{'/teams/' + ${team.pk}}">
+                                                                                                        <i class="icon-eye" title="View"></i>
+                                                                                                    </a>
+                                                                                                    <div th:if="${isTeamLeader}">
+                                                                                                        <a th:href="@{'/teams/' + ${team.pk} + '/edit'}">
+                                                                                                            <i class="icon-cog" title="Edit"></i>
+                                                                                                        </a>
+                                                                                                        <a class="disbandButton" th:href="@{'/teams/' + ${team.pk} + '/disband'}">
+                                                                                                            <i class="icon-trash" title="Disband"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                                                                        <div th:unless="${isMember}">
+                                                                                                                                                            <a class="leaveButton" th:href="@{'/teams/' + ${team.pk} + '/leave'}">
+                                                                                                                                                                <i class="icon-trash" title="Leave"></i>
+                                                                                                                                                            </a>
+                                                                                                                                                        </div>
+                                                                                                </div>-->
+                                            </div>
+                                            <div class="separator-2"></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.game.getGameEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.platform.getPlatformEnumDesc()}"></span> - <span th:text="${team.teamPojo.region}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.teamSize.getTeamSizeEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f">Record: <span th:text="${team.matchesWon}"></span> - <span th:text="${team.matchesLost}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="cashout-tab">
+                    <div th:if="${cashoutTeams.isEmpty()}">You have no Cash Teams...</div>
+                    <div class="row">
+                        <div class="col-md-6" th:if="${cashoutTeams}" th:each="team : ${cashoutTeams}">
+                            <div class="image-box style-3-b">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="overlay-container">
+                                            <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                <img th:src="${team.displayUrl}" alt="" />
+                                            </a>
+                                            <div class="overlay-to-top">
+                                                <p class="small margin-clear">
+                                                    <em th:text="${team.teamPojo.teamName}"></em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                        <h3 class="title" th:text="${team.teamPojo.teamName}"></h3>
+                                                    </a>
+                                                </div>
+                                                <!--                                                <div class="col-md-6 text-right">
+                                                                                                    <a th:href="@{'/teams/' + ${team.pk}}" class="btn radius-50 btn-default btn-sm">
+                                                                                                        View 
+                                                                                                    </a>
+                                                                                                    <div th:if="${isTeamLeader}">
+                                                                                                        <a th:href="@{'/teams/' + ${team.pk} + '/edit'}">
+                                                                                                            <i class="icon-cog" title="Edit"></i>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>-->
+                                            </div>
+                                            <div class="separator-2"></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.game.getGameEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.platform.getPlatformEnumDesc()}"></span> - <span th:text="${team.teamPojo.region}"></span></div>
+                                            <div style="color:#2f2f2f"><span th:text="${team.teamPojo.teamSize.getTeamSizeEnumDesc()}"></span></div>
+                                            <div style="color:#2f2f2f">Record: <span th:text="${team.matchesWon}"></span> - <span th:text="${team.matchesLost}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br></br>
+            <br />
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+
+        <script>
+            $(function () {
+                $('.disbandButton').click(function (e) {
+                    e.preventDefault();
+                    var disbandLink = $(this).attr('href');
+
+                    $.confirm({
+                        title: 'Disband Team',
+                        content: 'Are you sure you want to disband the team?',
+                        autoClose: 'cancelAction|5000',
+                        buttons: {
+                            disbandTeam: {
+                                text: 'Confirm',
+                                btnClass: 'btn-blue',
+                                action: function () {
+                                    window.location.href = disbandLink;
+                                }
+                            },
+                            cancelAction: {
+                                text: 'Cancel',
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+
+                });
+            });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="contents container" style="border: 1px solid #f3f3f3;">
+<!--            <br/> 
+            <a th:href="@{'/' + ${#authentication.name} + '/matches/'}"> Back</a>-->
+            <h3 class="text-center">Please select the team you would like to join the tournament with...</h3>
+            <hr />
+            
+            <div class="tab-content clear-style panel">
+                <div class="tab-pane active" id="playoff-tab">
+                    <div th:if="${teams.isEmpty()}">
+                        No teams available for select. Please <a th:href="@{/teams/create}">Click here</a> to create new team.
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" th:if="${teams}" th:each="team : ${teams}">
+
+                            <div class="image-box style-3-b">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="overlay-container">
+                                            <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                <img th:src="@{/resources/images/nextlevelgames.png}" alt="" />
+                                            </a>
+                                            <div class="overlay-to-top">
+                                                <p class="small margin-clear">
+                                                    <em th:text="${team.teamPojo.teamName}"></em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <a th:href="@{'/matches/create/' + ${team.pk}}">
+                                                        <h3 class="title" th:text="${team.teamPojo.teamName}"></h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="separator-2"></div>
+                                            <div><span th:text="${team.teamPojo.game.getGameEnumDesc()}"></span></div>
+                                            <div><span th:text="${team.teamPojo.platform.getPlatformEnumDesc()}"></span></div>
+                                            <div><span th:text="${team.teamPojo.teamSize.getTeamSizeEnumDesc()}"></span></div>
+                                            <div>Record: <span th:text="${team.matchesWon}"></span> - <span th:text="${team.matchesLost}"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

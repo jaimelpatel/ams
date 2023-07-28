@@ -1,0 +1,13 @@
+<h1>Upload Status</h1>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+    <p>test</p>
+    <img th:src="${image}"></img>
+    <p>testing timezone</p>
+    <h2 th:text="${defaultTimezone1}"/>
+    <h2 th:text="${defaultTimezone2}"/>
+    <h2 th:text="${user.getTestingJavaTimeinDb(user.getUserInfo().getTimeZone())}"/>
+        
+    
+</div>

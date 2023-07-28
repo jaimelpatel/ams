@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+            <div th:text="${error}"></div>
+        </div>
+        <div th:if="${message}" class="message">
+            <div id="successMessage" class="alert-anim-success" style="display: none;" th:text="${message}"></div>
+        </div>
+
+        <div class="createTeamPage">
+            <!--<div class="match-header">-->
+            <div class="banner dark-translucent-bg" style="background-image:url(https://storage.googleapis.com/nlg-template-img/support/xboxcontroller.jpeg); background-position: 50% 27%;">
+
+
+                <div class="contents container">
+                    <div class="row">
+                        <div class="col-md-8 text-left">
+                            <h3>Create Cash Team</h3>
+                        </div>
+                    </div>
+                    <form th:action="@{'/tournaments/' + ${pk} + '/team/create'}" th:object="${teamCreationForm}" method="post">
+                        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                            <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                        </div>
+                        <div style="padding-bottom: 10px !important">
+                            <label>Team Name <span class="text-danger small">*</span></label>
+                            <input type="text" class="form-control" id="teamName" name="teamName" th:value="${teamCreationForm.teamName}"/>
+                            <br/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4" style="padding-bottom: 10px !important">
+                                <label>Game <span class="text-danger small">*</span></label>
+                                <select name="game" class="form-control" disabled="disabled">
+                                    <option value="">Select a Game</option>
+                                    <option th:value="0" th:selected="${teamCreationForm.game == 0}">Call of Duty: Modern Warfare Remastered</option>
+                                    <option th:value="1" th:selected="${teamCreationForm.game == 1}">Call of Duty: Infinite Warfare</option>
+                                    <option th:value="2" th:selected="${teamCreationForm.game == 2}">Call Of Duty: World War II</option>
+                                </select>
+                                <input type="hidden" name="game" th:value="${teamCreationForm.game}" />
+                            </div>
+                            <div class="col-md-4" style="padding-bottom: 10px !important">
+                                <label>Console <span class="text-danger small">*</span></label>
+                                <select name="platform" class="form-control" disabled="disabled">
+                                    <option value="">Select a Console</option>
+                                    <option th:value="0" th:selected="${teamCreationForm.platform == 0}">PC</option>
+                                    <option th:value="1" th:selected="${teamCreationForm.platform == 1}">Xbox 360</option>
+                                    <option th:value="2" th:selected="${teamCreationForm.platform == 2}">Xbox One</option>
+                                    <option th:value="3" th:selected="${teamCreationForm.platform == 3}">Playstation 3</option>
+                                    <option th:value="4" th:selected="${teamCreationForm.platform == 4}">Playstation 4</option>
+                                </select>
+                                <input type="hidden" name="platform" th:value="${teamCreationForm.platform}" />
+                            </div>
+                            <div class="col-md-4" style="padding-bottom: 10px !important">
+                                <label>Team Size <span class="text-danger small">*</span></label>
+                                <select name="teamSize" class="form-control" id="teamSizeInput" disabled="disabled">
+                                    <option value="">Select Team Size</option>
+                                    <option th:value="0" th:selected="${teamCreationForm.teamSize == 0}">Singles(1v1)</option>
+                                    <option th:value="1" th:selected="${teamCreationForm.teamSize == 1}">Doubles(2v2)</option>
+                                    <option th:value="2" th:selected="${teamCreationForm.teamSize == 2}">Threes(3v3) and Fours(4v4)</option>
+                                </select>
+                                <input type="hidden" name="teamSize" th:value="${teamCreationForm.teamSize}"/>
+                            </div>
+                            <br/><br/>
+                        </div>
+                        <!--<br/>-->
+                        <!-- Always cash game -->
+                        <input type="hidden" name="teamType" value="1"/>
+
+                        <!--                        <div style="padding-bottom: 10px !important">
+                                                    <label>Team Type</label>
+                                                    <ul class="teamTypeList">
+                                                        <li><input disabled="disabled" type="radio" name="teamType" value="0" th:checked="${teamCreationForm.teamType == 0}" /> XP Team (Free XP Matches)</li>
+                                                        <br></br>
+                                                        <li><input disabled="disabled" type="radio" name="teamType" value="1" checked="checked"/> Cashout Team (Wagers and Tournaments)</li>
+                                                    </ul>
+                                                </div>-->
+                        <div style="padding-bottom: 5px;" id="teamMemberInviteSection">
+                            <hr />
+                            <label>(OPTIONAL)</label> <span> Please enter below the usernames of any users you would like to invite to this tournament on team creation.</span>
+                            <div class="row" style="padding-bottom: 5px;">
+                                <div class="col-md-3" id="userInvite1Row" style="padding-bottom: 10px !important;">
+                                    <label>Username #1: </label>
+                                    <input type="text" class="form-control" id="userInvite1" name="userInvite1" th:value="${teamCreationForm.userInvite1}"/>
+                                </div>
+
+                                <div class="col-md-3" id="userInvite2Row" style="padding-bottom: 10px !important;">
+                                    <label>Username #2: </label>
+                                    <input type="text" class="form-control" id="userInvite2" name="userInvite2" th:value="${teamCreationForm.userInvite2}"/>
+                                </div>
+
+                                <div class="col-md-3" id="userInvite3Row" style="padding-bottom: 10px !important;">
+                                    <label>Username #3: </label>
+                                    <input type="text" class="form-control" id="userInvite3" name="userInvite3" th:value="${teamCreationForm.userInvite3}"/>
+                                </div>
+
+                                <div class="col-md-3" id="userInvite4Row" style="padding-bottom: 10px !important;">
+                                    <label>Username #4: </label>
+                                    <input type="text" class="form-control" id="userInvite4" name="userInvite4" th:value="${teamCreationForm.userInvite4}"/>
+                                </div>
+                            </div>                
+                        </div>
+                        <hr />
+                        <div class="text-left">
+                            <button class="btn btn-default radius-50 disabledOnClick">
+                                Create Team and Join Tournament
+                            </button>
+                        </div>
+                        <br/>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var teamSizeInput = document.getElementById("teamSizeInput");
+
+            if (!teamSizeInput.value || teamSizeInput.value == "0" || teamSizeInput.value == "1" || teamSizeInput.value == "2" || teamSizeInput.value == "3") {
+                showInputs(teamSizeInput.value);
+                document.getElementById("teamMemberInviteSection").style.display = 'none';
+            } else {
+                document.getElementById("teamMemberInviteSection").style.display = 'block';
+                showInputs(teamSizeInput.value);
+            }
+
+            teamSizeInput.addEventListener("change", function () {
+                if (!teamSizeInput.value || teamSizeInput.value == "0") {
+                    showInputs(teamSizeInput.value);
+                    document.getElementById("teamMemberInviteSection").style.display = 'none';
+                } else {
+                    document.getElementById("teamMemberInviteSection").style.display = 'block';
+                    document.getElementById("userInvite1").value = "";
+                    document.getElementById("userInvite2").value = "";
+                    document.getElementById("userInvite3").value = "";
+                    document.getElementById("userInvite4").value = "";
+
+                    showInputs(teamSizeInput.value);
+                }
+            });
+
+            function showInputs(teamSize) {
+                if (!teamSize || teamSize == "0")
+                {
+                    document.getElementById("userInvite1").value = "";
+                    document.getElementById("userInvite2").value = "";
+                    document.getElementById("userInvite3").value = "";
+                    document.getElementById("userInvite4").value = "";
+
+                    document.getElementById("userInvite1Row").style.display = 'none';
+                    document.getElementById("userInvite2Row").style.display = 'none';
+                    document.getElementById("userInvite3Row").style.display = 'none';
+                    document.getElementById("userInvite4Row").style.display = 'none';
+                } else if (teamSize == "1")
+                {
+                    document.getElementById("userInvite3").value = "";
+                    document.getElementById("userInvite4").value = "";
+
+                    document.getElementById("userInvite1Row").style.display = 'none';
+                    document.getElementById("userInvite2Row").style.display = 'none';
+                    document.getElementById("userInvite3Row").style.display = 'none';
+                    document.getElementById("userInvite4Row").style.display = 'none';
+                } else if (teamSize == "2")
+                {
+                    document.getElementById("userInvite1Row").style.display = 'none';
+                    document.getElementById("userInvite2Row").style.display = 'none';
+                    document.getElementById("userInvite3Row").style.display = 'none';
+                    document.getElementById("userInvite4Row").style.display = 'none';
+                }
+            }
+        </script>
+
+        <style type="text/css">
+            .teamTypeList li {
+                display: inline-block;
+            }
+        </style>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

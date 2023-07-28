@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/b4.png); background-position: 50% 25%;'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--                <h3>Edit Settings</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Bank</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+
+                        <p style="font-size:18px;">View all your NLG cash transactions and make withdrawals/transfers below.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountPage">
+            <div class="contents container" style="border: 0px solid #f3f3f3;">
+
+                <div class="status-option-links">
+                    <ul>
+                        <li><a th:href="@{/account}">General</a></li>
+                        <li><a th:href="@{/account/profile}">Profile</a></li>
+                        <li class="active"><a th:href="@{/account/bank}">Bank</a></li>
+                        <!--<li><a th:href="@{/}">Upcoming</a></li>-->
+                    </ul>
+                </div>
+                <br />
+
+                <div class="vertical">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="#vtab1" role="tab" data-toggle="tab"><i class="fa fa-bank pr-10"></i> Transactions</a></li>
+                        <li><a href="#vtab2" role="tab" data-toggle="tab"><i class="fa fa-dollar pr-10"></i>  Withdraw Cash</a></li>
+                        <li class="active"><a href="#vtab3" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i> Transfer Cash</a></li>
+                        <!--<li><a href="#vtab4" role="tab" data-toggle="tab"><i class="fa fa-file-o pr-10"></i> Well Documented</a></li>-->
+                    </ul>
+                    <div style="color:#1d2223" class="tab-content container">
+
+                        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                            <div th:text="${message}"></div>
+                        </div>
+                        <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                            <div th:text="${error}"></div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="vtab1">
+                            <h4>
+                                Current Balance: $<span th:text="${bankAmount}"></span>
+                            </h4>
+                            <div class="transactions" th:if="${transactions}">
+                                                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr style="color:white;background-color:#1d2223">
+                                            <th>
+                                                Txn Id
+                                            </th>
+                                            <th>
+                                                Amount
+                                            </th>
+                                            <th style="width:20%;">
+                                                Date
+                                            </th>
+                                            <th>
+                                                Message
+                                            </th>
+                                            <th>
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${transactions.isEmpty()}">
+                                            <td class="text-center" colspan="5" >No transaction history.</td>
+                                        </tr>
+                                        <tr th:if="${!transactions.isEmpty()}" th:each="transaction : ${transactions}">
+                                            <td th:text="${transaction.transactionId}"></td>
+                                            <td style="color:green" th:if="${transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).DEPOSIT_CASH OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).WAGER_CANCELLED OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).WAGER_WIN OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).TOURNAMENT_CANCELLED OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).TOURNAMENT_WIN}">+$<span th:text="${transaction.transactionAmount}"></span></td>
+                                            <td style="color:#a70c0c" th:if="${transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).WITHDRAW_CASH OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).WAGER_BUYIN OR transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).TOURNAMENT_BUYIN}">-$<span th:text="${transaction.transactionAmount}"></span></td>
+                                            <td th:if="${transaction.transactionType == T(com.ltlogic.constants.TransactionTypeEnum).TRANSFER_CASH}"><span style="color:green" th:if="${transaction.userPkTransferTo == user.pk}" th:text="${'+$' + transaction.transactionAmount}"></span><span style="color:#a70c0c" th:if="${transaction.user.pk == user.pk}" th:text="${'-$' + transaction.transactionAmount}"></span></td>
+                                            <td th:text="${transaction.getRowCreatedTimestampTimezone(user.userInfo.getTimeZone())}"></td>
+                                            <!--<td th:text="${transaction.rowCreatedTimestamp}"></td>-->
+                                            <td th:text="${transaction.transactionMessage}"></td>
+                                            <td th:text="${transaction.transactionStatus}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+
+                                <nav class="text-center" th:if="${pages}">
+                                    <ul class="pagination" th:if="${pages.size() > 0}">
+                                        <li th:if="${hasPrevPage}"><a th:href="@{'/bank/account/transfer/' + '?page=' + ${prevPage}}" aria-label="Previous"><i class="fa fa-angle-left"></i></a></li>
+                                        <li th:each="page : ${pages}" th:classappend="${currentPage == page} ? active : ''"><a th:href="@{'/bank/account/transfer/' + '?page=' + ${page}}" th:text="${page}"></a></li>
+                                        <li th:if="${hasNextPage}"><a th:href="@{'/bank/account/transfer/' + '?page=' + ${nextPage}}" aria-label="Next"><i class="fa fa-angle-right"></i></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="tab-pane fade" id="vtab2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        Current Balance: $<span th:text="${bankAmount}"></span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="withdrawForm">
+                                <form th:action="@{/bank/account/withdraw/process}" method="post">
+                                    <div class="row">
+                                        <div class="col-md-7">
+
+                                            <div>
+                                                <label>Please enter the amount of cash you would like to withdraw:</label>
+                                                <input type="number" name="wamount" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5" style="padding: 18px 15px;">
+                                            <button class="btn btn-default radius-50 disabledOnClick" formnovalidate="">Withdraw</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <h6>
+                                    *Maximum withdrawal amount of $250.00 once per day.
+                                </h6>
+                                <h6>
+                                    *There is a $1.00 withdrawal fee.
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade in active" id="vtab3">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        Current Balance: $<span th:text="${bankAmount}"></span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="transferForm">
+                                <form th:action="@{/bank/account/transfer/process}" method="post" th:object="${transferGameCashForm}">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Please enter the transfer amount:</label>
+                                            <input type="number" name="amount" th:value="${transferGameCashForm.amount}" class="form-control" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Please enter the recipients username:</label>
+                                            <input type="text" name="recipientUsername" th:value="${transferGameCashForm.recipientUsername}" class="form-control" />
+                                        </div>
+                                        <div class="col-md-4" style="padding: 18px 15px;">
+                                            <button class="btn btn-default radius-50 disabledOnClick" formnovalidate="">Make Transfer</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <h6>
+                                    *Maximum transfer amount of $50.00 per day.
+                                </h6>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br/>
+        <!--<hr />-->
+
+        <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+            <div th:text="${message}"></div>
+        </div>
+        <!--
+                <div class="bankInfo">
+                    <div class="row">
+                        <div class="col-md-6" style="padding: 10px">
+                            <h4>
+                                Current Balance: $<span th:text="${bankAmount}"></span>
+                            </h4>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a th:href="@{/bank/account/withdraw}" class="btn btn-info" href="">Withdraw Money</a>
+                            <a th:href="@{/bank/account/transfer}" class="btn btn-info" href="">Transfer Money</a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <h4>Transaction History</h4>-->
+
+
+        <!--</div>-->
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

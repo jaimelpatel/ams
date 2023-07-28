@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" th:style="'background-image:url(https://storage.googleapis.com/cod-pics/xboxbg.jpg); background-position: 50% 35%;'">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:44px;">Support Center</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View answers to our most frequently asked questions or submit a ticket below.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <section class="main-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <!-- main start -->
+                    <!-- ================ -->
+                    <div class="main col-md-8">
+
+                        <!-- page-title start -->
+                        <!-- ================ -->
+                        <h3 class="page-title">Frequently Asked Questions</h3><!--
+                        -->							<div class="separator-2"></div><!--
+                                                                                 page-title end 
+                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ut quisquam ab harum hic enim quibusdam aut quasi recusandae temporibus quo voluptatibus, dolorem consectetur ipsam facere ipsa. Commodi sunt, inventore!</p>-->
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs style-1" role="tablist">
+                            <li class="active"><a href="#tab1" role="tab" data-toggle="tab"><i class="fa  fa-life-saver pr-10"></i>General</a></li>
+                            <!--                            <li><a href="#tab2" role="tab" data-toggle="tab"><i class="fa fa-user pr-10"></i>Matches</a></li>
+                                                        <li><a href="#tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-10"></i>Tournaments</a></li>-->
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1">
+                                <!-- accordion start -->
+                                <div class="panel-group collapse-style-1" id="accordion-faq">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseOne" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> Who are we?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                We are a group of fellow gamers just like you! We got tired of dealing with the small payouts and questionable customer service at other competitive gaming websites so we decided to create our own. Here at Next Level Gaming we offer free and cash matches/tournaments with the highest payouts and strive to present the best customer service possible. Thank you for visiting our site and we hope you stay.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseTwo" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> What games do you offer for play?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                As of right now we offer strictly Call of Duty based titles for matches and tournaments on both the Playstation 4 and Xbox One. We will primarily be focused on the upcoming Call of Duty: World War II, however, we will include options to play some of the other recent Call of Duty titles including Call of Duty: Modern Warfare Remastered and Call of Duty: Infinite Warfare. We hope to add other games in the future!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseThree" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> Why don't you have credits?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                Unlike other competitive gaming websites, we offer NLG Cash as our only currency to play both cash matches and cash tournaments. Our ultimate goal is to provide the best pressure free environment for our users to have fun while making some extra cash. We wanted to make the process of playing matches/tournaments as easy as we could for our users and forcing users to buy non-refundable credits for tournaments just so we could make a quick buck didn't make sense. Therefore we only make money when our users actually play wagers/tournaments because NLG Cash can be withdrawn after purchase at any time. NLG Cash has a 1 to 1 ratio with the US Dollar ($1.00 NLG Cash = $1.00 USD).
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseFour" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> What is the difference between an XP and Cash team?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <!-- need to talk about playoff situation -->
+                                                The main and most important difference is XP teams are for free to play matches meaning users only gain/lose XP on these teams. A cash team is used for both cash matches (wagers) and cash tournaments, but these teams also gain/lose xp on all matches they play whether it is a wager or tournament match. On NLG cash teams are used for both wagers and tournaments since our only form of currency is NLG Cash. This was done in order to smooth and simplify the process as much as possible for our users. Another difference is that for free to play XP teams we only allow each user to be on 2 teams for the same ladder (Example of a ladder: Call of Duty: World War II - North America - Playstation 4 - Doubles). A user cannot be a part of more than 2 teams with the same attributes as shown in the example. For cash teams however, we allow users to be on up to 3 teams in any given ladder.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseThree2" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> How do NLG Playoffs work?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree2" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                On NLG we have leaderboards for both cash and xp teams. As stated in the answer to the question directly above, both xp and cash teams gain xp when they play free matches or cash matches in a wager or tournament. The amount of xp these teams acquire determine their ranks on the leaderboards, for both xp and cash teams. At the end of the season the top teams from each ladder will be placed into a free to play tournament to win a giant cash prize. As of right now, we are only offering playoff tournaments for North American Call of Duty: World War II teams on both Playstation 4 and Xbox One. Start competing in matches and tournaments today to top the leaderboards! View World War 2 Xbox One leaderboards <a th:href="@{/leaderboards/ww2/xbox1}" target="_blank">here</a> and Playstation 4 leaderboards <a th:href="@{/leaderboards/ww2/ps4}" target="_blank"> here</a>. You can read and learn more about playoffs <a th:href="@{/news/playoffs}" target="_blank"> here</a>. 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseFive" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> How do I deposit/withdraw/transfer NLG cash?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFive" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                After you have registered and are logged your NLG cash amount is displayed in a box in the top navbar on the right. If you click on that box, a dropdown will show a few options including "Deposit Cash", "Withdraw Cash" and "Transfer Cash". Select any of the options for your situation. Cash can also be bought/deposited by visiting the Shop. We only accept PayPal as a valid payment method for now which includes a 2.9% + $0.30 USD fee on every transaction. In order to withdraw, you must have your paypal email entered into your account information so we know where to send your money. You will send and receive payments to/from our business entity, Universal Gaming, LLC. 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseNine" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> How do I receive my winnings for a wager match/tournament?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseNine" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                If you win a wager match/tournament the NLG cash will be instantly deposited into your NLG account. At that point you can withdraw the cash if you want it and we will send you the money via PayPal as fast as we can.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseEight" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> How do I deal with a match or tournament issue?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseEight" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                We have outlined a detailed set of rules <a th:href="@{/rules/general}" target="_blank">here</a>. If these do not answer any question or issue you may have, you may submit a ticket and we will get back to you as soon as possible. If there are admins online for live support you may message them and they will help with any issues you may be having. Admins will always be on live support while there are active tournaments running.
+                                            </div>
+                                        </div>
+                                    </div>
+<!--                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseTen" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> Who are the official NLG admins?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTen" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseEle" class="collapsed">
+                                                    <i class="fa fa-question-circle pr-10"></i> How do I contact NLG?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseEle" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                You may submit a ticket with your question/issue or you may directly email us at support@nextlevelgamingonline.com. Any business inquires please email business@nextlevelgamingonline.com. 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- accordion end -->
+                            </div>
+                            <!--                            <div class="tab-pane fade" id="tab2">
+                                                             accordion start 
+                                                            <div class="panel-group collapse-style-1" id="accordion-faq-2">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapseSix" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> How do I play a match/tournament?
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseSix" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            After creating a team using the instructions above, you can find any upcoming matches/tournaments posted on the tournament and match finder. If you don't see anything you want to play you can create your own match for another team to accept. Requirements to play include inputting your Playstion 4/Xbox One gamertags into your account settings, and if playing a cashout match or tournament you must have enough NLG Cash in your account to cover the buy in.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseTwo-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseTwo-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Distinctio dolor assumenda optio a adipisci inventore culpa tempora molestias fuga cupiditate alias sint labore, quod minus iusto ad earum, vel nihil ipsum necessitatibus maxime facere? Corporis inventore, saepe placeat labore rerum assumenda repudiandae, eveniet aperiam dolor quibusdam porro nesciunt omnis voluptatum, perspiciatis. Doloremque perspiciatis quas sunt, similique modi facere a atque unde impedit assumenda accusantium vel animi iste omnis cupiditate amet quae ipsam repudiandae sint doloribus praesentium natus magnam et minima consequatur. Facilis corporis similique reiciendis officiis veritatis consectetur est rerum natus, hic illo molestiae voluptas numquam enim aut fugit possimus, ducimus ipsam quisquam, ab doloribus. Deleniti quam repudiandae eos, maxime commodi quas sit accusamus error eius. Ea temporibus eos, iusto!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseThree-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Laborum molestiae hic, optio libero nobis praesentium amet delectus nihil.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseThree-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Excepturi illo labore architecto quasi maxime voluptas, laborum rerum non fuga. Sit rerum doloremque hic voluptas harum voluptatibus obcaecati ducimus atque magni, quod eius dolores commodi voluptates! Reiciendis porro magnam tempore ipsa obcaecati fuga earum unde libero, sapiente voluptatibus nemo exercitationem minus praesentium, itaque cupiditate qui assumenda quas quidem sed, nisi animi debitis quaerat. Quo magni incidunt enim aspernatur fugit rem blanditiis hic asperiores est. Dolor doloremque adipisci earum officiis soluta sapiente laboriosam! Optio aspernatur magni quas molestias temporibus quibusdam commodi ab, repellendus modi sapiente repudiandae perspiciatis molestiae, ea sint dolor consectetur aliquam delectus nisi minima officia vel tenetur quam pariatur, quidem? Voluptatem architecto quam nisi, molestiae saepe quo expedita odio corporis.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseFour-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Quam labore soluta aspernatur a optio incidunt molestias.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseFour-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Quam dolor ipsa rerum, quasi ipsam aperiam molestias corporis debitis voluptas magni vero assumenda quidem odit beatae ullam eaque et nesciunt saepe officia cupiditate expedita laboriosam quae. Ea suscipit eius repellat rem voluptate consectetur quaerat, similique architecto enim fugiat vitae dolorem expedita. Voluptatum, repellendus dolores iure sit, necessitatibus repellat nemo atque provident perferendis ducimus. Distinctio quisquam perspiciatis vero error quos cum, ea culpa similique magni, iure ipsam amet fuga voluptatem assumenda! Labore soluta aspernatur a optio incidunt molestias consequatur minus molestiae nisi, iusto officiis eaque ipsam magni doloremque cum pariatur delectus dolore quae vero nobis esse enim, iste. Molestias maxime, odit, ducimus ab libero architecto vel accusantium et beatae excepturi incidunt obcaecati?
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseFive-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Dolor ipsa rerum, quasi ipsam aperiam molestias corporis debitis.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseFive-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Ipsam quod impedit, ea necessitatibus quasi, quis rem nemo laboriosam labore, temporibus fugit placeat, consectetur eaque qui amet! Cum ab nulla voluptatibus, velit eius tempore veniam, quos voluptate iusto commodi error, obcaecati debitis, qui ad reiciendis officiis cumque! Repudiandae quos distinctio dolor consequatur commodi quae iusto beatae, laborum saepe enim voluptates tempore tenetur expedita eveniet eius recusandae id eaque, sequi illo neque. Illo voluptate molestias harum quas, accusantium placeat consectetur dignissimos. Perspiciatis architecto accusamus pariatur similique porro expedita ad commodi delectus illum a consequuntur laboriosam fugit libero nisi non, amet fugiat, ducimus, quia? Maiores ex mollitia eos labore, cupiditate neque earum perferendis consequatur pariatur quis sunt repellendus dolores veritatis dicta nemo expedita. Impedit unde totam sint! Eius consequuntur ipsam dolorem, debitis, ea ipsa eum nulla ullam dolorum autem necessitatibus. Repudiandae vero incidunt at cum ipsa illum autem reprehenderit nisi, cupiditate modi ab voluptatum asperiores ullam? Nobis ipsum deleniti odio facilis pariatur omnis reiciendis expedita minima eveniet delectus quam assumenda modi nesciunt excepturi magni maxime, asperiores illum optio fugiat. Ullam sit, a et!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseSix-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Aliquam quas cumque officia ab laudantium corporis dolorem consequatur cupiditate.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseSix-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Vero odit est ullam. Velit distinctio, eligendi quo enim quaerat. Aliquam quas cumque officia ab laudantium corporis dolorem consequatur cupiditate quam quia delectus iusto ad non neque facere praesentium, odio a repellendus. Laudantium aliquam at maxime iure hic sapiente, est dicta accusamus numquam dolorum quasi saepe officiis vero nobis quo aut praesentium, fugit adipisci illo voluptatum quibusdam? Assumenda fuga explicabo aperiam, aspernatur! Sit dolore minus cumque quam commodi eaque impedit, nulla ex repellat tempora suscipit quaerat voluptates incidunt optio reiciendis illum voluptatum eveniet cum obcaecati ad saepe necessitatibus voluptas. Sunt ullam maxime eaque voluptatibus quia consequuntur, illum? Iure provident officiis animi, ratione minima at consequatur doloremque tenetur. Sapiente recusandae dolore reprehenderit velit autem consequuntur cumque eum illo tempora nobis praesentium laborum eius, provident vitae eveniet, porro in eligendi veniam magni dolorum rem quibusdam. Iure error, esse aliquam necessitatibus repellendus magnam nemo dolorum. Dolorem a veritatis iste provident, numquam ex, voluptates dolorum placeat.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseSeven-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Veniam iure aspernatur quod possimus provident voluptate dolore.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseSeven-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Doloribus perspiciatis quos dolore eum facere, id alias ipsam placeat corporis repudiandae adipisci, ratione ipsum odio culpa et laborum aut similique nulla voluptates velit optio mollitia, autem. Architecto ratione eligendi reprehenderit vitae, omnis eius dolorem nobis quaerat quo fugiat, quisquam, in itaque doloribus veniam tenetur ipsum atque totam fugit modi. Veniam iure aspernatur quod possimus provident voluptate dolore magnam voluptas architecto beatae assumenda, atque cumque voluptatum nam unde praesentium fugiat in dolores recusandae eveniet at quas. Incidunt fugit, velit earum in explicabo, voluptate quia iusto eveniet dicta odit reiciendis a! Molestiae quisquam ad, dolorum assumenda. Eaque ab aliquam consequuntur accusamus, quidem facilis similique veritatis tenetur perspiciatis natus corrupti laboriosam itaque magni fuga, nemo eos esse, molestias, quibusdam eius alias dolores magnam. Voluptatibus?
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseEight-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Veritatis repellat aliquam labore adipisci, ut placeat libero in, consectetur beatae.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseEight-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis repellat aliquam labore adipisci, ut placeat libero in, consectetur beatae soluta mollitia quia vel amet nobis? Ipsa dolores ipsum laudantium perferendis placeat molestias libero aliquam officia obcaecati maiores sunt esse quisquam laboriosam impedit commodi rerum eius ipsam quaerat reiciendis quis tempora necessitatibus veniam beatae, ad architecto. Assumenda quia ipsum expedita veritatis facere magni error ullam, maiores numquam! Facilis repellat, iste maxime blanditiis vel ullam rerum! Velit numquam sint maxime illum aut porro, praesentium non quibusdam vel necessitatibus ullam omnis ad veniam libero autem, voluptatem voluptatibus, consequatur commodi harum. Dignissimos doloremque nihil dolores incidunt, at facilis corporis unde deserunt alias consequatur voluptatibus cupiditate sint quaerat reiciendis, culpa maiores dolorem ipsam ab ratione totam ut laboriosam eos magni? Laboriosam nisi, delectus earum soluta quam nemo aut, eveniet sapiente modi a est, nobis unde iure alias doloribus. Non laboriosam quasi placeat repudiandae temporibus delectus!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseNine-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Incidunt fugit, velit earum in explicabo, voluptate quia iusto eveniet dicta.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseNine-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Doloribus perspiciatis quos dolore eum facere, id alias ipsam placeat corporis repudiandae adipisci, ratione ipsum odio culpa et laborum aut similique nulla voluptates velit optio mollitia, autem. Architecto ratione eligendi reprehenderit vitae, omnis eius dolorem nobis quaerat quo fugiat, quisquam, in itaque doloribus veniam tenetur ipsum atque totam fugit modi. Veniam iure aspernatur quod possimus provident voluptate dolore magnam voluptas architecto beatae assumenda, atque cumque voluptatum nam unde praesentium fugiat in dolores recusandae eveniet at quas. Incidunt fugit, velit earum in explicabo, voluptate quia iusto eveniet dicta odit reiciendis a! Molestiae quisquam ad, dolorum assumenda. Eaque ab aliquam consequuntur accusamus, quidem facilis similique veritatis tenetur perspiciatis natus corrupti laboriosam itaque magni fuga, nemo eos esse, molestias, quibusdam eius alias dolores magnam. Voluptatibus?
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseTen-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Assumenda reprehenderit minus quas odit obcaecati unde.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseTen-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda reprehenderit minus quas odit obcaecati unde, necessitatibus id sit corrupti dolore, pariatur, rem officiis sequi quasi molestiae magnam enim laudantium maxime vel commodi adipisci illo non quibusdam porro accusamus. Tempora ducimus ut quis pariatur ex quasi deserunt, voluptatum consectetur odit. Architecto magnam ipsa quam, repellat praesentium, minima dignissimos minus maxime expedita? Quam esse culpa ipsa. Sunt eveniet veniam expedita, voluptates veritatis. Quo natus officia porro perspiciatis, itaque est illo. Quod, laboriosam esse nostrum officia facere dolor quos nihil provident aliquid veritatis, sequi necessitatibus quasi at blanditiis illo omnis beatae ratione, voluptatem nemo voluptatibus mollitia cumque fugiat. Consectetur impedit porro hic corporis? Quod qui, similique cum eum deleniti omnis neque corrupti illum quibusdam incidunt, iure quisquam vero non asperiores debitis suscipit nobis delectus consequatur voluptatibus sapiente amet iusto magnam voluptate rerum. Repellat nam autem quidem temporibus natus quaerat facere porro! Rem, inventore.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-2" href="#collapseEleven-2" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Architecto ratione eligendi reprehenderit vitae, omnis eius dolorem nobis quaerat.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseEleven-2" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Eius repellendus voluptas molestiae, voluptatem, debitis ea iure quam repellat incidunt minus facere magnam, officiis consequuntur rerum. Ratione accusamus delectus quam nisi repellendus dolore quos incidunt officia asperiores, quisquam quis recusandae odit perspiciatis cumque eum modi dolorum velit tempore laboriosam totam! Veritatis similique beatae vel eum ad quidem, officia hic autem facilis et architecto reiciendis recusandae sint, ullam rerum quisquam voluptas ipsa alias ea excepturi a ab labore? Ipsum quod laboriosam vitae nostrum saepe nobis beatae ducimus rem tempore omnis et iste, illum reprehenderit maxime sequi aliquam atque, consequuntur corrupti libero debitis autem molestias. Cum vitae rerum autem libero ea? Culpa at voluptatem minus et, consequuntur blanditiis, similique aliquam dolorum quos accusantium atque. Temporibus neque aut libero unde, odit nihil architecto perferendis fugit molestiae laborum quod perspiciatis accusamus commodi dolorem illo nobis quis debitis asperiores, facilis dicta quos? Quam maxime laborum aut ratione fuga, esse sit quia rerum odio assumenda nobis magnam!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                             accordion end 
+                                                        </div>
+                                                        <div class="tab-pane fade" id="tab3">
+                                                             accordion start 
+                                                            <div class="panel-group collapse-style-1" id="accordion-faq-3">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseOne-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseOne-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Distinctio dolor assumenda optio a adipisci inventore culpa tempora molestias fuga cupiditate alias sint labore, quod minus iusto ad earum, vel nihil ipsum necessitatibus maxime facere? Corporis inventore, saepe placeat labore rerum assumenda repudiandae, eveniet aperiam dolor quibusdam porro nesciunt omnis voluptatum, perspiciatis. Doloremque perspiciatis quas sunt, similique modi facere a atque unde impedit assumenda accusantium vel animi iste omnis cupiditate amet quae ipsam repudiandae sint doloribus praesentium natus magnam et minima consequatur. Facilis corporis similique reiciendis officiis veritatis consectetur est rerum natus, hic illo molestiae voluptas numquam enim aut fugit possimus, ducimus ipsam quisquam, ab doloribus. Deleniti quam repudiandae eos, maxime commodi quas sit accusamus error eius. Ea temporibus eos, iusto!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseTwo-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Molestiae hic, optio libero nobis praesentium amet delectus nihil.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseTwo-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Excepturi illo labore architecto quasi maxime voluptas, laborum rerum non fuga. Sit rerum doloremque hic voluptas harum voluptatibus obcaecati ducimus atque magni, quod eius dolores commodi voluptates! Reiciendis porro magnam tempore ipsa obcaecati fuga earum unde libero, sapiente voluptatibus nemo exercitationem minus praesentium, itaque cupiditate qui assumenda quas quidem sed, nisi animi debitis quaerat. Quo magni incidunt enim aspernatur fugit rem blanditiis hic asperiores est. Dolor doloremque adipisci earum officiis soluta sapiente laboriosam! Optio aspernatur magni quas molestias temporibus quibusdam commodi ab, repellendus modi sapiente repudiandae perspiciatis molestiae, ea sint dolor consectetur aliquam delectus nisi minima officia vel tenetur quam pariatur, quidem? Voluptatem architecto quam nisi, molestiae saepe quo expedita odio corporis.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseThree-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Labore soluta aspernatur a optio incidunt molestias.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseThree-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Quam dolor ipsa rerum, quasi ipsam aperiam molestias corporis debitis voluptas magni vero assumenda quidem odit beatae ullam eaque et nesciunt saepe officia cupiditate expedita laboriosam quae. Ea suscipit eius repellat rem voluptate consectetur quaerat, similique architecto enim fugiat vitae dolorem expedita. Voluptatum, repellendus dolores iure sit, necessitatibus repellat nemo atque provident perferendis ducimus. Distinctio quisquam perspiciatis vero error quos cum, ea culpa similique magni, iure ipsam amet fuga voluptatem assumenda! Labore soluta aspernatur a optio incidunt molestias consequatur minus molestiae nisi, iusto officiis eaque ipsam magni doloremque cum pariatur delectus dolore quae vero nobis esse enim, iste. Molestias maxime, odit, ducimus ab libero architecto vel accusantium et beatae excepturi incidunt obcaecati?
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseFour-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Quam dolor ipsa rerum, quasi ipsam aperiam molestias corporis debitis.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseFour-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Ipsam quod impedit, ea necessitatibus quasi, quis rem nemo laboriosam labore, temporibus fugit placeat, consectetur eaque qui amet! Cum ab nulla voluptatibus, velit eius tempore veniam, quos voluptate iusto commodi error, obcaecati debitis, qui ad reiciendis officiis cumque! Repudiandae quos distinctio dolor consequatur commodi quae iusto beatae, laborum saepe enim voluptates tempore tenetur expedita eveniet eius recusandae id eaque, sequi illo neque. Illo voluptate molestias harum quas, accusantium placeat consectetur dignissimos. Perspiciatis architecto accusamus pariatur similique porro expedita ad commodi delectus illum a consequuntur laboriosam fugit libero nisi non, amet fugiat, ducimus, quia? Maiores ex mollitia eos labore, cupiditate neque earum perferendis consequatur pariatur quis sunt repellendus dolores veritatis dicta nemo expedita. Impedit unde totam sint! Eius consequuntur ipsam dolorem, debitis, ea ipsa eum nulla ullam dolorum autem necessitatibus. Repudiandae vero incidunt at cum ipsa illum autem reprehenderit nisi, cupiditate modi ab voluptatum asperiores ullam? Nobis ipsum deleniti odio facilis pariatur omnis reiciendis expedita minima eveniet delectus quam assumenda modi nesciunt excepturi magni maxime, asperiores illum optio fugiat. Ullam sit, a et!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseFive-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Aliquam quas cumque officia ab laudantium corporis dolorem consequatur cupiditate.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseFive-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Vero odit est ullam. Velit distinctio, eligendi quo enim quaerat. Aliquam quas cumque officia ab laudantium corporis dolorem consequatur cupiditate quam quia delectus iusto ad non neque facere praesentium, odio a repellendus. Laudantium aliquam at maxime iure hic sapiente, est dicta accusamus numquam dolorum quasi saepe officiis vero nobis quo aut praesentium, fugit adipisci illo voluptatum quibusdam? Assumenda fuga explicabo aperiam, aspernatur! Sit dolore minus cumque quam commodi eaque impedit, nulla ex repellat tempora suscipit quaerat voluptates incidunt optio reiciendis illum voluptatum eveniet cum obcaecati ad saepe necessitatibus voluptas. Sunt ullam maxime eaque voluptatibus quia consequuntur, illum? Iure provident officiis animi, ratione minima at consequatur doloremque tenetur. Sapiente recusandae dolore reprehenderit velit autem consequuntur cumque eum illo tempora nobis praesentium laborum eius, provident vitae eveniet, porro in eligendi veniam magni dolorum rem quibusdam. Iure error, esse aliquam necessitatibus repellendus magnam nemo dolorum. Dolorem a veritatis iste provident, numquam ex, voluptates dolorum placeat.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion-faq-3" href="#collapseSix-3" class="collapsed">
+                                                                                <i class="fa fa-question-circle pr-10"></i> Veniam iure aspernatur quod possimus provident voluptate dolore.
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseSix-3" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            Doloribus perspiciatis quos dolore eum facere, id alias ipsam placeat corporis repudiandae adipisci, ratione ipsum odio culpa et laborum aut similique nulla voluptates velit optio mollitia, autem. Architecto ratione eligendi reprehenderit vitae, omnis eius dolorem nobis quaerat quo fugiat, quisquam, in itaque doloribus veniam tenetur ipsum atque totam fugit modi. Veniam iure aspernatur quod possimus provident voluptate dolore magnam voluptas architecto beatae assumenda, atque cumque voluptatum nam unde praesentium fugiat in dolores recusandae eveniet at quas. Incidunt fugit, velit earum in explicabo, voluptate quia iusto eveniet dicta odit reiciendis a! Molestiae quisquam ad, dolorum assumenda. Eaque ab aliquam consequuntur accusamus, quidem facilis similique veritatis tenetur perspiciatis natus corrupti laboriosam itaque magni fuga, nemo eos esse, molestias, quibusdam eius alias dolores magnam. Voluptatibus?
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>-->
+                            <!-- accordion end -->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!-- main end -->
+
+                    <!-- sidebar start -->
+                    <!-- ================ -->
+                    <aside class="col-md-4 col-lg-3 col-lg-offset-1">
+                        <div class="sidebar">
+                            <div class="block clearfix">
+                                <h3 class="title">Submit Your Ticket</h3>
+                                <div class="separator-2"></div>
+                                <div class="alert alert-success hidden" id="MessageSent3">
+                                    We have received your message, we will contact you very soon.
+                                </div>
+                                <div class="alert alert-danger hidden" id="MessageNotSent3">
+                                    Oops! Something went wrong please refresh the page and try again.
+                                </div>
+                                <form th:action="@{/support/}" th:object="${supportTicketForm}" role="form" id="sidebar-form" class="margin-clear" method="post">
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${#fields.hasErrors('*')}">
+                                        <div th:each="err : ${#fields.errors('*')}" th:text="${err}"></div>
+                                    </div>
+                                    <div id="failureMessage" class="alert-anim-failure" style="display: none;" th:if="${error}">
+                                        <div th:text="${error}"></div>
+                                    </div>
+                                    <div id="successMessage" class="alert-anim-success" style="display: none;" th:if="${message}">
+                                        <div th:text="${message}"></div>
+                                    </div>
+
+                                    <div class="form-group has-feedback">
+                                        <label for="email3">Email Address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" th:value="${supportTicketForm.email}"></input>
+                                        <i class="fa fa-envelope form-control-feedback"></i>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ticket Type</label>
+                                        <select class="form-control" id="ticketType" name="ticketType">
+                                            <option value="0">Payment Issues</option>
+                                            <option value="1">Account Issues</option>
+                                            <option value="2">Report User</option>
+                                            <option value="3">Game Rules</option>
+                                            <option value="4">Other</option>
+                                        </select> 
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="message3">Message</label>
+                                        <textarea class="form-control" rows="4" id="message" placeholder="" name="message" th:value="${supportTicketForm.message}"></textarea>
+                                        <i class="fa fa-pencil form-control-feedback"></i>
+                                    </div>
+                                    <button value="Submit" class="submit-button btn btn-default radius-50">Submit</button>
+                                </form>
+                            </div>								
+                            <div class="block clearfix">
+                                <h3 class="title">Let Us Know</h3>
+                                <div class="separator-2"></div>
+                                <p>We want to hear from our users about any issues they may be having or anything they may want to see implemented in the future. Thank You!</p>
+                            </div>							
+                        </div>
+                    </aside>
+                    <!-- sidebar end -->
+
+
+                </div>
+            </div>
+        </section>
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

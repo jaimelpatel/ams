@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+
+    </head>
+    <body>
+
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+        <div class="banner dark-translucent-bg" style="background:url('https://storage.googleapis.com/cod-pics/ps4controller3.jpg'); background-position: 50% 30%; -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: cover;
+             background-size: cover;
+             width: 100%;">
+
+            <!-- breadcrumb end -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-left">
+                        <br />
+                        <!--<h3 class="title logo-font object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The <span class="text-default">Project</span> Inc.</h3>-->
+                        <h1 class="title" style="text-transform:none !important;font-size:42px;">WWII Leaderboards - PS4</h1>
+                        <div class="separator-2 object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                        <p style="font-size:18px;" class="text-left object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">View the top 100 teams in their respective ladders for CoD: World War II on Playstation 4.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="main-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <!-- main start -->
+                    <!-- ================ -->
+                    <div class="main col-md-12">
+                        <!-- tabs start -->
+                        <!-- ================ -->
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs style-3" role="tablist">
+                            <li class="active"><a href="#h3tab1" role="tab" data-toggle="tab"><i class="fa fa-dollar pr-10"></i>Cash - Team ($1600)</a></li>
+                            <li><a href="#h3tab2" role="tab" data-toggle="tab"><i class="fa fa-dollar pr-10"></i>Cash - Doubles ($800)</a></li>
+                            <li><a href="#h3tab3" role="tab" data-toggle="tab"><i class="fa fa-dollar pr-10"></i>Cash - Singles ($400)</a></li>
+                            <li><a href="#h3tab4" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i>XP - Team ($1600)</a></li>
+                            <li><a href="#h3tab5" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i>XP - Doubles ($800)</a></li>
+                            <li><a href="#h3tab6" role="tab" data-toggle="tab"><i class="fa fa-level-up pr-10"></i>XP - Singles ($400)</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+                            <div class="tab-pane in active" id="h3tab1">
+
+
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashTeam.isEmpty()}" th:text="${cashTeam[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashTeam.isEmpty()}" th:text="${cashTeam[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashTeam.isEmpty()}" th:text="${cashTeam[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Earnings</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${cashTeam.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!cashTeam.isEmpty()}" th:each="mwrTeam : ${cashTeam}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${'$' + mwrTeam.rankXP.totalCashEarned}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="h3tab2">
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashDoubles.isEmpty()}" th:text="${cashDoubles[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashDoubles.isEmpty()}">N/A</h4>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashDoubles.isEmpty()}" th:text="${cashDoubles[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashDoubles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashDoubles.isEmpty()}" th:text="${cashDoubles[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashDoubles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Earnings</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${cashDoubles.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!cashDoubles.isEmpty()}" th:each="mwrTeam : ${cashDoubles}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${'$' + mwrTeam.rankXP.totalCashEarned}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="h3tab3">
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""></img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashSingles.isEmpty()}" th:text="${cashSingles[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashSingles.isEmpty()}" th:text="${cashSingles[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!cashSingles.isEmpty()}" th:text="${cashSingles[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${cashSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Earnings</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${cashSingles.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!cashSingles.isEmpty()}" th:each="mwrTeam : ${cashSingles}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${'$' + mwrTeam.rankXP.totalCashEarned}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="h3tab4">
+
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpTeam.isEmpty()}" th:text="${xpTeam[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpTeam.isEmpty()}" th:text="${xpTeam[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpTeam.isEmpty()}" th:text="${xpTeam[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpTeam.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${xpTeam.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!xpTeam.isEmpty()}" th:each="mwrTeam : ${xpTeam}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="h3tab5">
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""></img>
+                                        </div>
+                                         <h4 style="text-align:center !important;" th:if="${!xpDoubles.isEmpty()}" th:text="${xpDoubles[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpDoubles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpDoubles.isEmpty()}" th:text="${xpDoubles[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpDoubles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpDoubles.isEmpty()}" th:text="${xpDoubles[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpDoubles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${xpDoubles.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!xpDoubles.isEmpty()}" th:each="mwrTeam : ${xpDoubles}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="h3tab6">
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-gold boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/first.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpSingles.isEmpty()}" th:text="${xpSingles[0].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-silver boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/second.jpg" alt=""> </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpSingles.isEmpty()}" th:text="${xpSingles[1].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-20">
+                                    <div class="pv-20 ph-20 feature-box-2-bronze boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                        <div style="width:30% !important;margin:auto !important;text-align:center;">
+                                            <img src="https://storage.googleapis.com/nlg-template-img/leaderboards/third.jpg" alt="">  </img>
+                                        </div>
+                                        <h4 style="text-align:center !important;" th:if="${!xpSingles.isEmpty()}" th:text="${xpSingles[2].teamPojo.teamName}"></h4> <h4 style="text-align:center !important;" th:if="${xpSingles.isEmpty()}">N/A</h4>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-colored">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Rank</th>
+                                            <th style="text-align:center;">Team Name</th>
+                                            <th style="text-align:center;">Record</th>
+                                            <th style="text-align:center;">Total XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${xpSingles.isEmpty()}">
+                                            <td class="text-center" colspan="5">
+                                                No rank history.
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${!xpSingles.isEmpty()}" th:each="mwrTeam : ${xpSingles}">
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.rank}"></td>
+                                            <td style="text-align:center;"><a th:href="@{'/teams/' + ${mwrTeam.pk}}" th:text="${mwrTeam.teamPojo.teamName}"></a></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.matchesWon + ' - ' + mwrTeam.matchesLost}"></td>
+                                            <td style="text-align:center;" th:text="${mwrTeam.rankXP.totalTeamXp}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- tabs end -->
+
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+    </body>
+</html>

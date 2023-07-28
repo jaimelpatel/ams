@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head">
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+        </div>
+
+
+
+        <div th:if="${message}" th:text="${message}" id="successMessage" class="alert-anim-success" style="display: none;">
+        </div>
+        <div th:if="${messageFailure}" th:text="${messageFailure}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+        <div th:if="${error}" th:text="${error}" id="failureMessage" class="alert-anim-failure" style="display: none;">
+        </div>
+        
+<script>
+(function(t,a,l,k,j,s){
+s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
+;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
+.push([f])},catch:function(){return k&and;new k()},c:l}};})(window,document,[]);
+</script>
+
+<!-- container element in which TalkJS will display a chat UI 
+<div id="talkjs-container" style="width: 90%; margin: 30px; height: 500px">
+  <i>Loading chat...</i>
+</div>
+
+ container element in which TalkJS will display a chat UI 
+<div id="chatbox-container" style="width: 93%; margin: 30px; height: 450px">
+  <i>Loading chat...</i>
+</div>-->
+
+<!--<button id="btn-getInTouch">Message this seller</button>-->
+
+<script>
+Talk.ready.then(function () {
+  var me = new Talk.User({
+    id: '123456',
+    name: 'Alice',
+    email: 'alice@example.com',
+    photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
+    welcomeMessage: 'Hey there! How are you? :-)',
+  });
+  window.talkSession = new Talk.Session({
+    appId: 'tpkaGPaU',
+    me: me,
+  });
+  var other = new Talk.User({
+    id: '654321',
+    name: 'Sebastian',
+    email: 'Sebastian@example.com',
+    photoUrl: 'https://talkjs.com/images/avatar-5.jpg',
+    welcomeMessage: 'Hey, how can I help?',
+  });
+  var other2 = new Talk.User({
+    id: '111111',
+    name: 'Ken',
+    email: 'test@example.com',
+    photoUrl: 'https://talkjs.com/images/avatar-6.jpg',
+    welcomeMessage: 'ffffffffffffffff',
+  });
+
+  var conversation = talkSession.getOrCreateConversation(
+    Talk.oneOnOneId(me, other)
+  );
+  conversation.setParticipant(me);
+  conversation.setParticipant(other);
+  
+    var conversation2 = talkSession.getOrCreateConversation(
+    Talk.oneOnOneId(me, other2)
+  );
+  conversation2.setParticipant(me);
+  conversation2.setParticipant(other2);
+
+var popup = window.talkSession.createPopup();
+popup.select(conversation);
+popup.mount({ show: false });
+
+var button = document.getElementById('btn-getInTouch');
+button.addEventListener('click', function (event) {
+  event.preventDefault();
+  popup.show();
+});
+//  var inbox = talkSession.createInbox();
+//  inbox.mount(document.getElementById('talkjs-container'));
+//  
+//  var chatbox = window.talkSession.createChatbox();
+//chatbox.select(conversation);
+//chatbox.mount(document.getElementById('chatbox-container'));
+});
+</script>
+
+
+
+        <!--<div class="contents container">-->
+        <!--        banner start 
+                 ================ 
+                <div class="banner dark-translucent-bg" th:style="'background:url(' + @{/resources/intro-images/iw.png} + ');'">
+                     section start 
+                     ================ 
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 text-center col-md-offset-2 space-bottom">
+                                <div class="title large_white object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">The Project</div>
+                                <p class="text-center lead object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Multipurpose HTML5 Template - More than 200+ HTML files.</p>
+                                <div class="separator object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                                <ul class="list-inline">
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><i class="icon-check text-default"></i> Corporate</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200"><i class="icon-check text-default"></i> Commerce</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300"><i class="icon-check text-default"></i> Medical‎</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="400"><i class="icon-check text-default"></i> Restaurant</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="500"><i class="icon-check text-default"></i> Wedding</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="600"><i class="icon-check text-default"></i> Portfolio/Agency</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><i class="icon-check text-default"></i> Landing</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200"><i class="icon-check text-default"></i> One Page</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300"><i class="icon-check text-default"></i> Coming Soon</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="400"><i class="icon-check text-default"></i> Education</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="500"><i class="icon-check text-default"></i> Beauty Center</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="600"><i class="icon-check text-default"></i> Construction</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><i class="icon-check text-default"></i> Hotel</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200"><i class="icon-check text-default"></i> Blog</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300"><i class="icon-check text-default"></i> Gym</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="400"><i class="icon-check text-default"></i> Resume</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="500"><i class="icon-check text-default"></i> Logistics</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="600"><i class="icon-check text-default"></i> 14+ Header Options</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><i class="icon-check text-default"></i> 8+ Footer Options</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200"><i class="icon-check text-default"></i> HTML email templates</li>
+                                    <li class="object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300"><i class="icon-check text-default"></i> Much More</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center pv-40 hidden-xs">
+                                    <a th:href="@{/}" class="btn btn-lg btn-animated radius-50 btn btn-white smooth-scroll object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">Demos	<i class="fa fa-arrow-down"></i></a>
+                                    <span class="ph-20"></span>
+                                    <a th:href="@{/}" class="btn btn-lg btn-animated radius-50 btn-white smooth-scroll object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">Slider Options <i class="fa fa-arrow-down"></i></a>
+                                    <span class="ph-20"></span>
+                                    <a th:href="@{/}" class="btn btn-lg btn-animated radius-50 btn-white smooth-scroll object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">Email Templates <i class="fa fa-arrow-down"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     section end 
+                </div>
+                 banner end -->
+
+
+        <!-- banner start -->
+        <!-- ================ -->
+
+
+        <!-- page wrapper start -->
+        <!-- ================ -->
+        <!--<div class="page-wrapper">-->
+        <div class="banner clearfix">
+
+            <!-- slideshow start -->
+            <!-- ================ -->
+            <div class="slideshow">
+
+                <!-- slider revolution start -->
+                <!-- ================ -->
+                <div class="slider-revolution-5-container">
+                    <div id="slider-banner-fullscreen" class="slider-banner-fullscreen rev_slider" data-version="5.0">
+                        <ul class="slides">
+                            
+                            
+                            
+
+                            <li class="text-center" data-transition="fade" data-slotamount="default" data-masterspeed="default" data-title="Kickoff">
+
+                                <!--main image--> 
+                                
+                                <img src="https://storage.googleapis.com/cod-pics/main5.gif" alt="slidebg2" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg"></img>
+                                <img src="https://storage.googleapis.com/nlg-template-img/index/Kickoff.png" > </img>
+                                <!--Transparent Background--> 
+<!--                                <div class="tp-caption dark-translucent-bg"
+                                     data-x="center"
+                                     data-y="center"
+                                     data-start="0"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                                     data-transform_out="o:0;s:600;"
+                                     data-width="5000"
+                                     data-height="5000">
+                                </div>-->
+
+<!--                                LAYER NR. 1 
+                                <div class="tp-caption large_white" style="color:white;font-size:80px !important"
+                                     data-x="center"
+                                     data-y="110"
+                                     data-start="500"
+                                     data-width="700"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                </div>
+                                
+                                <img src="https://storage.googleapis.com/cod-pics/Kickoff-01.png" style="height:200px !important;width:200px !important;"></img>
+
+                                LAYER NR. 2 
+                                <div class="tp-caption large_white tp-resizeme"
+                                     data-x="center"
+                                     data-y="190"
+                                     data-start="500"
+                                     data-width="650"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:2000;e:Power4.easeInOut;">
+                                    <div class="separator light"></div>
+                                </div>
+
+                                LAYER NR. 3 
+                                <div class="tp-caption medium_white" style="color:white;font-size:26px !important"
+                                     data-x="center"
+                                     data-y="220"
+                                     data-start="650"
+                                     data-width="1300"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">Start competing in matches and tournaments right away to top the leaderboards and qualify for playoffs!
+                                </div>
+
+-->                                
+                                <div class="tp-caption small_white text-center"
+                                     data-x="center"
+                                     data-y="565"
+                                     data-start="900"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"><a style="color:white" th:href="@{/news}" class="btn btn-lg radius-50 btn-dark btn-animated">More Details <i class="fa fa-arrow-right"></i></a>
+                                </div>
+
+                              <div class="tp-caption"
+                                     data-x="center"
+                                     data-y="630"
+                                     data-voffset="100"
+                                     data-start="1250"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                                </div>
+
+                            </li>
+                            
+                            
+                            
+                            
+                            
+                            <!-- slide 1 start -->
+                            <!-- ================ -->
+                            <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="Welcome">
+
+                                <!-- main image -->
+                                <img src="https://storage.googleapis.com/nlg-template-img/index/heroes4.png" alt="slidebg1" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover"  class="rev-slidebg"></img>
+
+                                <!-- Transparent Background -->
+                                <div class="tp-caption dark-translucent-bg"
+                                     data-x="center"
+                                     data-y="center"
+                                     data-start="0"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                                     data-transform_out="o:0;s:600;"
+                                     data-width="5000"
+                                     data-height="5000">
+                                </div>
+
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption large_white" style="color:white;font-size:80px !important;"
+                                     data-x="center"
+                                     data-y="110"
+                                     data-start="500"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">Welcome to NLG!
+                                </div>
+
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption large_white tp-resizeme"
+                                     data-x="center"
+                                     data-y="185"
+                                     data-start="650"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:2000;e:Power4.easeInOut;">
+                                    <div class="separator light"></div>
+                                </div>
+
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption medium_white" style="color:white;font-size:26px !important"
+                                     data-x="center"
+                                     data-y="215"
+                                     data-start="650"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">We offer competitive free and cash matches along with the highest cash payout tournaments.
+                                </div>
+
+                                <!-- LAYER NR. 4 -->
+                                <div class="tp-caption small_white"
+                                     data-x="center"
+                                     data-y="265"
+                                     data-start="900"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"><a style="color:white" th:href="@{/news}" class="btn btn-lg radius-50 btn-dark btn-animated">Read More <i class="fa fa-arrow-right"></i></a>
+                                </div>
+
+                                <div class="tp-caption" 
+                                     data-x="center"
+                                     data-y="640"
+                                     data-voffset="100"
+                                     data-start="1250"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                                </div>
+
+                            </li>
+                            <!-- slide 1 end -->
+
+                            <!--                     slide 2 start 
+                                                 ================ -->
+                            <li class="text-center" data-transition="fade" data-slotamount="default" data-masterspeed="default" data-title="Playoffs">
+
+                                <!--main image--> 
+                                <img src="https://storage.googleapis.com/nlg-template-img/index/codhome2.jpg" alt="slidebg2" data-bgposition="center top"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg"></img>
+
+                                <!--Transparent Background--> 
+                                <div class="tp-caption dark-translucent-bg"
+                                     data-x="center"
+                                     data-y="center"
+                                     data-start="0"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                                     data-transform_out="o:0;s:600;"
+                                     data-width="5000"
+                                     data-height="5000">
+                                </div>
+
+                                <!--LAYER NR. 1--> 
+                                <div class="tp-caption large_white" style="color:white;font-size:80px !important"
+                                     data-x="center"
+                                     data-y="110"
+                                     data-start="500"
+                                     data-width="700"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">Upcoming Season
+                                </div>
+
+                                <!--LAYER NR. 2--> 
+                                <div class="tp-caption large_white tp-resizeme"
+                                     data-x="center"
+                                     data-y="190"
+                                     data-start="500"
+                                     data-width="650"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:2000;e:Power4.easeInOut;">
+                                    <div class="separator light"></div>
+                                </div>
+
+                                <!--LAYER NR. 3--> 
+                                <div class="tp-caption medium_white" style="color:white;font-size:26px !important"
+                                     data-x="center"
+                                     data-y="220"
+                                     data-start="650"
+                                     data-width="1300"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">Start competing in matches and tournaments right away to top the leaderboards and qualify for playoffs!
+                                </div>
+
+                                <!--LAYER NR. 4--> 
+                                <div class="tp-caption small_white text-center"
+                                     data-x="center"
+                                     data-y="270"
+                                     data-start="900"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"><a style="color:white" th:href="@{/news/playoffs}" class="btn btn-lg radius-50 btn-dark btn-animated">Read More <i class="fa fa-arrow-right"></i></a>
+                                </div>
+
+                                <div class="tp-caption"
+                                     data-x="center"
+                                     data-y="bottom"
+                                     data-voffset="100"
+                                     data-start="1250"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                                </div>
+
+                            </li>
+                            
+                            
+                            
+                            
+                                                        <li class="text-center" data-transition="fade" data-slotamount="default" data-masterspeed="default" data-title="Features">
+
+                                <!--main image--> 
+                                
+                                <img src="https://storage.googleapis.com/cod-pics/10main.jpg" alt="slidebg2" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg"></img>
+                                <img src="https://storage.googleapis.com/nlg-template-img/index/LadderPromo-01.png" > </img>
+                                <!--Transparent Background--> 
+<!--                                <div class="tp-caption dark-translucent-bg"
+                                     data-x="center"
+                                     data-y="center"
+                                     data-start="0"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                                     data-transform_out="o:0;s:600;"
+                                     data-width="5000"
+                                     data-height="5000">
+                                </div>-->
+
+<!--                                LAYER NR. 1 
+                                <div class="tp-caption large_white" style="color:white;font-size:80px !important"
+                                     data-x="center"
+                                     data-y="110"
+                                     data-start="500"
+                                     data-width="700"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                </div>
+                                
+                                <img src="https://storage.googleapis.com/cod-pics/Kickoff-01.png" style="height:200px !important;width:200px !important;"></img>
+
+                                LAYER NR. 2 
+                                <div class="tp-caption large_white tp-resizeme"
+                                     data-x="center"
+                                     data-y="190"
+                                     data-start="500"
+                                     data-width="650"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="o:0;s:2000;e:Power4.easeInOut;">
+                                    <div class="separator light"></div>
+                                </div>
+
+                                LAYER NR. 3 
+                                <div class="tp-caption medium_white" style="color:white;font-size:26px !important"
+                                     data-x="center"
+                                     data-y="220"
+                                     data-start="650"
+                                     data-width="1300"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">Start competing in matches and tournaments right away to top the leaderboards and qualify for playoffs!
+                                </div>
+
+-->                                
+<!--                                <div class="tp-caption small_white text-center"
+                                     data-x="center"
+                                     data-y="565"
+                                     data-start="900"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;s:900;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"><a style="color:white" th:href="@{/news}" class="btn btn-lg radius-50 btn-dark btn-animated">More Details <i class="fa fa-arrow-right"></i></a>
+                                </div>-->
+
+                              <div class="tp-caption"
+                                     data-x="center"
+                                     data-y="630"
+                                     data-voffset="100"
+                                     data-start="1250"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];sX:1;sY:1;o:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                                </div>
+
+                            </li>
+
+
+                            <!--slide 2 end--> 
+                        </ul>
+                        <div class="tp-bannertimer"></div>
+                    </div>
+                </div>
+                <!-- slider revolution end -->
+
+            </div>
+
+            <!-- slideshow end -->
+
+
+            <!-- banner end-->
+        </div>
+        
+        <style type="text/css">
+            .tp-revslider-slidesli div.slotholder:nth-child(2) {
+                position: absolute;
+                top: 15% !important;
+                left: 18% !important;
+                z-index: 0;
+                width: 100%;
+                height: 100%;
+                visibility: inherit;
+                opacity: 1;
+                transform: matrix(1, 0, 0, 1, 0, 0);
+                /* display: none; */
+                width: 65% !important;
+                height: 65% !important;
+            }
+            
+            .tp-revslider-slidesli div.slotholder:nth-child(2) .defaultimg {
+                background-size: contain !important;
+            }
+        </style>
+        <div id="page-start">
+            <section class="pv-30 dark-bg bg-color-how-to-play padding-bottom-clear clearfix">
+                <div class="container">
+                    <div class="row">
+                        <!--                                                    <div class="col-md-8 col-md-offset-2">
+                                                                                <h2 class="text-center">How It Works...</h2>
+                                                                                <div class="separator"></div>
+                                                                                <br></br>
+                                                                                <p class="large text-center">Getting started is extremely easy. Just follow the steps below and you'll be on your way to earning XP and cash.</p>
+                                                                            </div>-->
+                        <!--<br></br>-->
+                        <div class="col-md-4 ">
+                            <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                <span class="icon default-bg circle"><i class="fa fa-user"></i></span>
+                                <h3>Sign Up</h3>
+                                <div class="separator clearfix"></div>
+                                <p>Sign up right away and start playing. It's completely free!</p>
+                                <div>
+                                    <a th:href="@{login}" class="link-light">Login<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                                <div>
+                                    <a th:href="@{register}" class="link-light">Sign Up<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                <span class="icon default-bg circle"><i class="fa fa-group"></i></span>
+                                <h3>Create a Team</h3>
+                                <div class="separator clearfix"></div>
+                                <p>Create an XP team for free matches or a Cashout team for cash matches/tournaments.</p>
+                                <a th:href="@{/teams/create}" class="link-light">Create Team<i class="pl-5 fa fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                <span class="icon default-bg circle"><i class="fa fa-gamepad"></i></span>
+                                <h3>Compete!</h3>
+                                <div class="separator clearfix"></div>
+                                <p>Join competitive matches and tournaments to earn xp/cash and top the leaderboards.</p>
+                                <div>
+                                    <a th:href="@{/matches}" class="link-light">View Matches<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                                <div>
+                                    <a th:href="@{/tournaments}" class="link-light">View Tournaments<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<br></br>-->
+            </section>
+        </div>
+
+
+
+
+        <!-- section start -->
+        <!-- ================ -->
+        <section class="section light-gray-bg clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="text-center" style="text-transform:none">Our Game Selection...</h1>
+                        <div class="separator"></div>
+                        <p class="text-center" style="font-size:16px">We support competitive free and cash matches for the following games on both Xbox One and Playstation 4. We plan on adding other popular titles in the future for your enjoyment.</p>
+                        <br></br>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px !important;">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="image-box text-center style-2 mb-30">
+                            <div class="overlay-container overlay-visible mb-30">
+                                <div class="img-size" style="max-height:380px !important">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/index/ww2title2.jpg" alt=""></img>
+                                </div>
+                                <!--<a href="#" class="overlay-link"><i class="fa fa-gamepad"></i></a>-->
+                                <!--									<div class="overlay-bottom hidden-xs">
+                                                                                                                <div class="text">
+                                                                                                                        <p class="lead margin-clear">Click to Play</p>
+                                                                                                                </div>
+                                                                                                        </div>-->
+                            </div>
+                            <div class="body padding-horizontal-clear mb-30">
+                                <!--									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+                                <div>
+                                    <a style="font-size:20px" class="link-dark" th:href="@{/leaderboards/ww2/xbox1}">View Xbox One Leaderboards<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                                <div>                                        
+                                    <a style="font-size:20px" class="link-dark" th:href="@{/leaderboards/ww2/ps4}">View Playstation 4 Leaderboards<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--						<div class="col-sm-6">
+                                                                            <div class="image-box text-center style-2 mb-20">
+                                                                                    <div class="overlay-container overlay-visible">
+                                                                                        <div class="img-size">
+                                                                                            <img th:src="@{/resources/images/iwtitle.png}" alt=""></img>
+                                                                                        </div>
+                                                                                            <a href="#" class="overlay-link"><i class="fa fa-gamepad"></i></a>
+                                                                                            <div class="overlay-bottom hidden-xs">
+                                                                                                    <div class="text">
+                                                                                                            <p class="lead margin-clear">Service Two</p>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="body padding-horizontal-clear">
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                                            <div>
+                                                                                                <a class="link-dark" href="#">View Xbox One Ladder<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                            </div>
+                                                                                            <div>                                        
+                                                                                                <a class="link-dark" href="#">View Playstation 4 Ladder<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                            </div>
+                                                                                    </div>
+                                                                            </div>
+                                                                    </div>-->
+                    <!--						<div class="col-sm-4">
+                                                                            <div class="image-box text-center style-2 mb-20">
+                                                                                    <div class="overlay-container overlay-visible">
+                                                                                            <img src="images/corporate-5-service-3.jpg" alt="">
+                                                                                            <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
+                                                                                            <div class="overlay-bottom hidden-xs">
+                                                                                                    <div class="text">
+                                                                                                            <p class="lead margin-clear">Service Three</p>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="body padding-horizontal-clear">
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                                            <a class="link-dark" href="#">Read More<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                    </div>
+                                                                            </div>
+                                                                    </div>-->
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                        <div class="image-box text-center style-2 mb-20">
+                            <div class="overlay-container overlay-visible">
+                                <div class="img-size">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/index/mwrtitle2.jpg" alt=""></img>
+                                </div>
+                                <!--<a href="#" class="overlay-link"><i class="fa fa-gamepad"></i></a>-->
+                                <!--									<div class="overlay-bottom hidden-xs">
+                                                                                                                <div class="text">
+                                                                                                                        <p class="lead margin-clear">Service Four</p>
+                                                                                                                </div>
+                                                                                                        </div>-->
+                            </div>
+                            <!--								<div class="body padding-horizontal-clear">
+                                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                                                    <div>
+                                                                                                        <a style="font-size:18px" class="link-dark" th:href="@{/leaderboards/mwr/xbox1}">View Xbox One Leaderboards<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                                    </div>
+                                                                                                    <div>                                        
+                                                                                                        <a style="font-size:18px" class="link-dark" th:href="@{/leaderboards/mwr/ps4}">View Playstation 4 Leaderboards<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                                    </div>
+                                                                                            </div>-->
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="image-box text-center style-2 mb-20">
+                            <div class="overlay-container overlay-visible">
+                                <div class="img-size" style="zoom:2">
+                                    <img src="https://storage.googleapis.com/nlg-template-img/index/iwtitle2.png" style="transform:scale(1.5);" alt=""></img>
+                                </div>
+                                <!--<a href="#" class="overlay-link"><i class="fa fa-gamepad"></i></a>-->
+                                <!--									<div class="overlay-bottom hidden-xs">
+                                                                                                                <div class="text">
+                                                                                                                        <p class="lead margin-clear">Service Five</p>
+                                                                                                                </div>
+                                                                                                        </div>-->
+                            </div>
+                            <!--								<div class="body padding-horizontal-clear">
+                                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                                                    <div>
+                                                                                                        <a style="font-size:18px" class="link-dark" href="#">View Xbox One Ladder<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                                    </div>
+                                                                                                    <div>                                        
+                                                                                                        <a style="font-size:18px" class="link-dark" href="#">View Playstation 4 Ladder<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                                    </div>
+                                                                                            </div>-->
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <!--						<div class="col-sm-4">
+                                                                            <div class="image-box text-center style-2 mb-20">
+                                                                                    <div class="overlay-container overlay-visible">
+                                                                                            <img src="images/corporate-5-service-6.jpg" alt="">
+                                                                                            <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
+                                                                                            <div class="overlay-bottom hidden-xs">
+                                                                                                    <div class="text">
+                                                                                                            <p class="lead margin-clear">Service Six</p>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="body padding-horizontal-clear">
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                                            <a class="link-dark" href="#">Read More<i class="pl-5 fa fa-angle-double-right"></i></a>
+                                                                                    </div>
+                                                                            </div>
+                                                                    </div>-->
+                </div>
+            </div>
+            <br/>
+        </section>
+        <!-- section end -->
+
+
+
+        <!--</div>-->
+        <!-- </div> -->
+
+        <div th:replace="fragments/footer :: footer">
+
+        </div>
+
+        <!--       Start of Tawk.to Script
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/599c76abb6e907673de08dab/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        End of Tawk.to Script-->
+
+    </body>
+</html>
